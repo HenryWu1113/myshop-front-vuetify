@@ -3,7 +3,7 @@
     <v-container class="d-flex justify-space-between align-center">
       <div class="title d-flex align-center" @click="$router.push('/')">
         <img class="logo" src="../../assets/Logo.png">
-        <h1 class="ms-2">吳李香</h1>
+        <h1 class="ms-2 hidden-sm-and-down">吳李香</h1>
       </div>
       <div class="btn-group d-flex">
         <v-btn class="btn" variant="flat" color="primary" to="/">首頁</v-btn>
@@ -13,20 +13,24 @@
         <v-btn class="btn" variant="flat" color="success" to="/contact">聯絡我們</v-btn>
       </div>
       <div class="bar-list-right-group d-flex">
-        <v-btn to="/likes" class="rounded">
+        <v-btn icon to="/likes" class="mr-5">
           <v-icon icon="mdi-heart" class="icon" color="red"></v-icon>
         </v-btn>
-        <v-btn to="/cart">
+        <v-btn icon to="/cart" class="mr-5">
           <v-icon icon="mdi-cart" class="icon" color="orange"></v-icon>
         </v-btn>
-        <v-btn to="/">
+        <v-btn icon to="/login">
           <v-icon icon="mdi-login-variant" class="icon" color="primary"></v-icon>
         </v-btn>
       </div>
-
     </v-container>
   </v-app-bar>
-  <router-view></router-view>
+  <v-main>
+    <v-container>
+
+      <router-view></router-view>
+    </v-container>
+  </v-main>
 </template>
 
 <style scoped lang="scss">
@@ -45,9 +49,17 @@
 
 .title {
   cursor: pointer;
+
+  h1 {
+    color: brown;
+  }
 }
 
-.title h1 {
-  color: brown;
+.dialog {
+  width: 100px;
 }
 </style>
+
+<script setup>
+
+</script>

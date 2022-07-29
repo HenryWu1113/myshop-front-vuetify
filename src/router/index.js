@@ -107,6 +107,22 @@ const router = createRouter({
             title: '吳李香 | 訂購紀錄'
           }
         },
+        {
+          path: 'login',
+          name: 'login',
+          component: () => import('@/views/front/LoginView.vue'),
+          meta: {
+            title: '吳李香 | 登入'
+          }
+        },
+        {
+          path: 'register',
+          name: 'register',
+          component: () => import('@/views/front/RegisterView.vue'),
+          meta: {
+            title: '吳李香 | 註冊'
+          }
+        },
       ]
     },
     {
