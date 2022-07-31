@@ -1,6 +1,12 @@
 <template>
   <v-app-bar>
-    <h1>Back</h1>
+    <v-container>
+      <h1>Back</h1>
+    </v-container>
   </v-app-bar>
-  <router-view></router-view>
+  <v-main>
+    <v-container>
+      <router-view></router-view>
+    </v-container>
+  </v-main>
 </template>

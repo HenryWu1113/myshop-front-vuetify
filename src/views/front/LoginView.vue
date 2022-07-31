@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="valid" @submit.prevent="register">
+  <v-form v-model="valid" @submit.prevent="login">
     <v-card class="ma-auto" max-width="800">
       <v-card-title class="text-center mt-5">
         <img class="register-logo" src="../../assets/Logo.png">
@@ -44,9 +44,12 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
-import { isEmail } from 'validator'
+import { useUserStore } from '@/stores/user'
 
 const showpwd = ref(false)
+const valid = ref(false)
+
+const user = useUserStore()
 
 const form = reactive({
   account: '',
@@ -66,6 +69,9 @@ const rules = reactive({
   ]
 })
 
-const valid = ref(false)
+const login = () => {
+  user.login(form)
+}
+
 
 </script>
