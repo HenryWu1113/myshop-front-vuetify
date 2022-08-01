@@ -11,7 +11,7 @@
   <v-navigation-drawer floating permanent>
     <v-list density="comfortable" nav>
       <v-list-item v-for="(list, i) in lists" :key="i" :value="list" :prepend-icon="list.icon" :title="list.title"
-        :to="list.to" rounded="shaped" height="50">
+        :to="list.to" rounded="shaped" height="50" color="warning">
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
