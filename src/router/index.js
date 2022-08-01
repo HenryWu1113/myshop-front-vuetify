@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import FrontNavbar from '@/views/front/FrontNavbar.vue'
 import FrontHomeView from '@/views/front/HomeView.vue'
 import NotFoundView from '@/views/NotFound.vue'
+import { useUserStore } from '@/stores/user'
 
 
 const router = createRouter({
@@ -16,7 +17,9 @@ const router = createRouter({
           name: 'home',
           component: FrontHomeView,
           meta: {
-            title: '吳李香'
+            title: '吳李香',
+            login: false,
+            admin: false
           }
         },
         {
@@ -24,7 +27,9 @@ const router = createRouter({
           name: 'brand',
           component: () => import('@/views/front/BrandView.vue'),
           meta: {
-            title: '吳李香 | 品牌特色'
+            title: '吳李香 | 品牌特色',
+            login: false,
+            admin: false
           }
         },
         {
@@ -32,7 +37,9 @@ const router = createRouter({
           name: 'why',
           component: () => import('@/views/front/WhyView.vue'),
           meta: {
-            title: '吳李香 | WHY 夏雪芒果'
+            title: '吳李香 | WHY 夏雪芒果',
+            login: false,
+            admin: false
           }
         },
         {
@@ -40,7 +47,9 @@ const router = createRouter({
           name: 'news',
           component: () => import('@/views/front/NewsView.vue'),
           meta: {
-            title: '吳李香 | 最新消息'
+            title: '吳李香 | 最新消息',
+            login: false,
+            admin: false
           }
         },
         {
@@ -48,7 +57,9 @@ const router = createRouter({
           name: 'newscontent',
           component: () => import('@/views/front/NewscontentView.vue'),
           meta: {
-            title: '吳李香 | 最新消息'
+            title: '吳李香 | 最新消息',
+            login: false,
+            admin: false
           }
         },
         {
@@ -56,7 +67,9 @@ const router = createRouter({
           name: 'contact',
           component: () => import('@/views/front/ContactView.vue'),
           meta: {
-            title: '吳李香 | 聯絡我們'
+            title: '吳李香 | 聯絡我們',
+            login: false,
+            admin: false
           }
         },
         {
@@ -64,7 +77,9 @@ const router = createRouter({
           name: 'likes',
           component: () => import('@/views/front/LikesView.vue'),
           meta: {
-            title: '吳李香 | 收藏'
+            title: '吳李香 | 收藏',
+            login: true,
+            admin: false
           }
         },
         {
@@ -72,7 +87,9 @@ const router = createRouter({
           name: 'product',
           component: () => import('@/views/front/ProductView.vue'),
           meta: {
-            title: '吳李香 | 商品'
+            title: '吳李香 | 商品',
+            login: false,
+            admin: false
           }
         },
         {
@@ -80,15 +97,19 @@ const router = createRouter({
           name: 'cart',
           component: () => import('@/views/front/CartView.vue'),
           meta: {
-            title: '吳李香 | 購物車'
+            title: '吳李香 | 購物車',
+            login: true,
+            admin: false
           }
         },
         {
-          path: 'cart/:id',
+          path: 'order/:id',
           name: 'payinfo',
           component: () => import('@/views/front/PayinfoView.vue'),
           meta: {
-            title: '吳李香 | 付款資訊'
+            title: '吳李香 | 付款資訊',
+            login: true,
+            admin: false
           }
         },
         {
@@ -96,7 +117,9 @@ const router = createRouter({
           name: 'userinfo',
           component: () => import('@/views/front/UserinfoView.vue'),
           meta: {
-            title: '吳李香 | 個人資料'
+            title: '吳李香 | 個人資料',
+            login: true,
+            admin: false
           }
         },
         {
@@ -104,7 +127,9 @@ const router = createRouter({
           name: 'order',
           component: () => import('@/views/front/OrderView.vue'),
           meta: {
-            title: '吳李香 | 訂購紀錄'
+            title: '吳李香 | 訂購紀錄',
+            login: true,
+            admin: false
           }
         },
         {
@@ -112,7 +137,9 @@ const router = createRouter({
           name: 'login',
           component: () => import('@/views/front/LoginView.vue'),
           meta: {
-            title: '吳李香 | 登入'
+            title: '吳李香 | 登入',
+            login: false,
+            admin: false
           }
         },
         {
@@ -120,7 +147,9 @@ const router = createRouter({
           name: 'register',
           component: () => import('@/views/front/RegisterView.vue'),
           meta: {
-            title: '吳李香 | 註冊'
+            title: '吳李香 | 註冊',
+            login: false,
+            admin: false
           }
         },
       ]
@@ -134,7 +163,9 @@ const router = createRouter({
           name: 'admin-home',
           component: () => import('@/views/admin/HomeView.vue'),
           meta: {
-            title: '吳李香 | 後臺管理 | 首頁'
+            title: '吳李香 | 後臺管理 | 首頁',
+            login: true,
+            admin: true
           }
         },
         {
@@ -142,7 +173,9 @@ const router = createRouter({
           name: 'admin-users',
           component: () => import('@/views/admin/UsersView.vue'),
           meta: {
-            title: '吳李香 | 後臺管理 | 會員管理'
+            title: '吳李香 | 後臺管理 | 會員管理',
+            login: true,
+            admin: true
           }
         },
         {
@@ -150,7 +183,9 @@ const router = createRouter({
           name: 'admin-orders',
           component: () => import('@/views/admin/OrdersView.vue'),
           meta: {
-            title: '吳李香 | 後臺管理 | 訂單管理'
+            title: '吳李香 | 後臺管理 | 訂單管理',
+            login: true,
+            admin: true
           }
         },
         {
@@ -158,7 +193,9 @@ const router = createRouter({
           name: 'admin-products',
           component: () => import('@/views/admin/ProductsView.vue'),
           meta: {
-            title: '吳李香 | 後臺管理 | 商品管理'
+            title: '吳李香 | 後臺管理 | 商品管理',
+            login: true,
+            admin: true
           }
         },
         {
@@ -166,7 +203,9 @@ const router = createRouter({
           name: 'admin-news',
           component: () => import('@/views/admin/NewsView.vue'),
           meta: {
-            title: '吳李香 | 後臺管理 | 最新消息管理'
+            title: '吳李香 | 後臺管理 | 最新消息管理',
+            login: true,
+            admin: true
           }
         },
         {
@@ -174,7 +213,9 @@ const router = createRouter({
           name: 'admin-feedback',
           component: () => import('@/views/admin/FeedbackView.vue'),
           meta: {
-            title: '吳李香 | 後臺管理 | 回饋訊息管理'
+            title: '吳李香 | 後臺管理 | 回饋訊息管理',
+            login: true,
+            admin: true
           }
         }
       ]
@@ -195,6 +236,24 @@ const router = createRouter({
       redirect: '/404'
     }
   ]
+})
+
+router.afterEach((to, from) => {
+  document.title = to.meta.title
+})
+
+router.beforeEach((to, from, next) => {
+  const user = useUserStore()
+
+  if (user.isLogin && (to.path === '/register' || to.path === '/login')) {
+    next('/')
+  } else if (to.meta.login && !user.isLogin) {
+    next('/login')
+  } else if (to.meta.admin && !user.isAdmin) {
+    next('/')
+  } else {
+    next()
+  }
 })
 
 export default router

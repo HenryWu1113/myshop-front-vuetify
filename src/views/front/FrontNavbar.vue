@@ -1,16 +1,16 @@
 <template>
   <v-app-bar class="bar" height="80">
     <v-container class="d-flex justify-space-between align-center">
-      <div class="title d-flex align-center" @click="$router.push('/')">
+      <div class="title d-flex align-center" @click="router.push('/')">
         <img class="logo" src="../../assets/Logo.png">
         <h1 class="ms-2 hidden-sm-and-down">吳李香</h1>
       </div>
       <div class="btn-group d-flex">
-        <v-btn class="btn" variant="flat" color="primary" to="/">首頁</v-btn>
-        <v-btn class="btn" variant="flat" color="warning" to="/brand">品牌特色</v-btn>
-        <v-btn class="btn" to="/why">WHY 夏雪</v-btn>
-        <v-btn class="btn" variant="flat" color="error" to="/news">最新資訊</v-btn>
-        <v-btn class="btn" variant="flat" color="success" to="/contact">聯絡我們</v-btn>
+        <v-btn class="btn" variant="flat" color="primary" to="/">{{ $t('home') }}</v-btn>
+        <v-btn class="btn" variant="flat" color="warning" to="/brand">{{ $t('brand') }}</v-btn>
+        <v-btn class="btn" to="/why">{{ $t('why') }}</v-btn>
+        <v-btn class="btn" variant="flat" color="error" to="/news">{{ $t('news') }}</v-btn>
+        <v-btn class="btn" variant="flat" color="success" to="/contact">{{ $t('contact') }}</v-btn>
       </div>
       <div class="bar-list-right-group d-flex">
         <v-btn v-if="isAdmin && isLogin" icon to="/admin" class="mr-5">
@@ -31,21 +31,30 @@
         <!-- <v-btn v-if="isLogin" icon>
           <v-icon icon="mdi-account" class="icon" color="primary"></v-icon>
         </v-btn> -->
-        <v-menu transition="slide-y-transition" v-if="isLogin">
+        <v-menu transition="slide-y-transition" location="bottom" v-if="isLogin">
           <template v-slot:activator="{ props }">
             <v-btn icon color="primary" v-bind="props">
               <v-icon icon="mdi-account" class="icon" color="primary"></v-icon>
             </v-btn>
           </template>
-          <v-list>
-            <v-list-item>
-              aaa
+          <v-list class="userlist">
+            <v-list-item class="d-flex flex-column">
+              <img class="MyAvatar" :src="avatar">
+              <h3>使用者暱稱</h3>
             </v-list-item>
-            <v-list-item>
-              bbb
+            <v-divider></v-divider>
+            <v-list-item v-for="(list, i) in lists" :key="i" :value="list" rounded="xl" :to="list.to"
+              active-color="primary" variant="plain">
+              <template v-slot:prepend>
+                <v-icon :icon="list.icon"></v-icon>
+              </template>
+              <v-list-item-title v-text="list.text"></v-list-item-title>
             </v-list-item>
-            <v-list-item>
-              ccc
+            <v-list-item rounded="xl" :value="logoutinfo" @click="logout" variant="plain">
+              <template v-slot:prepend>
+                <v-icon :icon="logoutinfo.icon"></v-icon>
+              </template>
+              <v-list-item-title v-text="logoutinfo.text"></v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -84,14 +93,46 @@
 .dialog {
   width: 100px;
 }
+
+.userlist {
+  padding: 0 2rem;
+}
+
+.MyAvatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  object-fit: cover;
+}
 </style>
 
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
+import { reactive } from 'vue'
+import router from '@/router'
 
 const user = useUserStore()
 const { logout } = user
-const { isLogin, isAdmin, cart } = storeToRefs(user)
+const { isLogin, isAdmin, cart, avatar } = storeToRefs(user)
+const lists = reactive([
+  {
+    text: '個人資料',
+    icon: 'mdi-newspaper-variant-outline',
+    to: '/userinfo'
+  },
+  {
+    text: '訂購紀錄',
+    icon: 'mdi-format-list-bulleted',
+    to: '/order'
+  }
+])
+
+const logoutinfo = reactive({
+  text: '登出',
+  icon: 'mdi-logout-variant'
+})
+
 
 </script>

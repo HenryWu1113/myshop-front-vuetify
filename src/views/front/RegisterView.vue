@@ -16,7 +16,7 @@
             </v-col>
             <v-col cols="12">
               <v-text-field :type="showpwd ? 'text' : 'password'" label="密碼" placeholder="請輸入帳號" counter="20"
-                maxlength="20" v-model="form.password" :rules="rules.password"
+                maxlength="20" v-model="form.password" :rules="rules.password" clearable clear-icon="mdi-delete"
                 :append-icon="showpwd ? 'mdi-eye' : 'mdi-eye-off'" @click:append="showpwd = !showpwd">
               </v-text-field>
             </v-col>
