@@ -23,7 +23,7 @@ function loadLocaleMessages() {
 }
 
 const i18n = createI18n({
-  locale: 'jp',
+  locale: 'cn',
   messages: {
     cn,
     en,
