@@ -7,11 +7,11 @@
         <v-table>
           <thead>
             <tr>
-              <th>圖片</th>
-              <th>名稱</th>
-              <th>分類</th>
-              <th>上架</th>
-              <th>管理</th>
+              <th class="text-h6">圖片</th>
+              <th class="text-h6">名稱</th>
+              <th class="text-h6">分類</th>
+              <th class="text-h6">上架</th>
+              <th class="text-h6">管理</th>
             </tr>
           </thead>
           <tbody>

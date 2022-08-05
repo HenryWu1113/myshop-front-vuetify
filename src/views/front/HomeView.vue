@@ -20,7 +20,7 @@
     </v-menu>
 
     <v-row>
-      <v-col v-if="products.length > 0" cols="12" md="6" lg="4" xl="3" v-for="product in products">
+      <v-col v-if="products.length > 0" cols="12" sm="6" lg="4" xl="3" v-for="product in products">
         <ProductCard :product="product"></ProductCard>
       </v-col>
       <v-col v-else>
