@@ -30,19 +30,25 @@
           </v-card>
         </v-dialog>
       </v-btn>
-      <v-btn icon>
+      <v-btn icon @click="addLike({ product: product._id })">
         <v-icon icon="mdi-heart-outline"></v-icon>
+      </v-btn>
+      <v-btn icon>
+        <v-icon icon="mdi-heart"></v-icon>
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useUserStore } from '@/stores/user'
+import { storeToRefs } from 'pinia'
 import router from '@/router'
 const user = useUserStore()
-const { addCart } = user
+const { addCart, addLike } = user
+const { likes } = storeToRefs(user)
+
 
 // 下面函式可用到裡面的值
 const props = defineProps(['product'])
@@ -52,6 +58,7 @@ const loading = ref(false)
 const dialog = ref(false)
 const valid = ref(false)
 const quantity = ref('')
+// const isLike = ref(false)
 
 
 const quantities = reactive(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
@@ -66,5 +73,14 @@ const submit = () => {
   addCart({ product: props.product._id, quantity: parseInt(quantity.value) })
   dialog.value = false
 }
+
+// const isLike = () => {
+//   if (likes.findIndex(item => item.product.toString() === props.product._id.toString()) > -1) return true
+//   else {
+//     return false
+//   }
+// }
+
+
 
 </script>

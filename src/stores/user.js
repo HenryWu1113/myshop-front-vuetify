@@ -14,7 +14,7 @@ export const useUserStore = defineStore({
       nickname: '',
       avatar: '',
       cart: 0,
-      likes: 0,
+      likes: [],
       role: 0
     }
   },
@@ -102,6 +102,27 @@ export const useUserStore = defineStore({
           icon: 'error',
           title: '失敗',
           text: '加入購物車失敗'
+        })
+      }
+    },
+    async addLike(product) {
+      if (this.token.length === 0) {
+        Swal.fire({
+          icon: 'error',
+          title: '失敗',
+          text: '請先登入'
+        })
+        router.push('/login')
+        return
+      }
+      try {
+        const { data } = await apiAuth.post('/users/likes', product)
+        this.likes = data.result
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: '失敗',
+          text: '加入收藏失敗'
         })
       }
     }

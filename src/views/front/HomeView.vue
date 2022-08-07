@@ -1,5 +1,5 @@
 <template>
-  <v-carousel cover cycle hide-delimiter-background show-arrows="hover" interval="5000" height="75vh">
+  <v-carousel cover cycle hide-delimiter-background hide-delimiters show-arrows="hover" interval="5000" height="75vh">
     <v-carousel-item v-for="(image, i) in images" :key="i">
       <v-img :src="image.src" cover>
       </v-img>
@@ -38,6 +38,11 @@ import { reactive } from 'vue'
 import Swal from 'sweetalert2'
 import { api } from '@/plugins/axios'
 import ProductCard from '@/components/ProductCard.vue'
+// import { useUserStore } from '@/stores/user'
+// import { storeToRefs } from 'pinia'
+// import { apiAuth } from '../../plugins/axios.js'
+// const user = useUserStore()
+// const { isLogin } = storeToRefs(user)
 
 const images = reactive([
   {
@@ -54,6 +59,7 @@ const images = reactive([
 
 const products = reactive([])
 
+
 const init = async () => {
   try {
     const { data } = await api.get('/products')
@@ -67,5 +73,20 @@ const init = async () => {
   }
 }
 
+// const login = async () => {
+//   if (isLogin !== true) return
+//   try {
+//     const { data } = await apiAuth.get('/users/likes')
+//     likeproducts.push(...data.result)
+//   } catch (error) {
+//     Swal.fire({
+//       icon: 'error',
+//       title: '失敗',
+//       text: '伺服器錯誤'
+//     })
+//   }
+// }
+
 init()
+// login()
 </script>
