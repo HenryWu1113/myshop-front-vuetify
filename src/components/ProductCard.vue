@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-img :src="product.image" height="300" cover @click="router.push(`/product/'+${product._id}`)"
+    <v-img :src="product.image" height="300" cover @click="router.push(`/product/${product._id}`)"
       style="cursor:pointer"></v-img>
     <v-card-title>
       <h2>
@@ -23,41 +23,40 @@
                 <h2 class="mb-5">${{ product.price }}</h2>
                 <v-form v-model="valid" @submit.prevent="submit">
                   <v-select v-model="quantity" :items="quantities" :rules="[rules.required]"></v-select>
-                  <v-btn block color="primary" type="submit" prepend-icon="mdi-cart" :loading="loading">加入購物車</v-btn>
+                  <v-btn block color="primary" type="submit" prepend-icon="mdi-cart">加入購物車</v-btn>
                 </v-form>
               </v-container>
             </v-card-text>
           </v-card>
         </v-dialog>
       </v-btn>
-      <v-btn icon @click="addLike({ product: product._id })">
-        <v-icon icon="mdi-heart-outline"></v-icon>
-      </v-btn>
-      <v-btn icon>
+      <v-btn icon v-if="isLike" @click="deleteLike({ product: product._id })">
         <v-icon icon="mdi-heart"></v-icon>
+      </v-btn>
+      <v-btn icon @click="addLike({ product: product._id })" v-else>
+        <v-icon icon="mdi-heart-outline"></v-icon>
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
-import router from '@/router'
+import { useRouter } from 'vue-router'
 const user = useUserStore()
-const { addCart, addLike } = user
+const router = useRouter()
+const { addCart, addLike, deleteLike } = user
 const { likes } = storeToRefs(user)
 
 
 // 下面函式可用到裡面的值
 const props = defineProps(['product'])
 
-
-const loading = ref(false)
 const dialog = ref(false)
 const valid = ref(false)
-const quantity = ref('')
+const quantity = ref('1')
 // const isLike = ref(false)
 
 
@@ -72,14 +71,15 @@ const submit = () => {
   if (!valid.value) return
   addCart({ product: props.product._id, quantity: parseInt(quantity.value) })
   dialog.value = false
+  quantity.value = '1'
 }
 
-// const isLike = () => {
-//   if (likes.findIndex(item => item.product.toString() === props.product._id.toString()) > -1) return true
-//   else {
-//     return false
-//   }
-// }
+// pinia 的值要加 value 取的到值
+const isLike = computed(() => {
+  return (likes.value.findIndex(item => item.product.toString() === props.product._id.toString()) > -1)
+})
+
+
 
 
 

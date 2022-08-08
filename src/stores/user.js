@@ -125,6 +125,27 @@ export const useUserStore = defineStore({
           text: '加入收藏失敗'
         })
       }
+    },
+    async deleteLike(product) {
+      if (this.token.length === 0) {
+        Swal.fire({
+          icon: 'error',
+          title: '失敗',
+          text: '請先登入'
+        })
+        router.push('/login')
+        return
+      }
+      try {
+        const { data } = await apiAuth.patch('/users/likes', product)
+        this.likes = data.result
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: '失敗',
+          text: '取消收藏失敗'
+        })
+      }
     }
   }
 })
