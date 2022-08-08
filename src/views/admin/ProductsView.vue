@@ -29,7 +29,7 @@
                 {{ product.sell === true ? '上架中' : '已下架' }}
               </td>
               <td>
-                <v-btn icon color="primary" @click="openDialog(product._id, idx)">
+                <v-btn icon color="primary" variant="text" @click="openDialog(product._id, idx)">
                   <v-icon icon="mdi-pen"></v-icon>
                 </v-btn>
               </td>
