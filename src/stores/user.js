@@ -105,6 +105,21 @@ export const useUserStore = defineStore({
         })
       }
     },
+    async updateCart(data) {
+      try {
+        const { data: resData } = await apiAuth.patch('/users/cart', data)
+        this.cart = resData.result
+        return true
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: '失敗',
+          text: '更新購物車失敗'
+        })
+        return false
+      }
+
+    },
     async addLike(product) {
       if (this.token.length === 0) {
         Swal.fire({
@@ -144,6 +159,25 @@ export const useUserStore = defineStore({
           icon: 'error',
           title: '失敗',
           text: '取消收藏失敗'
+        })
+      }
+    },
+    async checkout(data) {
+      try {
+        await apiAuth.post('/orders', data)
+        this.cart = 0
+        Swal.fire({
+          icon: 'success',
+          title: '成功',
+          text: '送出訂單成功'
+        })
+        router.push('/order')
+      } catch (error) {
+        console.log(error)
+        Swal.fire({
+          icon: 'error',
+          title: '失敗',
+          text: '送出訂單失敗'
         })
       }
     }

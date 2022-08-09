@@ -22,7 +22,8 @@
               <v-container>
                 <h2 class="mb-5">${{ product.price }}</h2>
                 <v-form v-model="valid" @submit.prevent="submit">
-                  <v-select v-model="quantity" :items="quantities" :rules="[rules.required]"></v-select>
+                  <v-select v-model="quantity" :items="quantities" :rules="[rules.required]" variant="outlined">
+                  </v-select>
                   <v-btn block color="primary" type="submit" prepend-icon="mdi-cart">加入購物車</v-btn>
                 </v-form>
               </v-container>

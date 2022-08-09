@@ -25,7 +25,8 @@
           <v-form v-model="valid" @submit.prevent="submit">
             <v-row>
               <v-col cols="4" lg="4">
-                <v-select v-model="quantity" :items="quantities" :rules="[rules.required]"></v-select>
+                <v-select v-model="quantity" :items="quantities" :rules="[rules.required]" variant="outlined">
+                </v-select>
               </v-col>
               <v-spacer></v-spacer>
               <v-col cols="8" lg="5">
@@ -35,8 +36,8 @@
           </v-form>
         </div>
       </v-col>
-      <v-col cols="12" class="mt-5">
-        <v-btn class="ma-auto" color="primary" variant="outlined" prepend-icon="mdi-cart" @click="router.go(-1)">
+      <v-col cols="12" class="mt-5 text-center">
+        <v-btn color="primary" variant="outlined" prepend-icon="mdi-cart" @click="router.go(-1)">
           回上一頁</v-btn>
       </v-col>
       <v-overlay class="align-center justify-center" :model-value='!product.sell'>
