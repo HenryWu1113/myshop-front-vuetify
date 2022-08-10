@@ -37,7 +37,7 @@
         </div>
       </v-col>
       <v-col cols="12" class="mt-5 text-center">
-        <v-btn color="primary" variant="outlined" prepend-icon="mdi-cart" @click="router.go(-1)">
+        <v-btn color="primary" variant="outlined" prepend-icon="mdi-arrow-left" @click="router.go(-1)">
           回上一頁</v-btn>
       </v-col>
       <v-overlay class="align-center justify-center" :model-value='!product.sell'>

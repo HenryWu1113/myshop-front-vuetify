@@ -11,23 +11,25 @@
             <v-col cols="12">
               <v-text-field type="account" label="帳號" placeholder="請輸入帳號" counter="20" maxlength="20"
                 v-model="form.account" :rules="rules.account" clearable clear-icon="mdi-delete"
-                append-icon="mdi-account-outline">
+                append-icon="mdi-account-outline" variant="outlined">
               </v-text-field>
             </v-col>
             <v-col cols="12">
               <v-text-field :type="showpwd ? 'text' : 'password'" label="密碼" placeholder="請輸入帳號" counter="20"
                 maxlength="20" v-model="form.password" :rules="rules.password" clearable clear-icon="mdi-delete"
-                :append-icon="showpwd ? 'mdi-eye' : 'mdi-eye-off'" @click:append="showpwd = !showpwd">
+                :append-icon="showpwd ? 'mdi-eye' : 'mdi-eye-off'" @click:append="showpwd = !showpwd"
+                variant="outlined">
               </v-text-field>
             </v-col>
             <v-col cols="12">
               <v-text-field label="暱稱" placeholder="請輸入暱稱" counter="10" maxlength="10" v-model="form.nickname"
-                :rules="rules.nickname" clearable clear-icon="mdi-delete" append-icon="mdi-emoticon-happy-outline">
+                :rules="rules.nickname" clearable clear-icon="mdi-delete" append-icon="mdi-emoticon-happy-outline"
+                variant="outlined">
               </v-text-field>
             </v-col>
             <v-col cols="12">
               <v-text-field type="email" label="電子信箱" placeholder="請輸入電子信箱" v-model="form.email" :rules="rules.email"
-                clearable clear-icon="mdi-delete" append-icon="mdi-email-outline">
+                clearable clear-icon="mdi-delete" append-icon="mdi-email-outline" variant="outlined">
               </v-text-field>
             </v-col>
           </v-row>

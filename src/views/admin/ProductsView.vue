@@ -46,31 +46,35 @@
     <v-form @submit.prevent="submitForm" v-model="form.valid">
       <v-card>
         <v-card-title>
-          <h2 class="text-center">{{ form._id.length > 0 ? '編輯商品' : '新增商品' }}</h2>
+          <h2 class="text-center mt-5">{{ form._id.length > 0 ? '編輯商品' : '新增商品' }}</h2>
         </v-card-title>
         <v-card-text>
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field v-model="form.name" label="商品名稱" :rules="[rules.required]"></v-text-field>
+                <v-text-field v-model="form.name" label="商品名稱" :rules="[rules.required]" variant="outlined"
+                  append-inner-icon="mdi-star-outline">
+                </v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field type="number" min="0" v-model="form.price" label="商品價格"
-                  :rules="[rules.required, rules.price]"></v-text-field>
+                  :rules="[rules.required, rules.price]" variant="outlined" append-inner-icon="mdi-bitcoin">
+                </v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-select :items="categories" type="number" min="0" v-model="form.category" label="商品分類"
-                  :rules="[rules.required]"></v-select>
+                  :rules="[rules.required]" variant="outlined" append-inner-icon="mdi-lipstick"></v-select>
               </v-col>
               <v-col cols="12">
                 <v-checkbox v-model="form.sell" label="上架"></v-checkbox>
               </v-col>
               <v-col cols="12">
-                <v-file-input v-model="form.image" show-size accept='image/*' label="商品圖片" :rules="[rules.size]">
+                <v-file-input v-model="form.image" show-size accept='image/*' label="商品圖片" :rules="[rules.size]"
+                  variant="outlined" prepend-icon="" append-inner-icon="mdi-link-variant">
                 </v-file-input>
               </v-col>
               <v-col cols="12">
-                <v-textarea v-model="form.description" label="商品描述"></v-textarea>
+                <v-textarea v-model="form.description" label="商品描述" variant="outlined"></v-textarea>
               </v-col>
             </v-row>
           </v-container>

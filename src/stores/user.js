@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import router from '@/router'
 import { apiAuth } from '../plugins/axios'
 
+
 export const useUserStore = defineStore({
   id: 'user',
   state() {
@@ -164,14 +165,14 @@ export const useUserStore = defineStore({
     },
     async checkout(data) {
       try {
-        await apiAuth.post('/orders', data)
+        const { data: resData } = await apiAuth.post('/orders', data)
         this.cart = 0
         Swal.fire({
           icon: 'success',
           title: '成功',
           text: '送出訂單成功'
         })
-        router.push('/order')
+        router.push('/order/' + resData.result)
       } catch (error) {
         console.log(error)
         Swal.fire({

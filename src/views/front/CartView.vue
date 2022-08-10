@@ -96,7 +96,7 @@ const rules = reactive({
     return !!v || '必填'
   },
   isMobilePhone(v) {
-    return isMobilePhone(v) || '手機號碼格式錯誤'
+    return isMobilePhone(v, 'zh-TW') || '手機號碼格式錯誤'
   }
 })
 
