@@ -234,9 +234,10 @@ const submitForm = async () => {
   try {
     const { data } = await apiAuth.patch('/orders/' + form._id, change)
     orders[form.idx] = data.result
-    orders.push(orders[form.idx].totalPrice = orders[form.idx].products.reduce((a, b) => {
+    // 把 totalPrice 物件加回去
+    orders[form.idx].totalPrice = orders[form.idx].products.reduce((a, b) => {
       return a + b.product.price * b.quantity
-    }, 0))
+    }, 0)
     // console.log(orders[form.idx])
     // console.log(data.result)
     console.log(orders)

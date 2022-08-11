@@ -1,5 +1,5 @@
 <template>
-  <v-carousel cover cycle hide-delimiter-background hide-delimiters show-arrows="hover" interval="5000" height="75vh">
+  <v-carousel cover cycle hide-delimiter-background hide-delimiters show-arrows="hover" interval="5000">
     <v-carousel-item v-for="(image, i) in images" :key="i">
       <v-img :src="image.src" cover>
       </v-img>

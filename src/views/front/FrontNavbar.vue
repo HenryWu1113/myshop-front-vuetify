@@ -6,11 +6,11 @@
         <h1 class="ms-2 hidden-sm-and-down">吳李香</h1>
       </div>
       <div class="btn-group d-flex">
-        <v-btn class="btn" variant="flat" color="primary" to="/">{{ $t('home') }}</v-btn>
-        <v-btn class="btn" variant="flat" color="warning" to="/brand">{{ $t('brand') }}</v-btn>
+        <v-btn class="btn" to="/">{{ $t('home') }}</v-btn>
+        <v-btn class="btn" to="/brand">{{ $t('brand') }}</v-btn>
         <v-btn class="btn" to="/why">{{ $t('why') }}</v-btn>
-        <v-btn class="btn" variant="flat" color="error" to="/news">{{ $t('news') }}</v-btn>
-        <v-btn class="btn" variant="flat" color="success" to="/contact">{{ $t('contact') }}</v-btn>
+        <v-btn class="btn" to="/news">{{ $t('news') }}</v-btn>
+        <v-btn class="btn" to="/contact">{{ $t('contact') }}</v-btn>
       </div>
       <div class="bar-list-right-group d-flex">
         <v-btn v-if="isAdmin && isLogin" icon to="/admin" class="mr-5">
