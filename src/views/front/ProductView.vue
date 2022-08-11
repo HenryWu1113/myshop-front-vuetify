@@ -25,7 +25,8 @@
           <v-form v-model="valid" @submit.prevent="submit">
             <v-row>
               <v-col cols="4" lg="4">
-                <v-select v-model="quantity" :items="quantities" :rules="[rules.required]" variant="outlined">
+                <v-select v-model="quantity" :items="quantities" :rules="[rules.required]" variant="outlined"
+                  density="compact">
                 </v-select>
               </v-col>
               <v-spacer></v-spacer>

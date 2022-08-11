@@ -43,15 +43,16 @@
       <v-row>
         <v-col cols="12" md="6">
           <v-text-field v-model="form.receiver" type="text" label="收件者姓名" placeholder="請輸入收件者姓名" counter="10"
-            maxlength="10" :rules="[rules.required]"></v-text-field>
+            maxlength="10" :rules="[rules.required]" variant="outlined"></v-text-field>
         </v-col>
         <v-col cols="12" md="6">
           <v-text-field v-model="form.cellphone" type="text" label="收件者電話" placeholder="請輸入收件者電話"
-            :rules="[rules.required, rules.isMobilePhone]">
+            :rules="[rules.required, rules.isMobilePhone]" variant="outlined">
           </v-text-field>
         </v-col>
         <v-col cols="12">
-          <v-text-field v-model="form.address" type="text" label="收件地址" placeholder="請輸入收件地址" :rules="[rules.required]">
+          <v-text-field v-model="form.address" type="text" label="收件地址" placeholder="請輸入收件地址" :rules="[rules.required]"
+            variant="outlined">
           </v-text-field>
         </v-col>
         <v-col cols="12" md="2" class="ma-auto">
