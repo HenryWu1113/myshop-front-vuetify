@@ -181,6 +181,25 @@ export const useUserStore = defineStore({
           text: '送出訂單失敗'
         })
       }
+    },
+    async getUser() {
+      if (this.token.length === 0) return
+      try {
+        const { data } = await apiAuth.get('/users')
+        this.account = data.result.account
+        this.email = data.result.email
+        this.nickname = data.result.nickname
+        this.avatar = data.result.avatar
+        this.cart = data.result.cart
+        this.likes = data.result.likes
+        this.role = data.result.role
+      } catch (error) {
+        this.logout()
+      }
     }
+  },
+  persist: {
+    key: 'Wu-Lee-shop',
+    paths: ['token']
   }
 })

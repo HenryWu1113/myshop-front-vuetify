@@ -132,7 +132,8 @@
               <v-text-field v-model="form.address" type="text" label="收件地址" placeholder="請輸入收件地址"
                 :rules="[rules.required]" variant="outlined">
               </v-text-field>
-              <v-select v-model="form.state" :items="orderState" variant="outlined"></v-select>
+              <v-select v-model="form.state" :items="orderState" item-title="opt" item-value="value" variant="outlined">
+              </v-select>
             </v-card-text>
             <v-card-actions class="d-flex justify-center mb-3">
               <v-btn color="warning" variant="outlined" type="submit" :loading="form.submitting">
@@ -194,7 +195,11 @@ const rules = reactive({
 })
 
 const items = reactive(['全部', '未付款', '訂單成立', '訂單取消'])
-const orderState = reactive([0, 1, 2])
+const orderState = reactive([
+  { opt: '未付款', value: 0 },
+  { opt: '訂單成立', value: 1 },
+  { opt: '訂單取消', value: 2 }
+])
 
 const filtereditems = computed(() => {
   if (item.value === '全部') return orders
