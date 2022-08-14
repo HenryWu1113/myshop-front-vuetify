@@ -182,6 +182,25 @@ export const useUserStore = defineStore({
         })
       }
     },
+    async editUser(data) {
+      try {
+        const { data: resData } = await apiAuth.patch('/users', data)
+        this.email = resData.result.email
+        this.nickname = resData.result.nickname
+        this.avatar = resData.result.avatar
+        Swal.fire({
+          icon: 'success',
+          title: '成功',
+          text: '編輯個人資料成功'
+        })
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: '失敗',
+          text: '編輯個人資料失敗'
+        })
+      }
+    },
     async getUser() {
       if (this.token.length === 0) return
       try {

@@ -55,7 +55,7 @@
           </v-btn>
         </v-col>
         <v-col cols="12" sm="3" lg="">
-          <span class="d-lg-none">詳細資訊 : </span>
+          <span class="d-lg-none">訂單資訊 : </span>
           <v-btn icon variant="text" @click="changeOrder(order._id)">
             <v-icon icon="mdi-pen"></v-icon>
           </v-btn>
