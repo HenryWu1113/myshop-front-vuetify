@@ -4,18 +4,18 @@
     <div class="user_info_card">
       <v-row>
         <v-col cols="12" md="5" lg="6">
-          <img :src="form.avatar" class="info_pic">
+          <img :src="users.avatar" class="info_pic">
         </v-col>
         <v-col cols="12" md="7" lg="6" class="d-flex flex-column justify-center">
-          <span class="text-h4">帳號 : {{ form.account }}</span>
-          <span class="text-h4">暱稱 : {{ form.nickname }}</span>
-          <span class="text-h4">信箱 : {{ form.email }}</span>
+          <span class="text-h4">帳號 : {{ users.account }}</span>
+          <span class="text-h4">暱稱 : {{ users.nickname }}</span>
+          <span class="text-h4">信箱 : {{ users.email }}</span>
         </v-col>
         <v-col cols="12" class="text-center">
           <v-btn variant="outlined" color="warning" @click="changeinfo">編輯個人資料</v-btn>
         </v-col>
       </v-row>
-      <v-dialog v-model="dialog">
+      <v-dialog v-model="dialog" persistent>
         <v-form @submit.prevent="submitForm" v-model="valid">
           <v-card>
             <v-card-title>
@@ -28,7 +28,7 @@
                   <v-col cols="12">
                     <v-text-field type="account" label="帳號" placeholder="請輸入帳號" counter="20" maxlength="20"
                       v-model="form.account" :rules="rules.account" append-inner-icon="mdi-account-outline"
-                      variant="outlined">
+                      variant="outlined" disabled>
                     </v-text-field>
                   </v-col>
                   <v-col cols="12">
@@ -42,13 +42,18 @@
                     </v-text-field>
                   </v-col>
                   <v-col cols="12">
-                    <v-file-input v-model="form.as" show-size accept='image/*' label="大頭貼" :rules="[rules.size]"
+                    <v-file-input v-model="form.avatar" show-size accept='image/*' label="大頭貼" :rules="rules.size"
                       variant="outlined" prepend-icon="" append-inner-icon="mdi-link-variant">
                     </v-file-input>
                   </v-col>
                 </v-row>
               </v-container>
             </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="warning" @click="dialog = false">取消</v-btn>
+              <v-btn type="submit" color="primary">確定</v-btn>
+            </v-card-actions>
           </v-card>
         </v-form>
       </v-dialog>
@@ -75,12 +80,24 @@ import Swal from 'sweetalert2'
 import { ref, reactive } from 'vue'
 import { isEmail } from 'validator'
 import { useUserStore } from '@/stores/user'
+import { storeToRefs } from 'pinia'
+
 
 const user = useUserStore()
 const { editUser } = user
+const { nickname, email, account, avatar } = storeToRefs(user)
 
 const dialog = ref(false)
 const valid = ref(false)
+
+const users = reactive({
+  account: '',
+  email: '',
+  nickname: '',
+  avatar: []
+})
+
+// const users = reactive([])
 
 const form = reactive({
   account: '',
@@ -102,11 +119,35 @@ const rules = reactive({
   email: [
     v => !!v || '電子信箱必填',
     v => isEmail(v) || '電子信箱格式錯誤'
+  ],
+  size: [
+    v => !v || !v.length || (v[0]?.type?.includes('image') && v[0]?.size < 1024 * 1024) || '檔案格式不符'
   ]
 })
 
 const changeinfo = () => {
   dialog.value = true
+  form.avatar = []
+}
+
+const submitForm = async () => {
+  if (!valid) return
+  const fd = new FormData()
+  for (const key in form) {
+    if (['account'].includes(key)) continue
+    else if (key === 'avatar') fd.append(key, form[key][0])
+    else fd.append(key, form[key])
+  }
+  const result = await editUser(fd)
+  console.log(fd)
+  if (result) {
+    // console.log(nickname.value)
+    users.account = account.value
+    users.email = email.value
+    users.nickname = nickname.value
+    users.avatar = avatar.value
+  }
+  dialog.value = false
 }
 
 const init = async () => {
@@ -115,7 +156,13 @@ const init = async () => {
     form.account = data.result.account
     form.email = data.result.email
     form.nickname = data.result.nickname
-    form.avatar = data.result.avatar
+    // form.avatar = data.result.avatar
+    users.account = data.result.account
+    users.email = data.result.email
+    users.nickname = data.result.nickname
+    users.avatar = data.result.avatar
+    // users.push(data.result)
+    console.log(users)
   } catch (error) {
     console.log(error)
     Swal.fire({

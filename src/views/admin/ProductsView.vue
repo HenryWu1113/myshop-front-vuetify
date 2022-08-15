@@ -81,8 +81,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn type="submit" color="primary" :loading="form.submitting">確定</v-btn>
           <v-btn color="warning" @click="form.dialog = false" :disabled="form.submitting">取消</v-btn>
+          <v-btn type="submit" color="primary" :loading="form.submitting">確定</v-btn>
         </v-card-actions>
       </v-card>
     </v-form>
@@ -99,7 +99,7 @@
 <script setup>
 import { reactive } from 'vue'
 import Swal from 'sweetalert2'
-import { apiAuth } from '../../plugins/axios.js';
+import { apiAuth } from '@/plugins/axios.js';
 
 const products = reactive([])
 const categories = reactive(['芒果', '香蕉', '火龍果'])
@@ -130,6 +130,7 @@ const rules = reactive({
 })
 
 const openDialog = (_id, idx) => {
+  console.log(form.image);
   form._id = _id
   if (idx > -1) {
     form.name = products[idx].name
@@ -161,6 +162,7 @@ const submitForm = async () => {
     else if (key === 'image') fd.append(key, form[key][0])
     else fd.append(key, form[key])
   }
+  // console.log(fd)
 
   try {
     if (form._id.length === 0) {
@@ -197,6 +199,7 @@ const init = async () => {
   try {
     const { data } = await apiAuth.get('/products/all')
     products.push(...data.result)
+    console.log(products)
   } catch (error) {
     Swal.fire({
       icon: 'error',

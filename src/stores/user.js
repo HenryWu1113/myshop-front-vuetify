@@ -193,6 +193,8 @@ export const useUserStore = defineStore({
           title: '成功',
           text: '編輯個人資料成功'
         })
+        return true
+        // { email: this.email, nickname: this.nickname, avatar: this.avatar }
       } catch (error) {
         Swal.fire({
           icon: 'error',
