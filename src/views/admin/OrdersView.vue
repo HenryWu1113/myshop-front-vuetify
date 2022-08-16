@@ -136,10 +136,10 @@
               </v-select>
             </v-card-text>
             <v-card-actions class="d-flex justify-center mb-3">
+              <v-btn color="primary" variant="outlined" @click="dialog2 = false">關閉</v-btn>
               <v-btn color="warning" variant="outlined" type="submit" :loading="form.submitting">
                 確認更改
               </v-btn>
-              <v-btn color="primary" variant="outlined" @click="dialog2 = false">關閉</v-btn>
             </v-card-actions>
           </v-card>
         </v-form>
