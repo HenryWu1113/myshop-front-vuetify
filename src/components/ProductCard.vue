@@ -31,10 +31,10 @@
           </v-card>
         </v-dialog>
       </v-btn>
-      <v-btn icon v-if="isLike" @click="deleteLike({ product: product._id })">
+      <v-btn icon v-if="isLike" @click="deleteLike({ product: product._id })" variant="text">
         <v-icon icon="mdi-heart"></v-icon>
       </v-btn>
-      <v-btn icon @click="addLike({ product: product._id })" v-else>
+      <v-btn icon @click="addLike({ product: product._id })" v-else variant="text">
         <v-icon icon="mdi-heart-outline"></v-icon>
       </v-btn>
     </v-card-actions>

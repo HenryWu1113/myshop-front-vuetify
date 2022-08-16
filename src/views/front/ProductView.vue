@@ -8,15 +8,15 @@
         <div class="product_title d-flex justify-space-between">
           <h1>{{ product.name }}</h1>
           <v-sapcer></v-sapcer>
-          <v-btn icon v-if="isLike" @click="deleteLike({ product: product._id })">
+          <v-btn icon v-if="isLike" @click="deleteLike({ product: product._id })" variant="text">
             <v-icon icon="mdi-heart"></v-icon>
           </v-btn>
-          <v-btn icon @click="addLike({ product: product._id })" v-else>
+          <v-btn icon v-else @click="addLike({ product: product._id })" variant="text">
             <v-icon icon="mdi-heart-outline"></v-icon>
           </v-btn>
         </div>
         <div class="product_content mt-10">
-          <p>{{ product.description }}</p>
+          <p style="white-space: pre-wrap;">{{ product.description }}</p>
         </div>
         <div class="product_price mt-10">
           <h2>${{ product.price }}</h2>
