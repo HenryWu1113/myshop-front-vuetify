@@ -184,6 +184,7 @@ export const useUserStore = defineStore({
     },
     async editUser(data) {
       try {
+        console.log(data)
         const { data: resData } = await apiAuth.patch('/users', data)
         this.email = resData.result.email
         this.nickname = resData.result.nickname
@@ -199,7 +200,7 @@ export const useUserStore = defineStore({
         Swal.fire({
           icon: 'error',
           title: '失敗',
-          text: '編輯個人資料失敗'
+          text: error.isAxiosError ? error.response.data.message : error.message
         })
       }
     },

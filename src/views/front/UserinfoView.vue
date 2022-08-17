@@ -68,6 +68,7 @@
   .info_pic {
     width: 300px;
     height: 300px;
+    border: 1px solid #000;
     object-fit: cover;
     border-radius: 50%;
   }
@@ -127,15 +128,19 @@ const rules = reactive({
 
 const changeinfo = () => {
   dialog.value = true
+  form.account = account.value
+  form.email = email.value
+  form.nickname = nickname.value
   form.avatar = []
 }
 
 const submitForm = async () => {
-  if (!valid) return
+  if (!valid.value) return
   const fd = new FormData()
   for (const key in form) {
     if (['account'].includes(key)) continue
-    else if (key === 'avatar') fd.append(key, form[key][0])
+    // key 的名稱要跟後台 upload 裡面的 upload.single('image') 的 image 名稱一樣
+    else if (key === 'avatar') fd.append('image', form[key][0])
     else fd.append(key, form[key])
   }
   const result = await editUser(fd)

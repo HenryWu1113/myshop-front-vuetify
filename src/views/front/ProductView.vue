@@ -19,7 +19,7 @@
           <p style="white-space: pre-wrap;">{{ product.description }}</p>
         </div>
         <div class="product_price mt-10">
-          <h2>${{ product.price }}</h2>
+          <h2>NT. {{ product.price }}</h2>
         </div>
         <div class="product_amount mt-5">
           <v-form v-model="valid" @submit.prevent="submit">

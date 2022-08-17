@@ -8,7 +8,7 @@
       </h2>
     </v-card-title>
     <v-card-actions>
-      <h2 class="ms-2">${{ product.price }}</h2>
+      <h2 class="ms-2">NT. {{ product.price }}</h2>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon icon="mdi-cart"></v-icon>
@@ -20,7 +20,7 @@
             </v-card-title>
             <v-card-text class="text-center">
               <v-container>
-                <h2 class="mb-5">${{ product.price }}</h2>
+                <h2 class="mb-5">NT. {{ product.price }}</h2>
                 <v-form v-model="valid" @submit.prevent="submit">
                   <v-select v-model="quantity" :items="quantities" :rules="[rules.required]" variant="outlined">
                   </v-select>

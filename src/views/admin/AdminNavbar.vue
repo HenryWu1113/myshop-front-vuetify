@@ -4,7 +4,7 @@
       <h1>後臺管理</h1>
       <v-spacer></v-spacer>
       <v-btn icon to="/">
-        <v-icon class="icon" icon="mdi-arrow-left-bold-circle" color="primary"></v-icon>
+        <v-icon class="icon" icon="mdi-arrow-left-bold-outline" color="primary"></v-icon>
       </v-btn>
     </v-container>
   </v-app-bar>

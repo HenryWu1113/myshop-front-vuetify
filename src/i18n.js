@@ -1,5 +1,5 @@
 import { createI18n } from 'vue-i18n'
-import cn from './locales/cn.json'
+import tw from './locales/tw.json'
 import en from './locales/en.json'
 import jp from './locales/jp.json'
 
@@ -23,9 +23,9 @@ function loadLocaleMessages() {
 }
 
 const i18n = createI18n({
-  locale: 'cn',
+  locale: 'tw',
   messages: {
-    cn,
+    tw,
     en,
     jp
   }

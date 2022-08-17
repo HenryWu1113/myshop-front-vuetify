@@ -13,34 +13,37 @@
         <v-btn class="btn" to="/contact">{{ $t('contact') }}</v-btn>
       </div>
       <div class="bar-list-right-group d-flex">
+        <!-- <v-btn icon @click="$i18n.locale = 'en'" class="mr-5">
+          <v-icon icon="mdi-fingerprint" class="icon"></v-icon>
+        </v-btn> -->
         <v-btn v-if="isAdmin && isLogin" icon to="/admin" class="mr-5">
-          <v-icon icon="mdi-fingerprint" class="icon" color="primary"></v-icon>
+          <v-icon icon="mdi-fingerprint" class="icon"></v-icon>
         </v-btn>
         <v-btn icon to="/likes" class="mr-5">
-          <v-icon icon="mdi-heart" class="icon" color="red"></v-icon>
+          <v-icon icon="mdi-heart-outline" class="icon"></v-icon>
         </v-btn>
         <v-btn icon to="/cart" class="mr-5">
           <v-badge class="badge" color="red" v-if='cart > 0'>
-            <v-icon icon="mdi-cart" class="icon" color="orange"></v-icon>
+            <v-icon icon="mdi-cart-check" class="icon"></v-icon>
           </v-badge>
-          <v-icon v-if='cart === 0' icon="mdi-cart" class="icon" color="orange"></v-icon>
+          <v-icon v-if='cart === 0' icon="mdi-cart-check" class="icon"></v-icon>
         </v-btn>
         <v-btn v-if="!isLogin" icon to="/login">
-          <v-icon icon="mdi-login-variant" class="icon" color="primary"></v-icon>
+          <v-icon icon="mdi-login-variant" class="icon"></v-icon>
         </v-btn>
         <!-- <v-btn v-if="isLogin" icon>
           <v-icon icon="mdi-account" class="icon" color="primary"></v-icon>
         </v-btn> -->
-        <v-menu transition="slide-y-transition" location="bottom" v-if="isLogin">
+        <v-menu transition="scale-transition" location="bottom" v-if="isLogin">
           <template v-slot:activator="{ props }">
-            <v-btn icon color="primary" v-bind="props">
-              <v-icon icon="mdi-account" class="icon" color="primary"></v-icon>
+            <v-btn icon v-bind="props">
+              <v-icon icon="mdi-account-outline" class="icon"></v-icon>
             </v-btn>
           </template>
           <v-list class="userlist">
             <v-list-item class="d-flex flex-column">
               <img class="MyAvatar" :src="avatar">
-              <h3>使用者暱稱</h3>
+              <h3 class="text-center">{{ nickname }}</h3>
             </v-list-item>
             <v-divider></v-divider>
             <v-list-item v-for="(list, i) in lists" :key="i" :value="list" rounded="xl" :to="list.to"
@@ -113,7 +116,9 @@ import router from '@/router'
 
 const user = useUserStore()
 const { logout } = user
-const { isLogin, isAdmin, cart, avatar } = storeToRefs(user)
+const { isLogin, isAdmin, cart, avatar, nickname } = storeToRefs(user)
+
+const language = reactive(['中文', 'English', '日本語'])
 const lists = reactive([
   {
     text: '個人資料',

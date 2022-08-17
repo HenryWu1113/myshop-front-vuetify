@@ -11,7 +11,7 @@
       <span>會員電子信箱</span>
     </v-col>
     <v-col class="text-h6">
-      <span>收件時間</span>
+      <span>寄件時間</span>
     </v-col>
     <v-col class="text-h6">
       <span>訊息內容</span>
@@ -19,7 +19,7 @@
   </v-row>
   <v-divider class="mb-10 d-none d-lg-block"></v-divider>
   <div class="order_panel">
-    <v-row v-if="feedbacks.length > 0" v-for="feedback in feedbacks" :key="feedback._id" class="mt-3">
+    <v-row v-if="feedbacks.length > 0" v-for="(feedback, i) in feedbacks" :key="feedback._id" class="mt-3">
       <v-col>
         <span>{{ feedback.user.account }}</span>
       </v-col>
@@ -33,11 +33,27 @@
         <span>{{ new Date(feedback.date).toLocaleString() }}</span>
       </v-col>
       <v-col>
-        <v-btn variant="outlined">檢視內容</v-btn>
+        <v-btn variant="outlined" @click="openDialog(i)">檢視內容</v-btn>
       </v-col>
       <v-divider></v-divider>
     </v-row>
   </div>
+  <v-dialog v-model="dialog">
+    <v-card>
+      <v-card-title class="text-center mt-5">
+        <h2>會員帳號 : {{ feedbacks[idx].user.account }}</h2>
+      </v-card-title>
+      <v-card-text>
+        <v-container>
+          <p>時間 : {{ new Date(feedbacks[idx].date).toLocaleString() }}</p>
+          <span>訊息 : {{ feedbacks[idx].comment }}</span>
+        </v-container>
+      </v-card-text>
+      <v-card-actions>
+        <v-btn block color="warning" @click="dialog = false">關閉</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 
 </template>
 
@@ -56,7 +72,15 @@ import { apiAuth } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { ref, reactive, computed } from 'vue'
 
+const dialog = ref(false)
+const idx = ref(-1)
+
 const feedbacks = reactive([])
+
+const openDialog = (i) => {
+  idx.value = i
+  dialog.value = true
+}
 
 const init = async () => {
   try {
