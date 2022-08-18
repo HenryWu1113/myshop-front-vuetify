@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div class="MyContainer">
     <h1 class="text-h2 text-center mt-15"><b>最新消息</b></h1>
     <v-row v-if="news.length > 0" v-for="n in news" :key="n._id" class="mt-3">
       <v-col cols="" class="d-flex align-center">
@@ -20,7 +20,9 @@
     <!-- <div class="text-center">
       <v-pagination v-model="page" :length="news.length / 5"></v-pagination>
     </div> -->
-  </v-container>
+  </div>
+
+
 </template>
 
 <style scoped lang="scss">

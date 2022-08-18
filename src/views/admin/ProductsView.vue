@@ -81,8 +81,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="warning" @click="form.dialog = false" :disabled="form.submitting">取消</v-btn>
-          <v-btn type="submit" color="primary" :loading="form.submitting">確定</v-btn>
+          <v-btn color="warning" @click="form.dialog = false" :disabled="form.submitting" variant="outlined">取消</v-btn>
+          <v-btn type="submit" color="primary" :loading="form.submitting" variant="outlined">確定</v-btn>
         </v-card-actions>
       </v-card>
     </v-form>

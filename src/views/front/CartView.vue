@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div class="MyContainer">
     <h1 class="text-center mt-15">購物車</h1>
     <v-row v-if="cart.length > 0" class="mt-4" v-for="(item, idx) in cart" :key="item._id"
       :class="{ 'bg-error': !item.product.sell }">
@@ -30,7 +30,7 @@
           <v-icon icon="mdi-trash-can-outline"></v-icon>
         </v-btn>
       </v-col>
-      <v-divider></v-divider>
+      <v-divider class="d-none d-md-block"></v-divider>
     </v-row>
     <h1 v-else class="text-h1 text-center mt-10">沒有商品哦</h1>
     <v-row>
@@ -62,7 +62,7 @@
         </v-col>
       </v-row>
     </v-form>
-  </v-container>
+  </div>
 </template>
 
 <style scoped lang="scss">

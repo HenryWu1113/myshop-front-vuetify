@@ -1,7 +1,7 @@
 <template>
   <img class="contact_img"
     src="https://www.undp.org/sites/g/files/zskgke326/files/migration/cn/UNDP-CH-Why-Humanity-Must-Save-Nature-To-Save-Itself.jpeg">
-  <v-container>
+  <div class="MyContainer">
     <v-row class="mt-7">
       <v-col cols="12" lg="4">
         <div class="contact_box">
@@ -40,7 +40,7 @@
         </v-form>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
   <v-dialog v-model="dialog" transition="dialog-top-transition">
     <v-card>
       <v-card-text>

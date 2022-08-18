@@ -5,18 +5,10 @@
       </v-img>
     </v-carousel-item>
   </v-carousel> -->
-  <swiper :slidesPerView="1" :spaceBetween="30" :loop="true" :pagination="{
-    clickable: true,
-  }" :autoplay="{
-  delay: 2500,
-  disableOnInteraction: false,
-}" :modules="modules" class="mySwiper">
-    <swiper-slide v-for="(image, i) in images" :key="i">
-      <img :src="image.src">
-    </swiper-slide>
-  </swiper>
-  <v-container class="mt-10">
-    <v-menu>
+
+
+  <!-- <v-container class="mt-10"> -->
+  <!-- <v-menu>
       <template v-slot:activator="{ props }">
         <v-btn color="primary" v-bind="props">
           Activator slot
@@ -27,17 +19,41 @@
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-menu>
-
+    </v-menu> -->
+  <swiper :slidesPerView="1" :spaceBetween="30" :loop="true" :pagination="{
+    clickable: true,
+  }" :autoplay="{
+  delay: 2500,
+  disableOnInteraction: false,
+}" :modules="modules" class="mySwiper">
+    <swiper-slide v-for="(image, i) in images" :key="i">
+      <img :src="image.src">
+    </swiper-slide>
+  </swiper>
+  <div class="MyContainer">
     <v-row>
-      <v-col v-if="products.length > 0" cols="12" sm="6" lg="4" xl="3" v-for="product in products">
+      <v-col cols="12" class="text-center">
+        <h1 class="text-h2">最新商品</h1>
+      </v-col>
+      <v-col cols="6" md="4" lg="3">
+        <v-select variant="outlined" v-model="item" :items="items"></v-select>
+      </v-col>
+      <v-col cols="6" md="8" lg="9">
+        <v-text-field variant="outlined" v-model="search" placeholder="搜尋" appendInnerIcon="mdi-shopping-search">
+        </v-text-field>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col v-if="products.length > 0" cols="12" md="6" lg="4" xl="3" v-for="product in filtereditems">
         <ProductCard :product="product"></ProductCard>
       </v-col>
       <v-col v-else>
         <h1 class="text-center">沒有商品</h1>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
+
+  <!-- </v-container> -->
 </template>
 
 <style scoped lang="scss">
@@ -58,7 +74,8 @@ body {
 
 .swiper {
   width: 100%;
-  height: 500px;
+  aspect-ratio: 16 / 6;
+  // height: 300px;
 }
 
 .swiper-slide {
@@ -88,16 +105,16 @@ body {
   object-fit: cover;
 }
 
-@media (min-width:768px) {
-  .swiper {
-    width: 100%;
-    height: 800px;
-  }
-}
+// @media (min-width:960px) {
+//   .swiper {
+//     width: 100%;
+//     height: 500px;
+//   }
+// }
 </style>
 
 <script setup>
-import { reactive } from 'vue'
+import { ref, reactive } from 'vue'
 import Swal from 'sweetalert2'
 import { api } from '@/plugins/axios'
 import ProductCard from '@/components/ProductCard.vue'
@@ -112,6 +129,7 @@ import "swiper/css/navigation"
 
 // import required modules
 import { Pagination, Autoplay } from "swiper"
+import { computed } from '@vue/reactivity'
 // import { useUserStore } from '@/stores/user'
 // import { storeToRefs } from 'pinia'
 // import { apiAuth } from '../../plugins/axios.js'
@@ -120,6 +138,10 @@ import { Pagination, Autoplay } from "swiper"
 
 const modules = reactive([Pagination, Autoplay])
 
+const item = ref('全部')
+const search = ref('')
+
+const items = reactive(['全部', '芒果', '火龍果', '香蕉'])
 const images = reactive([
   {
     src: 'https://images.unsplash.com/photo-1659563095582-bcacd4c09298?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1075&q=80',
@@ -135,6 +157,15 @@ const images = reactive([
 
 const products = reactive([])
 
+const filtereditems = computed(() => {
+  return products.filter(i => {
+    const inc = i.name.includes(search.value)
+    if (item.value === '全部') return inc
+    else if (item.value === '芒果') return inc && i.category === '芒果'
+    else if (item.value === '火龍果') return inc && i.category === '火龍果'
+    else return inc && i.category === '香蕉'
+  })
+})
 
 const init = async () => {
   try {

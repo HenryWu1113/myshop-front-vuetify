@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="MyContainer">
     <v-row>
       <v-col cols="12" lg="7">
         <v-img :src="product.image"></v-img>
@@ -49,12 +49,6 @@
 </template>
 
 <style scoped lang="scss">
-.container {
-  margin: auto;
-  width: 80%;
-  max-width: 1110px;
-  margin-top: 8rem;
-}
 </style>
 
 <script setup>

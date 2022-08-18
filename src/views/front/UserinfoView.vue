@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div class="MyContainer">
     <h1 class="text-h2 text-center mt-15"><b>個人資料</b></h1>
     <div class="user_info_card">
       <v-row>
@@ -58,7 +58,7 @@
         </v-form>
       </v-dialog>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <style scoped lang="scss">

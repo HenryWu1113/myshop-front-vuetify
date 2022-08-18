@@ -24,7 +24,7 @@
       <v-col cols="12" class="text-center">沒有最新消息</v-col>
     </v-row>
   </v-container>
-  <v-dialog v-model="dialog">
+  <v-dialog v-model="dialog" persistent>
     <v-form v-model="valid" @submit.prevent="submitForm">
       <v-card>
         <v-card-title class="text-center mt-5">
@@ -50,10 +50,10 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
+          <v-btn color="primary" variant="outlined" @click="dialog = false" :disabled='submitting'>關閉</v-btn>
           <v-btn color="warning" variant="outlined" type="submit" :loading="submitting">
             確認
           </v-btn>
-          <v-btn color="primary" variant="outlined" @click="dialog = false" :disabled='submitting'>關閉</v-btn>
         </v-card-actions>
       </v-card>
     </v-form>

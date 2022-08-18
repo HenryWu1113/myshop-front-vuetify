@@ -1,6 +1,6 @@
 <template>
   <h1 class="text-h2 text-center mt-15"><b>我的收藏</b></h1>
-  <v-container>
+  <div class="MyContainer">
     <swiper v-if="likes.length > 0" :effect="'coverflow'" :grabCursor="true" :centeredSlides="true"
       :slidesPerView="'auto'" :coverflowEffect="{
         rotate: 50,
@@ -12,10 +12,10 @@
   clickable: true,
 }" :breakpoints="{
   '600': {
-    slidesPerView: 2
+    slidesPerView: 1
   },
   '960': {
-    slidesPerView: 3
+    slidesPerView: 2
   },
   '1264': {
     slidesPerView: 4
@@ -41,7 +41,7 @@
       </swiper-slide>
     </swiper>
     <h1 v-else class="text-h1 text-center mt-10">沒有收藏哦!!!</h1>
-  </v-container>
+  </div>
 </template>
 
 <style scoped lang="scss">

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div class="MyContainer">
     <h1 class="text-h2 text-center mt-15"><b>{{ n.title }}</b></h1>
     <h6 class="text-h6 mt-15">發布時間 : {{ new Date(n.date).toLocaleString() }}</h6>
     <p class="mt-5" style="white-space: pre-wrap;">{{ n.content }}</p>
@@ -7,7 +7,7 @@
       <v-btn color="primary" variant="outlined" prepend-icon="mdi-arrow-left" @click="router.go(-1)">
         回上一頁</v-btn>
     </v-col>
-  </v-container>
+  </div>
 </template>
 
 <style scoped lang="scss">

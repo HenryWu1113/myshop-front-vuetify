@@ -1,9 +1,10 @@
 <template>
-  <v-container>
+  <div class="MyContainer">
     <h1 class="text-h2 text-center mt-15"><b>訂購紀錄</b></h1>
     <v-row class="mt-5">
-      <v-col cols="12" md="3" sm="4">
-        <v-select v-model="item" variant="outlined" :items="items" append-inner-icon="mdi-pistol"></v-select>
+      <v-col cols="12" md="3">
+        <v-select v-model="item" variant="outlined" :items="items" append-inner-icon="mdi-filter-menu-outline">
+        </v-select>
       </v-col>
     </v-row>
     <v-row class="d-none d-lg-flex">
@@ -35,17 +36,17 @@
           <span class="d-lg-none">訂購日期 : </span>
           <span>{{ new Date(order.date).toLocaleString() }}</span>
         </v-col>
-        <v-col cols="12" sm="4" lg="" class="d-flex align-center">
+        <v-col cols="12" md="4" lg="" class="d-flex align-center">
           <span class="d-lg-none">訂單狀態 : </span>
           <span v-if="order.state === 0">未付款</span>
           <span v-else-if="order.state === 1">訂單成立</span>
           <span v-else="order.state === 2">訂單取消</span>
         </v-col>
-        <v-col cols="12" sm="4" lg="" class="d-flex align-center">
+        <v-col cols="12" md="4" lg="" class="d-flex align-center">
           <span class="d-lg-none">總價 : </span>
           <span>NT. {{ order.totalPrice }}</span>
         </v-col>
-        <v-col cols="12" sm="4" lg="">
+        <v-col cols="12" md="4" lg="">
           <span class="d-lg-none">詳細資訊 : </span>
           <v-btn icon variant="text" @click="openDialog(order._id)">
             <v-icon icon="mdi-plus"></v-icon>
@@ -108,7 +109,7 @@
       </v-dialog>
     </div>
 
-  </v-container>
+  </div>
 </template>
 
 <style scoped lang="scss">
