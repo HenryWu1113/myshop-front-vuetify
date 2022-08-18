@@ -15,7 +15,7 @@
             </v-btn>
           </v-card-title>
           <v-card-text class="text-center">
-            <div class="self-info">
+            <div class="self-info" v-if="isLogin">
               <img class="MyAvatar_menu mb-2" :src="avatar">
               <h3 class="text-center text-h3">{{ nickname }}</h3>
             </div>
@@ -34,6 +34,58 @@
             <v-btn block size="x-large" color="warning" class="btn" to="/contact" @click="dialog = false">{{
                 $t('contact')
             }}</v-btn>
+            <div class="btn_group">
+              <v-btn v-if="isAdmin && isLogin" icon to="/admin" class="mr-3" @click="dialog = false">
+                <v-icon icon="mdi-fingerprint" class="icon"></v-icon>
+              </v-btn>
+              <v-btn icon to="/likes" class="mr-3" @click="dialog = false">
+                <v-icon icon="mdi-heart-outline" class="icon"></v-icon>
+              </v-btn>
+              <v-btn icon to="/cart" class="mr-3" @click="dialog = false">
+                <v-badge class="badge" color="red" v-if='cart > 0'>
+                  <v-icon icon="mdi-cart-check" class="icon"></v-icon>
+                </v-badge>
+                <v-icon v-if='cart === 0' icon="mdi-cart-check" class="icon"></v-icon>
+              </v-btn>
+              <v-menu transition="scale-transition" location="bottom" open-on-hover>
+                <template v-slot:activator="{ props }">
+                  <v-btn icon v-bind="props" class="mr-2">
+                    <v-icon icon="mdi-earth" class="icon"></v-icon>
+                  </v-btn>
+                </template>
+                <v-list>
+                  <v-list-item v-for="(language, idx) in languages" :key="idx" :value="language" rounded="xl"
+                    active-color="primary" variant="plain" :title="language" @click="$i18n.locale = changeLang(idx)">
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+              <v-btn v-if="!isLogin" icon to="/login" @click="dialog = false">
+                <v-icon icon="mdi-login-variant" class="icon"></v-icon>
+              </v-btn>
+              <v-menu transition="scale-transition" location="bottom" v-if="isLogin">
+                <template v-slot:activator="{ props }">
+                  <v-btn icon v-bind="props">
+                    <v-icon icon="mdi-account-outline" class="icon"></v-icon>
+                  </v-btn>
+                </template>
+                <v-list class="userlist">
+                  <v-list-item v-for="(list, i) in lists" :key="i" :value="list" rounded="xl" :to="list.to"
+                    active-color="primary" variant="plain">
+                    <template v-slot:prepend>
+                      <v-icon :icon="list.icon"></v-icon>
+                    </template>
+                    <v-list-item-title v-text="list.text"></v-list-item-title>
+                  </v-list-item>
+                  <v-list-item rounded="xl" :value="logoutinfo" @click="logout" variant="plain">
+                    <template v-slot:prepend>
+                      <v-icon :icon="logoutinfo.icon"></v-icon>
+                    </template>
+                    <v-list-item-title v-text="logoutinfo.text"></v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </div>
+
           </v-card-text>
         </v-card>
       </v-dialog>
@@ -42,7 +94,7 @@
         <img class="logo" src="../../assets/Logo.png">
         <h1 class="ms-2">吳李香</h1>
       </div>
-      <div class="btn-group d-none d-lg-flex">
+      <div class="page-group d-none d-lg-flex">
         <v-btn class="btn" to="/">{{ $t('home') }}</v-btn>
         <v-btn class="btn" to="/brand">{{ $t('brand') }}</v-btn>
         <v-btn class="btn" to="/why">{{ $t('why') }}</v-btn>
@@ -65,9 +117,7 @@
           </v-badge>
           <v-icon v-if='cart === 0' icon="mdi-cart-check" class="icon"></v-icon>
         </v-btn>
-        <v-btn v-if="!isLogin" icon to="/login">
-          <v-icon icon="mdi-login-variant" class="icon"></v-icon>
-        </v-btn>
+
         <v-menu transition="scale-transition" location="bottom" open-on-hover>
           <template v-slot:activator="{ props }">
             <v-btn icon v-bind="props" class="mr-2">
@@ -80,7 +130,9 @@
             </v-list-item>
           </v-list>
         </v-menu>
-
+        <v-btn v-if="!isLogin" icon to="/login">
+          <v-icon icon="mdi-login-variant" class="icon"></v-icon>
+        </v-btn>
         <v-menu transition="scale-transition" location="bottom" v-if="isLogin">
           <template v-slot:activator="{ props }">
             <v-btn icon v-bind="props">
@@ -169,10 +221,15 @@
   object-fit: cover;
 }
 
-.btn-group {
+.page-group {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.btn_group {
+  border: 1px solid orange;
+  padding: 1rem;
 }
 
 .bar-list-right-group {
