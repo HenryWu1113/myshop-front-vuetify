@@ -1,17 +1,17 @@
 <template>
-  <v-app-bar height="80">
+  <v-app-bar height="100" color="amber">
     <v-container class="d-flex align-center">
       <h1>後臺管理</h1>
       <v-spacer></v-spacer>
       <v-btn icon to="/">
-        <v-icon class="icon" icon="mdi-arrow-left-bold-outline" color="primary"></v-icon>
+        <v-icon class="icon" icon="mdi-arrow-left-bold-outline"></v-icon>
       </v-btn>
     </v-container>
   </v-app-bar>
   <v-navigation-drawer floating permanent>
-    <v-list density="comfortable" nav>
+    <v-list density="comfortable" nav color="transparent">
       <v-list-item v-for="(list, i) in lists" :key="i" :value="list" :prepend-icon="list.icon" :title="list.title"
-        :to="list.to" rounded="shaped" height="50" color="warning">
+        :to="list.to" height="50" color="brown">
       </v-list-item>
     </v-list>
   </v-navigation-drawer>

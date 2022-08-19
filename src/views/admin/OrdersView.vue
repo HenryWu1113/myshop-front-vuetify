@@ -30,11 +30,11 @@
     <div class="order_panel">
       <v-row v-if="orders.length > 0" v-for="order in filtereditems" :key="order._id" class="pt-3 pb-3 mt-10"
         style="border-left:3px solid grey">
-        <v-col cols="12" lg="">
+        <v-col cols="12" lg="" class="d-flex align-center">
           <span class="d-lg-none" @click="router.push('/order/' + order._id)" style="cursor: pointer;">訂單編號 : </span>
           <span @click="router.push('/order/' + order._id)" style="cursor: pointer;">{{ order._id }}</span>
         </v-col>
-        <v-col cols="12" lg="">
+        <v-col cols="12" lg="" class="d-flex align-center">
           <span class="d-lg-none">訂購日期 : </span>
           <span>{{ new Date(order.date).toLocaleString() }}</span>
         </v-col>
@@ -151,9 +151,9 @@
 
 <style scoped lang="scss">
 .order_panel {
-  background-color: #f9f9f9;
+  background-color: #FFFDE7;
   border-radius: 20px;
-  box-shadow: 5px 5px 10px rgb(233, 229, 255);
+  box-shadow: 5px 5px 10px #FFF9C4;
   padding: 10px 30px 50px 30px;
 
 }

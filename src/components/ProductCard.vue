@@ -1,45 +1,61 @@
 <template>
-  <v-card>
-    <v-img :src="product.image" height="300" cover @click="router.push(`/product/${product._id}`)"
-      style="cursor:pointer"></v-img>
-    <v-card-title>
-      <h2>
-        {{ product.name }}
-      </h2>
-    </v-card-title>
-    <v-card-actions>
-      <h2 class="ms-2">NT. {{ product.price }}</h2>
-      <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon icon="mdi-cart"></v-icon>
-        <v-dialog v-model="dialog" activator="parent">
-          <v-card width="500">
-            <v-img cover :src="product.image" height="400"></v-img>
-            <v-card-title class="text-center mt-5">
-              <h2>{{ product.name }}</h2>
-            </v-card-title>
-            <v-card-text class="text-center">
-              <v-container>
-                <h2 class="mb-5">NT. {{ product.price }}</h2>
-                <v-form v-model="valid" @submit.prevent="submit">
-                  <v-select v-model="quantity" :items="quantities" :rules="[rules.required]" variant="outlined">
-                  </v-select>
-                  <v-btn block color="primary" type="submit" prepend-icon="mdi-cart">加入購物車</v-btn>
-                </v-form>
-              </v-container>
-            </v-card-text>
-          </v-card>
-        </v-dialog>
-      </v-btn>
-      <v-btn icon v-if="isLike" @click="deleteLike({ product: product._id })" variant="text">
-        <v-icon icon="mdi-heart"></v-icon>
-      </v-btn>
-      <v-btn icon @click="addLike({ product: product._id })" v-else variant="text">
-        <v-icon icon="mdi-heart-outline"></v-icon>
-      </v-btn>
-    </v-card-actions>
-  </v-card>
+  <div id="product_card">
+    <v-card variant="outlined" color="amber">
+      <v-img :src="product.image" height="300" cover @click="router.push(`/product/${product._id}`)"
+        style="cursor:pointer"></v-img>
+      <v-card-title class="pt-5 pb-5">
+        <h2 class="text-brown">
+          {{ product.name }}
+        </h2>
+      </v-card-title>
+      <v-card-actions class="pt-2">
+        <h2 class="ms-2 text-deep-orange">NT. {{ product.price }}</h2>
+        <v-spacer></v-spacer>
+        <v-btn icon>
+          <v-icon icon="mdi-cart" class="text-brown"></v-icon>
+          <v-dialog v-model="dialog" activator="parent">
+            <v-card width="500">
+              <v-img cover :src="product.image" height="400"></v-img>
+              <v-card-title class="text-center mt-5">
+                <h2 class="text-brown">{{ product.name }}</h2>
+              </v-card-title>
+              <v-card-text class="text-center">
+                <v-container>
+                  <h2 class="mb-5 text-deep-orange">NT. {{ product.price }}</h2>
+                  <v-form v-model="valid" @submit.prevent="submit">
+                    <v-select v-model="quantity" :items="quantities" :rules="[rules.required]" variant="outlined">
+                    </v-select>
+                    <v-btn block color="orange" type="submit" prepend-icon="mdi-cart">加入購物車</v-btn>
+                  </v-form>
+                </v-container>
+              </v-card-text>
+            </v-card>
+          </v-dialog>
+        </v-btn>
+        <v-btn icon v-if="isLike" @click="deleteLike({ product: product._id })" variant="text">
+          <v-icon icon="mdi-heart" class="text-red"></v-icon>
+        </v-btn>
+        <v-btn icon @click="addLike({ product: product._id })" v-else variant="text">
+          <v-icon icon="mdi-heart-outline" class="text-red"></v-icon>
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </div>
+
 </template>
+
+<style scoped lang="scss">
+#product_card {
+  transition: 0.4s;
+  box-shadow: 0 3px 8px #ffc107a9;
+}
+
+#product_card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 3px 13px #ffc107;
+
+}
+</style>
 
 <script setup>
 import { ref, reactive, computed } from 'vue'

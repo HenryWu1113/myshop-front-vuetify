@@ -1,6 +1,6 @@
 <template>
   <div class="MyContainer">
-    <h1 class="text-h2 text-center mt-15"><b>個人資料</b></h1>
+    <h1 class="text-h2 text-center text-brown font-weight-bold mt-10">個人資料</h1>
     <div class="user_info_card">
       <v-row>
         <v-col cols="12" md="5" lg="6">

@@ -1,6 +1,6 @@
 <template>
   <div id="FrontNavbar">
-    <v-app-bar height="80">
+    <v-app-bar height="100" color="amber">
       <v-spacer class="d-lg-none"></v-spacer>
       <v-btn icon class="d-lg-none" @click="dialog = true">
         <v-icon icon="mdi-format-list-bulleted" class="icon"></v-icon>
@@ -42,7 +42,7 @@
                 <v-icon icon="mdi-heart-outline" class="icon"></v-icon>
               </v-btn>
               <v-btn icon to="/cart" class="mr-3" @click="dialog = false">
-                <v-badge class="badge" color="red" v-if='cart > 0'>
+                <v-badge class="badge" color="amber-darken-4" v-if='cart > 0'>
                   <v-icon icon="mdi-cart-check" class="icon"></v-icon>
                 </v-badge>
                 <v-icon v-if='cart === 0' icon="mdi-cart-check" class="icon"></v-icon>
@@ -70,7 +70,7 @@
                 </template>
                 <v-list class="userlist">
                   <v-list-item v-for="(list, i) in lists" :key="i" :value="list" rounded="xl" :to="list.to"
-                    active-color="primary" variant="plain">
+                    active-color="primary" variant="plain" @click="dialog = false">
                     <template v-slot:prepend>
                       <v-icon :icon="list.icon"></v-icon>
                     </template>
@@ -85,16 +85,15 @@
                 </v-list>
               </v-menu>
             </div>
-
           </v-card-text>
         </v-card>
       </v-dialog>
 
       <div class="title align-center d-none d-sm-flex" @click="router.push('/')">
-        <img class="logo" src="../../assets/Logo.png">
-        <h1 class="ms-2">吳李香</h1>
+        <!-- <img class="logo" src="../../assets/Logo.png"> -->
+        <h1 class="ms-2 text-white">吳李香農場</h1>　<h3 class="text-white">有機栽種 / 產地直銷</h3>
       </div>
-      <div class="page-group d-none d-lg-flex">
+      <div class="page-group d-none d-lg-flex text-white">
         <v-btn class="btn" to="/">{{ $t('home') }}</v-btn>
         <v-btn class="btn" to="/brand">{{ $t('brand') }}</v-btn>
         <v-btn class="btn" to="/why">{{ $t('why') }}</v-btn>
@@ -112,7 +111,7 @@
           <v-icon icon="mdi-heart-outline" class="icon"></v-icon>
         </v-btn>
         <v-btn icon to="/cart" class="mr-3">
-          <v-badge class="badge" color="red" v-if='cart > 0'>
+          <v-badge class="badge" color="amber-darken-4" v-if='cart > 0'>
             <v-icon icon="mdi-cart-check" class="icon"></v-icon>
           </v-badge>
           <v-icon v-if='cart === 0' icon="mdi-cart-check" class="icon"></v-icon>
@@ -167,6 +166,21 @@
 
   <v-main>
     <router-view></router-view>
+    <div id="footer">
+      <div class="MyContainer">
+        <v-row>
+          <v-col cols="12" md="4">
+            <h1 class="text-center text-h4 text-brown font-weight-bold">標題一</h1>
+          </v-col>
+          <v-col cols="12" md="4">
+            <h1 class="text-center text-h4 text-brown font-weight-bold">標題一</h1>
+          </v-col>
+          <v-col cols="12" md="4">
+            <h1 class="text-center text-h4 text-brown font-weight-bold">聯絡我們</h1>
+          </v-col>
+        </v-row>
+      </div>
+    </div>
   </v-main>
 </template>
 
@@ -186,6 +200,7 @@
 
 .icon {
   font-size: 2.5rem;
+  color: white;
 }
 
 .title {
@@ -199,17 +214,19 @@
 }
 
 .self-info {
-  border-radius: 50px;
-  background: #f7dfb4;
-  box-shadow: 0 10px 15px#b38e4a;
-  border: 2px solid #f1cc87;
+  margin: auto;
+  width: 300px;
+  border-radius: 15px;
+  background: #FFFDE7;
+  box-shadow: 0 10px 15px#FFF9C4;
+  // border: 2px solid #f1cc87;
 }
 
 .MyAvatar {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 1px solid #000;
+  // border: 1px solid #000;
   object-fit: cover;
 }
 
@@ -227,14 +244,21 @@
   transform: translateX(-50%);
 }
 
-.btn_group {
-  border: 1px solid orange;
-  padding: 1rem;
-}
+// .btn_group {
+//   border: 1px solid orange;
+//   padding: 1rem;
+// }
 
 .bar-list-right-group {
   position: absolute;
   right: 0;
+}
+
+#footer {
+  margin-top: 5rem;
+  width: 100%;
+  padding: 5rem;
+  background: #D7CCC8;
 }
 </style>
 

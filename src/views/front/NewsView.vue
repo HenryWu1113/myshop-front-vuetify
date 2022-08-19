@@ -1,6 +1,6 @@
 <template>
-  <div class="MyContainer">
-    <h1 class="text-h2 text-center mt-15"><b>最新消息</b></h1>
+  <div class="MyContainer mt-10">
+    <h1 class="text-h2 text-center text-brown font-weight-bold">最新消息</h1>
     <v-row v-if="news.length > 0" v-for="n in news" :key="n._id" class="mt-3">
       <v-col cols="" class="d-flex align-center">
         <h2 @click="router.push('/news/' + n._id)" style="cursor:pointer;">

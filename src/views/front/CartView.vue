@@ -1,6 +1,6 @@
 <template>
   <div class="MyContainer">
-    <h1 class="text-center mt-15">購物車</h1>
+    <h1 class="text-h2 text-center text-brown font-weight-bold mt-10">購物車</h1>
     <v-row v-if="cart.length > 0" class="mt-4" v-for="(item, idx) in cart" :key="item._id"
       :class="{ 'bg-error': !item.product.sell }">
       <v-col cols="12" md="">
@@ -8,22 +8,24 @@
         </v-img>
       </v-col>
       <v-col cols="12" md="" class="d-flex align-center justify-center text-center">
-        <h2 @click="router.push(`/product/${item.product._id}`)" style="cursor: pointer;">{{ item.product.name }}</h2>
+        <h2 class="text-brown" @click="router.push(`/product/${item.product._id}`)" style="cursor: pointer;">{{
+            item.product.name
+        }}</h2>
       </v-col>
       <v-col cols="12" md="" class="d-flex align-center justify-center text-center">
-        <span class="text-h6">${{ item.product.price }}</span>
+        <span class="text-h6 text-deep-orange">NT. {{ item.product.price }}</span>
       </v-col>
       <v-col cols="12" md="" class="d-flex align-center justify-center text-center">
         <v-btn icon variant="text" @click="update(idx, item.quantity - 1)" :disabled="item.quantity < 2">
-          <v-icon icon="mdi-minus"></v-icon>
+          <v-icon icon="mdi-minus" color="brown"></v-icon>
         </v-btn>
         <span class="ms-3 me-3 text-h6">{{ item.quantity }}</span>
         <v-btn icon variant="text" @click="update(idx, item.quantity + 1)">
-          <v-icon icon="mdi-plus"></v-icon>
+          <v-icon icon="mdi-plus" color="brown"></v-icon>
         </v-btn>
       </v-col>
       <v-col cols="12" md="" class="d-flex align-center justify-center text-center">
-        <span class="text-h6">${{ item.product.price * item.quantity }}</span>
+        <span class="text-h6 text-deep-orange">NT. {{ item.product.price * item.quantity }}</span>
       </v-col>
       <v-col cols="12" md="" class="d-flex align-center justify-center text-center">
         <v-btn icon variant="text" color="red" @click="update(idx, 0)">

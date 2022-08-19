@@ -4,7 +4,7 @@
     <h6 class="text-h6 mt-15">發布時間 : {{ new Date(n.date).toLocaleString() }}</h6>
     <p class="mt-5" style="white-space: pre-wrap;">{{ n.content }}</p>
     <v-col cols="12" class="mt-5 text-center">
-      <v-btn color="primary" variant="outlined" prepend-icon="mdi-arrow-left" @click="router.go(-1)">
+      <v-btn color="brown" variant="outlined" prepend-icon="mdi-arrow-left" @click="router.go(-1)">
         回上一頁</v-btn>
     </v-col>
   </div>

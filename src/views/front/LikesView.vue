@@ -26,11 +26,11 @@
           <v-img :src="like.product.image" @click="router.push(`/product/${like.product._id}`)" style="cursor:pointer">
           </v-img>
           <v-card-title>
-            <h2 class="ms-3">{{ like.product.name }}</h2>
+            <h2 class="ms-3 text-brown">{{ like.product.name }}</h2>
           </v-card-title>
           <v-card-text>
             <v-container>
-              <h2 class="mb-5">NT. {{ like.product.price }}</h2>
+              <h2 class="text-deep-orange">NT. {{ like.product.price }}</h2>
             </v-container>
           </v-card-text>
           <v-card-actions>
