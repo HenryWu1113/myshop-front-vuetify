@@ -41,6 +41,7 @@
         </v-col>
       </v-row>
     </div>
+    <FooterPart></FooterPart>
   </div>
 
   <!-- </v-container> -->
@@ -108,6 +109,7 @@ import { ref, reactive } from 'vue'
 import Swal from 'sweetalert2'
 import { api } from '@/plugins/axios'
 import ProductCard from '@/components/ProductCard.vue'
+import FooterPart from '@/components/FooterPart.vue'
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue"
 
@@ -120,7 +122,7 @@ import "swiper/css/navigation"
 
 // import required modules
 import { Pagination, Autoplay, EffectFade } from "swiper"
-import { computed } from '@vue/reactivity'
+import { computed } from 'vue'
 // import { useUserStore } from '@/stores/user'
 // import { storeToRefs } from 'pinia'
 // import { apiAuth } from '../../plugins/axios.js'

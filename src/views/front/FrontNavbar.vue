@@ -105,22 +105,22 @@
           <v-icon icon="mdi-fingerprint" class="icon"></v-icon>
         </v-btn> -->
         <v-btn v-if="isAdmin && isLogin" icon to="/admin" class="mr-3">
-          <v-icon icon="mdi-fingerprint" class="icon"></v-icon>
+          <v-icon icon="mdi-fingerprint" class="icon text-white"></v-icon>
         </v-btn>
         <v-btn icon to="/likes" class="mr-3">
-          <v-icon icon="mdi-heart-outline" class="icon"></v-icon>
+          <v-icon icon="mdi-heart-outline" class="icon text-white"></v-icon>
         </v-btn>
         <v-btn icon to="/cart" class="mr-3">
           <v-badge class="badge" color="amber-darken-4" v-if='cart > 0'>
-            <v-icon icon="mdi-cart-check" class="icon"></v-icon>
+            <v-icon icon="mdi-cart-check" class="icon text-white"></v-icon>
           </v-badge>
-          <v-icon v-if='cart === 0' icon="mdi-cart-check" class="icon"></v-icon>
+          <v-icon v-if='cart === 0' icon="mdi-cart-check" class="icon text-white"></v-icon>
         </v-btn>
 
         <v-menu transition="scale-transition" location="bottom" open-on-hover>
           <template v-slot:activator="{ props }">
             <v-btn icon v-bind="props" class="mr-2">
-              <v-icon icon="mdi-earth" class="icon"></v-icon>
+              <v-icon icon="mdi-earth" class="icon text-white"></v-icon>
             </v-btn>
           </template>
           <v-list>
@@ -130,12 +130,12 @@
           </v-list>
         </v-menu>
         <v-btn v-if="!isLogin" icon to="/login">
-          <v-icon icon="mdi-login-variant" class="icon"></v-icon>
+          <v-icon icon="mdi-login-variant" class="icon text-white"></v-icon>
         </v-btn>
         <v-menu transition="scale-transition" location="bottom" v-if="isLogin">
           <template v-slot:activator="{ props }">
             <v-btn icon v-bind="props">
-              <v-icon icon="mdi-account-outline" class="icon"></v-icon>
+              <v-icon icon="mdi-account-outline" class="icon text-white"></v-icon>
             </v-btn>
           </template>
           <v-list class="userlist">
@@ -166,21 +166,7 @@
 
   <v-main>
     <router-view></router-view>
-    <div id="footer">
-      <div class="MyContainer">
-        <v-row>
-          <v-col cols="12" md="4">
-            <h1 class="text-center text-h4 text-brown font-weight-bold">標題一</h1>
-          </v-col>
-          <v-col cols="12" md="4">
-            <h1 class="text-center text-h4 text-brown font-weight-bold">標題一</h1>
-          </v-col>
-          <v-col cols="12" md="4">
-            <h1 class="text-center text-h4 text-brown font-weight-bold">聯絡我們</h1>
-          </v-col>
-        </v-row>
-      </div>
-    </div>
+
   </v-main>
 </template>
 
@@ -200,7 +186,7 @@
 
 .icon {
   font-size: 2.5rem;
-  color: white;
+  // color: white;
 }
 
 .title {
@@ -252,13 +238,6 @@
 .bar-list-right-group {
   position: absolute;
   right: 0;
-}
-
-#footer {
-  margin-top: 5rem;
-  width: 100%;
-  padding: 5rem;
-  background: #D7CCC8;
 }
 </style>
 
