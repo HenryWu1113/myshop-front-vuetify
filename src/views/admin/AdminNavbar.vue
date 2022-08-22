@@ -1,10 +1,10 @@
 <template>
   <v-app-bar height="100" color="amber">
     <v-container class="d-flex align-center">
-      <h1>後臺管理</h1>
+      <h1 class="text-white">後臺管理</h1>
       <v-spacer></v-spacer>
       <v-btn icon to="/">
-        <v-icon class="icon" icon="mdi-arrow-left-bold-outline"></v-icon>
+        <v-icon class="icon" color="white" icon="mdi-arrow-left-bold-outline"></v-icon>
       </v-btn>
     </v-container>
   </v-app-bar>

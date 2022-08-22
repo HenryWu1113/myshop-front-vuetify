@@ -1,6 +1,6 @@
 <template>
   <div id="product_card">
-    <v-card variant="outlined" color="amber">
+    <v-card variant="outlined" color="brown-lighten-4">
       <v-img :src="product.image" height="300" cover @click="router.push(`/product/${product._id}`)"
         style="cursor:pointer"></v-img>
       <v-card-title class="pt-5 pb-5">
@@ -47,7 +47,7 @@
 <style scoped lang="scss">
 #product_card {
   transition: 0.4s;
-  box-shadow: 0 3px 8px #ffc107a9;
+  // box-shadow: 0 3px 8px #ffc107a9;
 }
 
 #product_card:hover {

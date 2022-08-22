@@ -1,3 +1,13 @@
+body {
+  /* 以下為了去除滑動欄 */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
 .MyContainer {
   margin: auto;
   width: 100%;

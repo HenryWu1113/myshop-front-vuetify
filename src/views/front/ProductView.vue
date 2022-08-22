@@ -3,8 +3,7 @@
     <div class="MyContainer">
       <v-row>
         <v-col cols="12" lg="7">
-          <v-img :src="product.image" style="border-radius:40px 5px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);"
-            class="border">
+          <v-img :src="product.image" style="border-radius:40px 5px; box-shadow: 5px 5px 10px #FFE082;" class="border">
           </v-img>
         </v-col>
         <v-col cols="12" lg="5">

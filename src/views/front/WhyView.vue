@@ -1,8 +1,8 @@
 <template>
   <div id="why_view">
     <h2>why 夏雪</h2>
-    <FooterPart></FooterPart>
   </div>
+  <FooterPart></FooterPart>
 </template>
 
 <script setup>

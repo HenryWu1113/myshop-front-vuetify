@@ -1,0 +1,19 @@
+#front_news_view {
+  .v-row {
+    transition: 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+    h2 {
+      color: #795548;
+    }
+
+    &:hover {
+      background-color: #FFF8E1;
+    }
+  }
+
+  .column_divider {
+    width: 2px;
+    height: 50px;
+    background: grey;
+  }
+}

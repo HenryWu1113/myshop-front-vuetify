@@ -3,7 +3,7 @@
     <v-app-bar height="100" color="amber">
       <v-spacer class="d-lg-none"></v-spacer>
       <v-btn icon class="d-lg-none" @click="dialog = true">
-        <v-icon icon="mdi-format-list-bulleted" class="icon"></v-icon>
+        <v-icon icon="mdi-format-list-bulleted" class="icon text-white"></v-icon>
       </v-btn>
 
       <v-dialog v-model="dialog" fullscreen transition="dialog-top-transition">
@@ -89,9 +89,9 @@
         </v-card>
       </v-dialog>
 
-      <div class="title align-center d-none d-sm-flex" @click="router.push('/')">
+      <div class="title align-center d-flex" @click="router.push('/')">
         <!-- <img class="logo" src="../../assets/Logo.png"> -->
-        <h1 class="ms-2 text-white">吳李香農場</h1>　<h3 class="text-white">有機栽種 / 產地直銷</h3>
+        <h1 class="ms-2 text-white">吳李香農場</h1>　<h3 class="text-white d-none d-sm-block">有機栽種 / 產地直銷</h3>
       </div>
       <div class="page-group d-none d-lg-flex text-white">
         <v-btn class="btn" to="/">{{ $t('home') }}</v-btn>

@@ -41,8 +41,8 @@
         </v-col>
       </v-row>
     </div>
-    <FooterPart></FooterPart>
   </div>
+  <FooterPart></FooterPart>
 
   <!-- </v-container> -->
 </template>

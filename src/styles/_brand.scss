@@ -1,0 +1,182 @@
+#brand_view {
+  .brand_top_img {
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    background: url('../assets/farm.png') center/cover;
+    position: relative;
+
+    .circle {
+      width: 30%;
+      aspect-ratio: 1 / 1;
+      border: 5px solid #FFF8E1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      backdrop-filter: blur(1px) brightness(60%);
+
+      span {
+        width: 100%;
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-align: center;
+        text-shadow: 0px 1px 5px rgba(0, 0, 0, 1);
+        animation: jump 2s ease-in-out infinite;
+
+        &:nth-child(1) {
+          animation-delay: 0.1s;
+        }
+
+        &:nth-child(2) {
+          animation-delay: 0.2s;
+        }
+
+        &:nth-child(3) {
+          animation-delay: 0.3s;
+        }
+
+        &:nth-child(4) {
+          animation-delay: 0.4s;
+        }
+
+        &:nth-child(5) {
+          animation-delay: 0.5s;
+        }
+
+        &:nth-child(6) {
+          animation-delay: 0.6s;
+        }
+
+        &:nth-child(7) {
+          animation-delay: 0.7s;
+        }
+      }
+
+      @keyframes jump {
+        from {
+          transform: translateY(0px) rotate(0deg);
+        }
+
+        25% {
+          transform: translateY(-50%);
+        }
+
+        50% {
+          transform: translateY(0px) rotate(360deg);
+        }
+
+        100% {
+          transform: translateY(0px) rotate(360deg);
+        }
+      }
+    }
+  }
+
+  .MyContainer {
+    margin-top: 5rem;
+
+    .content1,
+    .content3,
+    .content5 {
+      order: 1;
+    }
+
+    .content2,
+    .content4,
+    .content6 {
+      order: 2;
+    }
+
+    .img1,
+    .img3 {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-position: 0 70%;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .img2 {
+      width: 100%;
+      // aspect-ratio: 4 / 3;
+      object-position: 0 70%;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+
+    .word1,
+    .word2,
+    .word3,
+    .slogan {
+      font-size: 18px;
+      line-height: 36px;
+    }
+
+    .certification {
+      width: 100%;
+      max-width: 800px;
+    }
+
+  }
+
+  @include sm {
+    .brand_top_img {
+      .circle {
+        span {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+
+  @include md {
+    .MyContainer {
+      margin-top: 8rem;
+
+      .content1,
+      .content4,
+      .content5 {
+        order: 1;
+      }
+
+      .content2,
+      .content3,
+      .content6 {
+        order: 2;
+      }
+    }
+
+    .brand_top_img {
+      .circle {
+        span {
+          font-size: 2.5rem;
+        }
+      }
+    }
+  }
+
+  @include lg {
+    .brand_top_img {
+      .circle {
+        span {
+          font-size: 3.2rem;
+        }
+      }
+    }
+  }
+
+  @include xl {
+    .brand_top_img {
+      .circle {
+        span {
+          font-size: 4rem;
+        }
+      }
+    }
+  }
+
+}

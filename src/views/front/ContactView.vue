@@ -2,8 +2,7 @@
   <div id="contact_view">
     <!-- <img class="contact_img"
       src="https://img.freepik.com/premium-photo/happy-new-year-number-made-fruits-berries_88281-5412.jpg?w=1380"> -->
-    <v-parallax class="mb-15"
-      src="https://scontent.ftpe14-1.fna.fbcdn.net/v/t39.30808-6/294188883_8564335890258405_5451743927341035630_n.jpg?stp=cp1_dst-jpg&_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=p_NT1QzaYtYAX_dEght&_nc_ht=scontent.ftpe14-1.fna&oh=00_AT99b1pIOlx0f0Z0fo8nxJhHz8qIkXxk3Dk9I3n0ez6RJQ&oe=6307E3D6"
+    <v-parallax class="mb-15" src="https://shoplineimg.com/60e7f216ed3d3c0024770f58/610d117bbbb7ce0026b0af3b/800x.jpg?"
       cover height="600">
       <div class="d-flex flex-column fill-height justify-center align-center text-white">
         <h1 class="text-h1 mb-4 pt-6 pb-6 ps-6 pe-6 font-weight-bold contact_bg">
@@ -14,24 +13,24 @@
     <div class="MyContainer">
       <v-row class="mt-7">
         <v-col cols="12" lg="4">
-          <div class="contact_box">
+          <div class="contact_box1">
             <v-icon class="contact_icon" icon="mdi-phone"></v-icon>
-            <h1 class="text-brown">電話</h1>
-            <span class="text-brown">0911888777</span>
+            <h1 class="">電話</h1>
+            <span class="">0911888777</span>
           </div>
         </v-col>
         <v-col cols="12" lg="4">
-          <div class="contact_box" @click="dialog = true" style="cursor:pointer;">
+          <div class="contact_box2" @click="dialog = true">
             <v-icon class="contact_icon" icon="mdi-chat-outline"></v-icon>
-            <h1 class="text-brown">Line</h1>
-            <span class="text-brown">id : XXXXXX</span>
+            <h1 class="">Line</h1>
+            <span class="">id : XXXXXX</span>
           </div>
         </v-col>
         <v-col cols="12" lg="4">
-          <div class="contact_box">
+          <div class="contact_box3">
             <v-icon class="contact_icon" icon="mdi-email-outline"></v-icon>
-            <h1 class="text-brown">信箱</h1>
-            <span class="text-brown">mangoshop@gmail.com</span>
+            <h1 class="">信箱</h1>
+            <span class="">mangoshop@gmail.com</span>
           </div>
         </v-col>
       </v-row>
@@ -68,31 +67,6 @@
 </template>
 
 <style scoped lang="scss">
-.contact_img {
-  width: 100%;
-  height: 300px;
-  object-fit: contain;
-  object-position: center 50%;
-}
-
-.contact_bg {
-  backdrop-filter: blur(3px);
-  border-radius: 20px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.contact_box {
-  border: 1px solid #000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 4rem 0;
-
-  .contact_icon {
-    font-size: 4rem;
-    color: #FFC107;
-  }
-}
 </style>
 
 <script setup>
