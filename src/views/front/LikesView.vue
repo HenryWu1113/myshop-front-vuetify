@@ -1,6 +1,6 @@
 <template>
-  <h1 class="text-h2 text-center mt-15"><b>我的收藏</b></h1>
-  <div class="MyContainer">
+  <div id="likes_view">
+    <h1 class="text-h2 text-center pt-15 text-brown font-weight-bold"><b>我的收藏</b></h1>
     <swiper v-if="likes.length > 0" :effect="'coverflow'" :grabCursor="true" :centeredSlides="true"
       :slidesPerView="'auto'" :coverflowEffect="{
         rotate: 50,
@@ -12,17 +12,17 @@
   clickable: true,
 }" :breakpoints="{
   '600': {
-    slidesPerView: 1
+    slidesPerView: 2
   },
   '960': {
-    slidesPerView: 2
+    slidesPerView: 3
   },
   '1264': {
     slidesPerView: 4
   }
 }" :navigation="true" :speed="700" :modules="modules" class="mySwiper">
       <swiper-slide v-if="likes.length > 0" v-for="(like, i) in likes" :key="like._id">
-        <v-card class="rounded-xl">
+        <v-card variant="outlined" color="brown-lighten-4">
           <v-img :src="like.product.image" @click="router.push(`/product/${like.product._id}`)" style="cursor:pointer">
           </v-img>
           <v-card-title>
@@ -34,7 +34,7 @@
             </v-container>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="red" @click="deleteLike(i)" prepend-icon="mdi-delete" block>移除收藏
+            <v-btn color="orange" @click="deleteLike(i)" prepend-icon="mdi-delete" block>移除收藏
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -45,38 +45,6 @@
 </template>
 
 <style scoped lang="scss">
-html,
-body {
-  position: relative;
-  height: 100%;
-}
-
-body {
-  background: #eee;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  margin: 0;
-  padding: 0;
-}
-
-.swiper {
-  width: 100%;
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-
-.swiper-slide {
-  background-position: center;
-  background-size: cover;
-  // width: 300px;
-  // height: 300px;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-}
 </style>
 
 <script setup>

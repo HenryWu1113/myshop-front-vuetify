@@ -79,6 +79,18 @@
   .MyContainer {
     margin-top: 5rem;
 
+    .logo {
+      width: 100%;
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      img {
+        width: 200px;
+      }
+    }
+
     .content1,
     .content3,
     .content5 {
@@ -131,11 +143,33 @@
         }
       }
     }
+
+    .MyContainer {
+      .logo {
+        h1 {
+          font-size: 3rem;
+        }
+
+        img {
+          width: 300px;
+        }
+      }
+    }
   }
 
   @include md {
     .MyContainer {
       margin-top: 8rem;
+
+      .logo {
+        h1 {
+          font-size: 4rem;
+        }
+
+        img {
+          width: 400px;
+        }
+      }
 
       .content1,
       .content4,
@@ -164,6 +198,18 @@
       .circle {
         span {
           font-size: 3.2rem;
+        }
+      }
+    }
+
+    .MyContainer {
+      .logo {
+        h1 {
+          font-size: 5rem;
+        }
+
+        img {
+          width: 500px;
         }
       }
     }

@@ -1,0 +1,20 @@
+#product_card {
+  transition: 0.4s;
+
+  .v-card {
+    position: relative;
+
+    .saletage {
+      position: absolute;
+      right: -3%;
+      top: -2%;
+    }
+  }
+
+  // box-shadow: 0 1px 8px #ffc107a9;
+
+  &:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 3px 13px #ffc107d2;
+  }
+}

@@ -13,25 +13,29 @@
     <div class="MyContainer">
       <v-row class="mt-7">
         <v-col cols="12" lg="4">
-          <div class="contact_box1">
-            <v-icon class="contact_icon" icon="mdi-phone"></v-icon>
-            <h1 class="">電話</h1>
-            <span class="">0911888777</span>
-          </div>
+          <a href="tel:0910968708">
+            <div class="contact_box1">
+              <v-icon class="contact_icon" icon="mdi-phone"></v-icon>
+              <h1 class="">電話</h1>
+              <span class="">0910968708</span>
+            </div>
+          </a>
         </v-col>
         <v-col cols="12" lg="4">
           <div class="contact_box2" @click="dialog = true">
             <v-icon class="contact_icon" icon="mdi-chat-outline"></v-icon>
             <h1 class="">Line</h1>
-            <span class="">id : XXXXXX</span>
+            <span class="">id : wlsfarm</span>
           </div>
         </v-col>
         <v-col cols="12" lg="4">
-          <div class="contact_box3">
-            <v-icon class="contact_icon" icon="mdi-email-outline"></v-icon>
-            <h1 class="">信箱</h1>
-            <span class="">mangoshop@gmail.com</span>
-          </div>
+          <a href="mailto:service@wlsfarm.com.tw">
+            <div class="contact_box3">
+              <v-icon class="contact_icon" icon="mdi-email-outline"></v-icon>
+              <h1 class="">信箱</h1>
+              <span class="">service@wlsfarm.com.tw</span>
+            </div>
+          </a>
         </v-col>
       </v-row>
     </div>
@@ -55,7 +59,7 @@
         </v-col>
       </v-row>
     </div>
-    <v-dialog v-model="dialog" transition="dialog-top-transition">
+    <v-dialog v-model="dialog">
       <v-card>
         <v-card-text>
           <img src="../../assets/Logo.png" style="width:300px;">

@@ -12,6 +12,10 @@
       </div>
     </div>
     <div class="MyContainer">
+      <div class="logo text-center mb-15">
+        <h1 class="text-brown mb-5">~~品牌商標~~</h1>
+        <img src="../../assets/Logo.png" alt="">
+      </div>
       <p class="slogan text-center text-amber-darken-2 text-h6">
         吳李香農場一直以來都秉持著「健康第一」的信念，不使用任何化學肥料或農藥，一直都採用友善耕作，無毒裁種的方式管理果園，109年開始加入有機夏雪芒果行列(目前是有機轉型期)，吳李香農場將「信念」栽種出的夏雪芒果，每一顆都是「堅持」。
       </p>

@@ -39,22 +39,13 @@
           <v-icon icon="mdi-heart-outline" class="text-red"></v-icon>
         </v-btn>
       </v-card-actions>
+      <img class="saletage" src="../assets/sale-tag.png">
     </v-card>
   </div>
 
 </template>
 
 <style scoped lang="scss">
-#product_card {
-  transition: 0.4s;
-  // box-shadow: 0 3px 8px #ffc107a9;
-}
-
-#product_card:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 3px 13px #ffc107;
-
-}
 </style>
 
 <script setup>

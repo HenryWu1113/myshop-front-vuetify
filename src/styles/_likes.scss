@@ -1,0 +1,46 @@
+#likes_view {
+  // width: 100%;
+  // height: calc(100% - 100px);
+  // background: url('../assets/放射狀背景黃色.jpg') no-repeat center/cover;
+  // background: blue;
+
+  .swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    max-width: 450px;
+
+    &:hover {
+      box-shadow: 0 0 10px orange;
+    }
+
+    // width: 300px;
+    // height: 300px;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: black;
+    font-weight: 900;
+  }
+
+  @include sm {
+    .swiper-slide {
+      max-width: none;
+    }
+  }
+}

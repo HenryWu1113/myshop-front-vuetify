@@ -17,7 +17,7 @@
           <v-card-text class="text-center">
             <div class="self-info" v-if="isLogin">
               <img class="MyAvatar_menu mb-2" :src="avatar">
-              <h3 class="text-center text-h3">{{ nickname }}</h3>
+              <h3 class="text-center text-h3 text-brown">{{ nickname }}</h3>
             </div>
             <v-btn block size="x-large" color="warning" class="btn" to="/" @click="dialog = false">{{ $t('home') }}
             </v-btn>
@@ -103,6 +103,8 @@
         <v-btn class="btn" to="/contact">{{ $t('contact') }}</v-btn>
       </div>
       <div class="bar-list-right-group d-none d-lg-flex">
+        <v-select v-model="language" :items="languages">
+        </v-select>
         <!-- <v-btn icon @click="$i18n.locale = 'en'" class="mr-5">
           <v-icon icon="mdi-fingerprint" class="icon"></v-icon>
         </v-btn> -->
@@ -143,7 +145,7 @@
           <v-list class="userlist">
             <v-list-item class="d-flex flex-column">
               <img class="MyAvatar" :src="avatar">
-              <h3 class="text-center">{{ nickname }}</h3>
+              <h3 class="text-center text-brown">{{ nickname }}</h3>
             </v-list-item>
             <v-divider></v-divider>
             <v-list-item v-for="(list, i) in lists" :key="i" :value="list" rounded="xl" :to="list.to"
@@ -254,6 +256,7 @@ const { logout } = user
 const { isLogin, isAdmin, cart, avatar, nickname } = storeToRefs(user)
 
 const dialog = ref(false)
+const language = ref('中文')
 const languages = reactive(['中文', 'English', '日本語'])
 const lists = reactive([
   {

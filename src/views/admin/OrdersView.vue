@@ -1,7 +1,7 @@
 <template>
   <div id="back_order_view">
     <v-container>
-      <h1 class="text-h2 text-center mt-15"><b>訂單管理</b></h1>
+      <h1 class="text-h2 text-center mt-15 font-weight-bold"><b>訂單管理</b></h1>
       <v-row class="mt-5">
         <v-col cols="12" md="3" sm="4">
           <v-select v-model="item" variant="outlined" :items="items" append-inner-icon="mdi-pistol"></v-select>

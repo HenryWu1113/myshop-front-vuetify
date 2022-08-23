@@ -24,9 +24,10 @@
 
     @include md {
       border-radius: 20px;
+      padding-top: 5rem;
 
       .mango {
-        width: 200px;
+        width: 260px;
         position: absolute;
         right: -5%;
         top: 0;
@@ -39,12 +40,14 @@
     }
 
     @include lg {
+      padding-top: 6rem;
+
       .user_info {
         line-height: 80px;
       }
 
       .mango {
-        width: 350px;
+        width: 400px;
         position: absolute;
         right: -10%;
         top: 0;
