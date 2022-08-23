@@ -43,4 +43,11 @@
       max-width: none;
     }
   }
+
+  @include xl {
+    .swiper-slide {
+      // max-width: 500px;
+      // height: 700px;
+    }
+  }
 }

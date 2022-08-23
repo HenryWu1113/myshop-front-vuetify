@@ -103,8 +103,8 @@
         <v-btn class="btn" to="/contact">{{ $t('contact') }}</v-btn>
       </div>
       <div class="bar-list-right-group d-none d-lg-flex">
-        <v-select v-model="language" :items="languages">
-        </v-select>
+        <!-- <v-select v-model="language" :items="languages" variant="outlined" @onchange="setLang">
+        </v-select> -->
         <!-- <v-btn icon @click="$i18n.locale = 'en'" class="mr-5">
           <v-icon icon="mdi-fingerprint" class="icon"></v-icon>
         </v-btn> -->
@@ -129,7 +129,7 @@
           </template>
           <v-list>
             <v-list-item v-for="(language, idx) in languages" :key="idx" :value="language" rounded="xl"
-              active-color="amber" variant="plain" :title="language" @click="$i18n.locale = changeLang(idx)">
+              active-color="amber" variant="plain" :title="language" @click="setLang(language)">
             </v-list-item>
           </v-list>
         </v-menu>
@@ -248,15 +248,16 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed, watch } from 'vue'
 import router from '@/router'
+import i18n from '@/i18n'
 
 const user = useUserStore()
 const { logout } = user
 const { isLogin, isAdmin, cart, avatar, nickname } = storeToRefs(user)
 
 const dialog = ref(false)
-const language = ref('中文')
+// const language = ref('中文')
 const languages = reactive(['中文', 'English', '日本語'])
 const lists = reactive([
   {
@@ -270,6 +271,22 @@ const lists = reactive([
     to: '/order'
   }
 ])
+
+const setLang = (newLang) => {
+  // this.$i18n.locale = 'en'
+  // localStorage.setItem('locale', 'en')
+  if (newLang === '中文') {
+    i18n.locale = 'tw'
+    localStorage.setItem('locale', 'tw')
+  } else if (newLang === 'English') {
+    i18n.locale = 'en'
+    localStorage.setItem('locale', 'en')
+  } else {
+    i18n.locale = 'jp'
+    localStorage.setItem('locale', 'jp')
+  }
+}
+
 
 const changeLang = (idx) => {
   if (idx === 0) return 'tw'

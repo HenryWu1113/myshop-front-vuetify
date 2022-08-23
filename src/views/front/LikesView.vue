@@ -19,6 +19,9 @@
   },
   '1264': {
     slidesPerView: 4
+  },
+  '2200': {
+    slidesPerView: 6
   }
 }" :navigation="true" :speed="700" :modules="modules" class="mySwiper">
       <swiper-slide v-if="likes.length > 0" v-for="(like, i) in likes" :key="like._id">
