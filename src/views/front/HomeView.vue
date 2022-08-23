@@ -48,21 +48,6 @@
 </template>
 
 <style scoped lang="scss">
-html,
-body {
-  position: relative;
-  height: 100%;
-}
-
-body {
-  background: #eee;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  margin: 0;
-  padding: 0;
-}
-
 .swiper {
   width: 100%;
   aspect-ratio: 16 / 6;
@@ -95,13 +80,6 @@ body {
   height: 100%;
   object-fit: cover;
 }
-
-// @media (min-width:960px) {
-//   .swiper {
-//     width: 100%;
-//     height: 500px;
-//   }
-// }
 </style>
 
 <script setup>

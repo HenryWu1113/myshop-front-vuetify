@@ -38,7 +38,7 @@
     <v-row>
       <v-spacer></v-spacer>
       <v-col cols="12" md="3" class="text-center mt-10">
-        <span class="text-h6">總價 : NT.{{ totalPrice }}</span>
+        <span class="text-h6 text-red">總價 : NT.{{ totalPrice }}</span>
       </v-col>
     </v-row>
     <v-form v-model="valid" @submit.prevent="submit">

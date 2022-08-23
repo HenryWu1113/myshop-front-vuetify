@@ -1,0 +1,66 @@
+#userinfo_view {
+  .user_info_card {
+    // border: 1px dashed #F57F17;
+    // background: #F57F17;
+    background: linear-gradient(315deg, rgba(255, 255, 0, 0.11), rgba(255, 166, 0, 0.726));
+    border-radius: 10px;
+    position: relative;
+    text-shadow: 0 0 5px white;
+
+
+    .info_pic {
+      width: 100%;
+      aspect-ratio: 1/1;
+      border: 3px solid white;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .user_info {
+      font-size: 20px;
+      text-align: center;
+      color: #795548;
+    }
+
+    @include md {
+      border-radius: 20px;
+
+      .mango {
+        width: 200px;
+        position: absolute;
+        right: -5%;
+        top: 0;
+      }
+
+      .user_info {
+        text-align: left;
+        font-size: 32px;
+      }
+    }
+
+    @include lg {
+      .user_info {
+        line-height: 80px;
+      }
+
+      .mango {
+        width: 350px;
+        position: absolute;
+        right: -10%;
+        top: 0;
+      }
+
+      .grass {
+        width: 100%;
+        opacity: 30%;
+        position: absolute;
+        right: 0%;
+        bottom: 0;
+        border-end-start-radius: 20px;
+        border-end-end-radius: 20px;
+      }
+    }
+
+
+  }
+}

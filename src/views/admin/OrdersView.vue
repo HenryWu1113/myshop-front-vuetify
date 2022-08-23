@@ -1,152 +1,155 @@
 <template>
-  <v-container>
-    <h1 class="text-h2 text-center mt-15"><b>訂單管理</b></h1>
-    <v-row class="mt-5">
-      <v-col cols="12" md="3" sm="4">
-        <v-select v-model="item" variant="outlined" :items="items" append-inner-icon="mdi-pistol"></v-select>
-      </v-col>
-    </v-row>
-    <v-row class="d-none d-lg-flex">
-      <v-col class="text-h6">
-        <span>訂單編號</span>
-      </v-col>
-      <v-col class="text-h6">
-        <span>訂購日期</span>
-      </v-col>
-      <v-col class="text-h6">
-        <span>訂單狀態</span>
-      </v-col>
-      <v-col class="text-h6">
-        <span>總價</span>
-      </v-col>
-      <v-col class="text-h6">
-        <span>詳細資訊</span>
-      </v-col>
-      <v-col class="text-h6">
-        <span>訂單資訊</span>
-      </v-col>
-    </v-row>
-    <v-divider class="mb-10 d-none d-lg-block"></v-divider>
-    <div class="order_panel">
-      <v-row v-if="orders.length > 0" v-for="order in filtereditems" :key="order._id" class="pt-3 pb-3 mt-10"
-        style="border-left:3px solid grey">
-        <v-col cols="12" lg="" class="d-flex align-center">
-          <span class="d-lg-none" @click="router.push('/order/' + order._id)" style="cursor: pointer;">訂單編號 : </span>
-          <span @click="router.push('/order/' + order._id)" style="cursor: pointer;">{{ order._id }}</span>
-        </v-col>
-        <v-col cols="12" lg="" class="d-flex align-center">
-          <span class="d-lg-none">訂購日期 : </span>
-          <span>{{ new Date(order.date).toLocaleString() }}</span>
-        </v-col>
-        <v-col cols="12" sm="3" lg="" class="d-flex align-center">
-          <span class="d-lg-none">訂單狀態 : </span>
-          <span v-if="order.state === 0">未付款</span>
-          <span v-else-if="order.state === 1">訂單成立</span>
-          <span v-else="order.state === 2">訂單取消</span>
-        </v-col>
-        <v-col cols="12" sm="3" lg="" class="d-flex align-center">
-          <span class="d-lg-none">總價 : </span>
-          <span>NT. {{ order.totalPrice }}</span>
-        </v-col>
-        <v-col cols="12" sm="3" lg="">
-          <span class="d-lg-none">詳細資訊 : </span>
-          <v-btn icon variant="text" @click="openDialog(order._id)">
-            <v-icon icon="mdi-plus"></v-icon>
-          </v-btn>
-        </v-col>
-        <v-col cols="12" sm="3" lg="">
-          <span class="d-lg-none">訂單資訊 : </span>
-          <v-btn icon variant="text" @click="changeOrder(order._id)">
-            <v-icon icon="mdi-pen"></v-icon>
-          </v-btn>
+  <div id="back_order_view">
+    <v-container>
+      <h1 class="text-h2 text-center mt-15"><b>訂單管理</b></h1>
+      <v-row class="mt-5">
+        <v-col cols="12" md="3" sm="4">
+          <v-select v-model="item" variant="outlined" :items="items" append-inner-icon="mdi-pistol"></v-select>
         </v-col>
       </v-row>
-      <h1 v-else class="text-h1 text-center mt-10">沒有訂單哦</h1>
-      <v-dialog v-model="dialog">
-        <v-card>
-          <v-card-title>
-            <h3 class="text-center mt-4">~~~~~ 訂單編號 :{{ form._id }} ~~~~~</h3>
-          </v-card-title>
-          <v-card-text>
-            <v-row class="d-none d-md-flex">
-              <v-col cols="12" md="5">
-                <span>產品</span>
-              </v-col>
-              <v-col cols="12" md="2">
-                <span>單價</span>
-              </v-col>
-              <v-col cols="12" md="2">
-                <span>數量</span>
-              </v-col>
-              <v-col cols="12" md="3">
-                <span>總價</span>
-              </v-col>
-            </v-row>
-            <v-divider class="d-none d-md-block mb-1"></v-divider>
-            <v-row v-for="product in orders[form.idx].products" :key="product._id">
-              <v-col cols="12" md="5">
-                <span class="d-none d-md-block" @click="router.push('/product/' + product.product._id)"
-                  style="cursor:pointer">
-                  {{ product.product.name }}
-                </span>
-                <span class="d-md-none text-h6" @click="router.push('/product/' + product.product._id)"
-                  style="cursor:pointer">
-                  <b>{{ product.product.name }}</b>
-                </span>
-              </v-col>
-              <v-col cols="4" md="2">
-                <span class="d-md-none">單價 : </span>
-                <span>NT. {{ product.product.price }}</span>
-              </v-col>
-              <v-col cols="4" md="2">
-                <span class="d-md-none">數量 : </span>
-                <span>{{ product.quantity }}</span>
-              </v-col>
-              <v-col cols="4" md="3">
-                <span class="d-md-none">總價 : </span>
-                <span>NT. {{ product.product.price * product.quantity }}</span>
-              </v-col>
-              <v-divider class="d-md-none"></v-divider>
-            </v-row>
-            <v-divider class="d-none d-md-block"></v-divider>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn color="primary" block @click="dialog = false">關閉</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-
-      <v-dialog v-model="dialog2" persistent>
-        <v-form @submit.prevent="submitForm" v-model="form.valid">
+      <v-row class="d-none d-lg-flex">
+        <v-col class="text-h6">
+          <span>訂單編號</span>
+        </v-col>
+        <v-col class="text-h6">
+          <span>訂購日期</span>
+        </v-col>
+        <v-col class="text-h6">
+          <span>訂單狀態</span>
+        </v-col>
+        <v-col class="text-h6">
+          <span>總價</span>
+        </v-col>
+        <v-col class="text-h6">
+          <span>詳細資訊</span>
+        </v-col>
+        <v-col class="text-h6">
+          <span>訂單資訊</span>
+        </v-col>
+      </v-row>
+      <v-divider class="mb-10 d-none d-lg-block"></v-divider>
+      <div class="order_panel">
+        <v-row v-if="orders.length > 0" v-for="order in filtereditems" :key="order._id" class="pt-3 pb-3 mt-10"
+          style="border-left:3px solid #FFEB3B">
+          <v-col cols="12" lg="" class="d-flex align-center">
+            <span class="d-lg-none" @click="router.push('/order/' + order._id)" style="cursor: pointer;">訂單編號 : </span>
+            <span @click="router.push('/order/' + order._id)" style="cursor: pointer;">{{ order._id }}</span>
+          </v-col>
+          <v-col cols="12" lg="" class="d-flex align-center">
+            <span class="d-lg-none">訂購日期 : </span>
+            <span>{{ new Date(order.date).toLocaleString() }}</span>
+          </v-col>
+          <v-col cols="12" sm="3" lg="" class="d-flex align-center">
+            <span class="d-lg-none">訂單狀態 : </span>
+            <span v-if="order.state === 0">未付款</span>
+            <span v-else-if="order.state === 1">訂單成立</span>
+            <span v-else="order.state === 2">訂單取消</span>
+          </v-col>
+          <v-col cols="12" sm="3" lg="" class="d-flex align-center">
+            <span class="d-lg-none">總價 : </span>
+            <span>NT. {{ order.totalPrice }}</span>
+          </v-col>
+          <v-col cols="12" sm="3" lg="">
+            <span class="d-lg-none">詳細資訊 : </span>
+            <v-btn icon variant="text" @click="openDialog(order._id)">
+              <v-icon icon="mdi-plus"></v-icon>
+            </v-btn>
+          </v-col>
+          <v-col cols="12" sm="3" lg="">
+            <span class="d-lg-none">訂單資訊 : </span>
+            <v-btn icon variant="text" @click="changeOrder(order._id)">
+              <v-icon icon="mdi-pen"></v-icon>
+            </v-btn>
+          </v-col>
+        </v-row>
+        <h1 v-else class="text-h1 text-center mt-10">沒有訂單哦</h1>
+        <v-dialog v-model="dialog">
           <v-card>
             <v-card-title>
-              <h3 class="text-center mt-4">~~~~~ 訂單編號 :{{ form._id }} ~~~~~</h3>
+              <h3 class="text-center mt-4 text-brown">~~~~~ 訂單編號 :{{ form._id }} ~~~~~</h3>
             </v-card-title>
             <v-card-text>
-              <h2 class="text-center">會員 : {{ form.nickname }}</h2>
-              <v-text-field v-model="form.receiver" type="text" label="收件者姓名" placeholder="請輸入收件者姓名" counter="10"
-                maxlength="10" :rules="[rules.required]" variant="outlined"></v-text-field>
-              <v-text-field v-model="form.cellphone" type="text" label="收件者電話" placeholder="請輸入收件者電話"
-                :rules="[rules.required, rules.isMobilePhone]" variant="outlined">
-              </v-text-field>
-              <v-text-field v-model="form.address" type="text" label="收件地址" placeholder="請輸入收件地址"
-                :rules="[rules.required]" variant="outlined">
-              </v-text-field>
-              <v-select v-model="form.state" :items="orderState" item-title="opt" item-value="value" variant="outlined">
-              </v-select>
+              <v-row class="d-none d-md-flex">
+                <v-col cols="12" md="5">
+                  <span class="text-brown">產品</span>
+                </v-col>
+                <v-col cols="12" md="2">
+                  <span class="text-brown">單價</span>
+                </v-col>
+                <v-col cols="12" md="2">
+                  <span class="text-brown">數量</span>
+                </v-col>
+                <v-col cols="12" md="3">
+                  <span class="text-brown">總價</span>
+                </v-col>
+              </v-row>
+              <v-divider class="d-none d-md-block mb-1"></v-divider>
+              <v-row v-for="product in orders[form.idx].products" :key="product._id">
+                <v-col cols="12" md="5">
+                  <span class="d-none d-md-block text-brown" @click="router.push('/product/' + product.product._id)"
+                    style="cursor:pointer">
+                    {{ product.product.name }}
+                  </span>
+                  <span class="d-md-none text-h6 text-brown" @click="router.push('/product/' + product.product._id)"
+                    style="cursor:pointer">
+                    <b>{{ product.product.name }}</b>
+                  </span>
+                </v-col>
+                <v-col cols="4" md="2">
+                  <span class="d-md-none text-brown">單價 : </span>
+                  <span class="text-deep-orange">NT. {{ product.product.price }}</span>
+                </v-col>
+                <v-col cols="4" md="2">
+                  <span class="d-md-none text-brown">數量 : </span>
+                  <span class="text-brown">{{ product.quantity }}</span>
+                </v-col>
+                <v-col cols="4" md="3">
+                  <span class="d-md-none text-brown">總價 : </span>
+                  <span class="text-deep-orange">NT. {{ product.product.price * product.quantity }}</span>
+                </v-col>
+                <v-divider class="d-md-none"></v-divider>
+              </v-row>
+              <v-divider class="d-none d-md-block"></v-divider>
             </v-card-text>
-            <v-card-actions class="d-flex justify-center mb-3">
-              <v-btn color="primary" variant="outlined" @click="dialog2 = false">關閉</v-btn>
-              <v-btn color="warning" variant="outlined" type="submit" :loading="form.submitting">
-                確認更改
-              </v-btn>
+            <v-card-actions>
+              <v-btn color="brown" block @click="dialog = false">關閉</v-btn>
             </v-card-actions>
           </v-card>
-        </v-form>
-      </v-dialog>
-    </div>
+        </v-dialog>
 
-  </v-container>
+        <v-dialog v-model="dialog2" persistent>
+          <v-form @submit.prevent="submitForm" v-model="form.valid">
+            <v-card>
+              <v-card-title>
+                <h3 class="text-center mt-4 text-brown">~~~~~ 訂單編號 :{{ form._id }} ~~~~~</h3>
+              </v-card-title>
+              <v-card-text>
+                <h2 class="text-center text-brown mb-4">會員 : {{ form.nickname }}</h2>
+                <v-text-field v-model="form.receiver" type="text" label="收件者姓名" placeholder="請輸入收件者姓名" counter="10"
+                  maxlength="10" :rules="[rules.required]" variant="outlined"></v-text-field>
+                <v-text-field v-model="form.cellphone" type="text" label="收件者電話" placeholder="請輸入收件者電話"
+                  :rules="[rules.required, rules.isMobilePhone]" variant="outlined">
+                </v-text-field>
+                <v-text-field v-model="form.address" type="text" label="收件地址" placeholder="請輸入收件地址"
+                  :rules="[rules.required]" variant="outlined">
+                </v-text-field>
+                <v-select v-model="form.state" :items="orderState" item-title="opt" item-value="value"
+                  variant="outlined">
+                </v-select>
+              </v-card-text>
+              <v-card-actions class="d-flex justify-center mb-3">
+                <v-btn color="brown" variant="outlined" @click="dialog2 = false">關閉</v-btn>
+                <v-btn color="warning" variant="outlined" type="submit" :loading="form.submitting">
+                  確認更改
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-form>
+        </v-dialog>
+      </div>
+
+    </v-container>
+  </div>
 </template>
 
 <style scoped lang="scss">

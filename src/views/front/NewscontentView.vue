@@ -1,8 +1,8 @@
 <template>
   <div class="MyContainer">
-    <h1 class="text-h2 text-center mt-15"><b>{{ n.title }}</b></h1>
-    <h6 class="text-h6 mt-15">發布時間 : {{ new Date(n.date).toLocaleString() }}</h6>
-    <p class="mt-5" style="white-space: pre-wrap;">{{ n.content }}</p>
+    <h1 class="text-h2 text-center mt-15 font-weight-bold text-brown"><b>{{ n.title }}</b></h1>
+    <h6 class="text-h6 mt-15 text-orange">發布時間 : {{ new Date(n.date).toLocaleString() }}</h6>
+    <p class="mt-5 text-brown" style="white-space: pre-wrap;">{{ n.content }}</p>
     <v-col cols="12" class="mt-5 text-center">
       <v-btn color="brown" variant="outlined" prepend-icon="mdi-arrow-left" @click="router.go(-1)">
         回上一頁</v-btn>

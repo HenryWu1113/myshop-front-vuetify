@@ -1,78 +1,71 @@
 <template>
-  <div class="MyContainer">
-    <h1 class="text-h2 text-center text-brown font-weight-bold mt-10">個人資料</h1>
-    <div class="user_info_card">
-      <v-row>
-        <v-col cols="12" md="5" lg="6">
-          <img :src="users.avatar" class="info_pic">
-        </v-col>
-        <v-col cols="12" md="7" lg="6" class="d-flex flex-column justify-center">
-          <span class="text-h4">帳號 : {{ users.account }}</span>
-          <span class="text-h4">暱稱 : {{ users.nickname }}</span>
-          <span class="text-h4">信箱 : {{ users.email }}</span>
-        </v-col>
-        <v-col cols="12" class="text-center">
-          <v-btn variant="outlined" color="warning" @click="changeinfo">編輯個人資料</v-btn>
-        </v-col>
-      </v-row>
-      <v-dialog v-model="dialog" persistent>
-        <v-form @submit.prevent="submitForm" v-model="valid">
-          <v-card>
-            <v-card-title>
-              <h1 class="text-center mt-3 mb-3">個人資料</h1>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12">
-                    <v-text-field type="account" label="帳號" placeholder="請輸入帳號" counter="20" maxlength="20"
-                      v-model="form.account" :rules="rules.account" append-inner-icon="mdi-account-outline"
-                      variant="outlined" disabled>
-                    </v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field label="暱稱" placeholder="請輸入暱稱" counter="10" maxlength="10" v-model="form.nickname"
-                      :rules="rules.nickname" append-inner-icon="mdi-emoticon-happy-outline" variant="outlined">
-                    </v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field type="email" label="電子信箱" placeholder="請輸入電子信箱" v-model="form.email"
-                      :rules="rules.email" append-inner-icon="mdi-email-outline" variant="outlined">
-                    </v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-file-input v-model="form.avatar" show-size accept='image/*' label="大頭貼" :rules="rules.size"
-                      variant="outlined" prepend-icon="" append-inner-icon="mdi-link-variant">
-                    </v-file-input>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="warning" @click="dialog = false">取消</v-btn>
-              <v-btn type="submit" color="primary">確定</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-form>
-      </v-dialog>
+  <div id="userinfo_view">
+    <div class="MyContainer">
+      <h1 class="text-h2 text-center text-brown font-weight-bold mt-10 mb-10">個人資料</h1>
+      <div class="user_info_card ps-5 pe-5">
+        <img src="../../assets/mango_cartoon.png" class="mango d-none d-md-block">
+        <img src="../../assets/grass_cartoon.png" class="grass d-none d-lg-block">
+        <v-row>
+          <v-col cols="12" md="5" lg="6">
+            <img :src="users.avatar" class="info_pic">
+          </v-col>
+          <v-col cols="12" md="7" lg="6" class="d-flex flex-column justify-center">
+            <span class="user_info">帳號 : {{ users.account }}</span>
+            <span class="user_info">暱稱 : {{ users.nickname }}</span>
+            <span class="user_info">信箱 : {{ users.email }}</span>
+          </v-col>
+          <v-col cols="12" class="text-center">
+            <v-btn variant="outlined" color="deep-orange" @click="changeinfo" class="mb-5">編輯個人資料</v-btn>
+          </v-col>
+        </v-row>
+        <v-dialog v-model="dialog" persistent>
+          <v-form @submit.prevent="submitForm" v-model="valid">
+            <v-card>
+              <v-card-title>
+                <h1 class="text-center mt-3 mb-3">個人資料</h1>
+              </v-card-title>
+              <v-divider></v-divider>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-text-field type="account" label="帳號" placeholder="請輸入帳號" counter="20" maxlength="20"
+                        v-model="form.account" :rules="rules.account" append-inner-icon="mdi-account-outline"
+                        variant="outlined" disabled>
+                      </v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field label="暱稱" placeholder="請輸入暱稱" counter="10" maxlength="10" v-model="form.nickname"
+                        :rules="rules.nickname" append-inner-icon="mdi-emoticon-happy-outline" variant="outlined">
+                      </v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field type="email" label="電子信箱" placeholder="請輸入電子信箱" v-model="form.email"
+                        :rules="rules.email" append-inner-icon="mdi-email-outline" variant="outlined">
+                      </v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-file-input v-model="form.avatar" show-size accept='image/*' label="大頭貼" :rules="rules.size"
+                        variant="outlined" prepend-icon="" append-inner-icon="mdi-link-variant">
+                      </v-file-input>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="brown" @click="dialog = false">取消</v-btn>
+                <v-btn type="submit" color="warning">確定</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-form>
+        </v-dialog>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.user_info_card {
-  // border: 1px solid #000;
-
-  .info_pic {
-    width: 300px;
-    height: 300px;
-    border: 1px solid #000;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-}
 </style>
 
 <script setup>

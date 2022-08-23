@@ -1,9 +1,9 @@
 <template>
   <div id="front_news_view">
     <div class="MyContainer mt-10">
-      <h1 class="text-h2 text-center text-brown font-weight-bold">最新消息</h1>
-      <v-row v-if="news.length > 0" v-for="n in news" :key="n._id" class="mt-3" @click="router.push('/news/' + n._id)"
-        style="cursor:pointer;">
+      <h1 class="text-h2 text-center text-brown font-weight-bold">{{ $t('news') }}</h1>
+      <v-row v-if="news.length > 0" v-for="n in pagination" :key="n._id" class="mt-3"
+        @click="router.push('/news/' + n._id)" style="cursor:pointer;">
         <v-col cols="12" md="" class="d-flex align-center">
           <h2 class="text-brown">
             ֍ {{ n.title }}
@@ -19,9 +19,9 @@
       <v-row v-else>
         <v-col cols="12" class="text-center">沒有最新消息</v-col>
       </v-row>
-      <!-- <div class="text-center">
-      <v-pagination v-model="page" :length="news.length / 5"></v-pagination>
-    </div> -->
+      <div class="text-center mt-10">
+        <v-pagination v-model="currentPage" :length="Math.ceil(news.length / 5)"></v-pagination>
+      </div>
     </div>
   </div>
 
@@ -39,17 +39,14 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-// const page = ref(1)
+const pageSize = 5
+const currentPage = ref(1)
 
 const news = reactive([])
 
-// const pagination = computed(() => {
-//   if (page.value === 1) {
-//     for (let i = 0; i < 5; i++) {
-//       return news[i]
-//     }
-//   }
-// })
+const pagination = computed(() => {
+  return news.slice((currentPage.value - 1) * pageSize, pageSize * currentPage.value)
+})
 
 const init = async () => {
   try {

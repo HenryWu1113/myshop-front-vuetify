@@ -1,0 +1,19 @@
+#back_order_view {
+  color: #795548;
+
+  .order_panel {
+    background-color: #FFFDE7;
+    border-radius: 20px;
+    // box-shadow: 5px 5px 10px #FFF9C4;
+    padding: 10px 30px 50px 30px;
+    margin-bottom: 3rem;
+
+    .order_id {
+      transition: 0.4s;
+
+      &:hover {
+        color: red;
+      }
+    }
+  }
+}

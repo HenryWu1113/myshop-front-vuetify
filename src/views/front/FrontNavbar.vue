@@ -35,6 +35,8 @@
                 $t('contact')
             }}</v-btn>
             <div class="btn_group">
+
+
               <v-btn v-if="isAdmin && isLogin" icon to="/admin" class="mr-3" @click="dialog = false">
                 <v-icon icon="mdi-fingerprint" class="icon"></v-icon>
               </v-btn>
@@ -70,7 +72,7 @@
                 </template>
                 <v-list class="userlist">
                   <v-list-item v-for="(list, i) in lists" :key="i" :value="list" rounded="xl" :to="list.to"
-                    active-color="primary" variant="plain" @click="dialog = false">
+                    active-color="orange" variant="plain" @click="dialog = false">
                     <template v-slot:prepend>
                       <v-icon :icon="list.icon"></v-icon>
                     </template>
@@ -125,7 +127,7 @@
           </template>
           <v-list>
             <v-list-item v-for="(language, idx) in languages" :key="idx" :value="language" rounded="xl"
-              active-color="primary" variant="plain" :title="language" @click="$i18n.locale = changeLang(idx)">
+              active-color="amber" variant="plain" :title="language" @click="$i18n.locale = changeLang(idx)">
             </v-list-item>
           </v-list>
         </v-menu>
@@ -145,7 +147,7 @@
             </v-list-item>
             <v-divider></v-divider>
             <v-list-item v-for="(list, i) in lists" :key="i" :value="list" rounded="xl" :to="list.to"
-              active-color="primary" variant="plain">
+              active-color="orange" variant="plain">
               <template v-slot:prepend>
                 <v-icon :icon="list.icon"></v-icon>
               </template>
