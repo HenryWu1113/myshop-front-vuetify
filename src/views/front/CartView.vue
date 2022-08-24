@@ -1,7 +1,7 @@
 <template>
   <div class="MyContainer">
     <h1 class="text-h2 text-center text-brown font-weight-bold mt-10" data-aos="fade-down" data-aos-duration="1000"
-      data-aos-offset="150">購物車</h1>
+      data-aos-offset="150">{{ $t('cart') }}</h1>
     <v-row v-if="cart.length > 0" class="mt-4" v-for="(item, idx) in cart" :key="item._id"
       :class="{ 'bg-error': !item.product.sell }">
       <v-col cols="12" md="">
@@ -39,7 +39,7 @@
     <v-row>
       <v-spacer></v-spacer>
       <v-col cols="12" md="3" class="text-center mt-10">
-        <span class="text-h6 text-red">總價 : NT.{{ totalPrice }}</span>
+        <span class="text-h6 text-red">{{ $t('totalprice') }} : NT.{{ totalPrice }}</span>
       </v-col>
     </v-row>
     <v-form v-model="valid" @submit.prevent="submit">
@@ -60,7 +60,7 @@
         </v-col>
         <v-col cols="12" md="2" class="ma-auto">
           <v-btn color="warning" block variant="outlined" type="submit" :disabled="!canCheckout">
-            確認並送出
+            {{ $t('confirmandsend') }}
           </v-btn>
         </v-col>
       </v-row>

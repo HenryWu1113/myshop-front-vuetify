@@ -13,12 +13,13 @@
     </div>
     <div class="MyContainer">
       <div class="logo text-center mb-15">
-        <h1 class="text-brown mb-5" data-aos="fade-down" data-aos-duration="1000" data-aos-offset="150">~~品牌商標~~</h1>
+        <h1 class="text-brown mb-5" data-aos="fade-down" data-aos-duration="1000" data-aos-offset="150">~~{{ $t('logo')
+        }}~~</h1>
         <img src="../../assets/Logo.png" data-aos="zoom-in-up" data-aos-duration="1000" data-aos-offset="150" alt="">
       </div>
       <p class="slogan text-center text-amber-darken-2 text-h6" data-aos="fade" data-aos-duration="1000"
         data-aos-offset="150">
-        吳李香農場一直以來都秉持著「健康第一」的信念，不使用任何化學肥料或農藥，一直都採用友善耕作，無毒裁種的方式管理果園，109年開始加入有機夏雪芒果行列(目前是有機轉型期)，吳李香農場將「信念」栽種出的夏雪芒果，每一顆都是「堅持」。
+        {{ $t('slogan') }}
       </p>
       <v-row class="mt-15">
         <v-col cols="12" md="6" class="content1">
@@ -27,8 +28,7 @@
         </v-col>
         <v-col cols="12" md="6" class="content2 d-flex align-center">
           <p class="text-brown text-center word1" data-aos="fade" data-aos-duration="1000" data-aos-offset="150">
-            「吳李香農場」位於台東，原本是荖葉園的農地，為了配合政府政策將荖葉園鏟平，初期休耕了許多年，種植綠肥植物改善土壤。
-            直到104年才開始栽種夏雪芒果，早期父母親務農家子弟，本身也是耳濡目染，也學會了務農的一些技巧。
+            {{ $t('intro1') }}
           </p>
         </v-col>
       </v-row>
@@ -39,8 +39,7 @@
         </v-col>
         <v-col cols="12" md="6" class="content4 d-flex align-center">
           <p class="text-brown text-center word2" data-aos="fade" data-aos-duration="1000" data-aos-offset="150">
-            一開始栽種夏雪芒果即選擇以有機方式種植，不僅不用擔心因使用農藥而傷了自己的身體，而生產出來的水果還能讓消費者吃得安心及健康，
-            現今社會食安問題頻傳，能夠讓大家吃到安心健康的水果，而貢獻一己之力，感到非常榮幸。
+            {{ $t('intro2') }}
           </p>
         </v-col>
       </v-row>
@@ -51,8 +50,7 @@
         </v-col>
         <v-col cols="12" md="6" class="content6 d-flex align-center">
           <p class="text-brown text-center word3" data-aos="fade" data-aos-duration="1000" data-aos-offset="150">
-            與草共生，不使用除草劑，採用人工割草，
-            果園有如公園般的美麗。
+            {{ $t('intro3') }}
           </p>
         </v-col>
       </v-row>
@@ -60,7 +58,7 @@
       <v-row class="mt-15">
         <v-col cols="12" class="text-center">
           <p class="text-h6 text-brown mb-5" data-aos="fade" data-aos-duration="1000" data-aos-offset="150">
-            109年加入有機夏雪芒果的行列(有機農產品證書)註:目前是轉型期階段</p>
+            {{ $t('certification') }}</p>
           <img class="certification" src="../../assets/certification.jpg" data-aos="zoom-out" data-aos-duration="1000"
             data-aos-offset="200">
         </v-col>

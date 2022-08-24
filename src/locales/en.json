@@ -4,7 +4,7 @@
   "why": "XiaXue Mango",
   "news": "News",
   "contact": "Contact us",
-  "latestproduct": "New Products",
+  "latestproduct": "Recommended Products",
   "wuleeintrotitle": "Introduction of WuLee Farm",
   "logo": "Our Logo",
   "slogan": "Wu Lixiang Farm has always adhered to the belief of \"health first\", does not use any chemical fertilizers or pesticides, and has always adopted friendly farming and non-toxic seed cutting methods to manage orchards. During the transition period), the Xia Xue mangoes planted by Wu Lixiang Farm with \"faith\", each one is \"persistence\".",
@@ -34,5 +34,10 @@
   "product": "Product",
   "singleprice": "Price",
   "amount": "Amount",
-  "close": "close"
+  "close": "close",
+  "cancel": "cancel",
+  "confirm": "confirm",
+  "unpaid": "Unpaid",
+  "orderestablished": "Order Established",
+  "ordercancel": "Order Canceled"
 }

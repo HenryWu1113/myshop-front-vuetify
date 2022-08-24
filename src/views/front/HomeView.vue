@@ -23,7 +23,7 @@
       <v-row class="mt-10">
         <v-col cols="12" class="text-center">
           <h1 data-aos="fade-down" data-aos-duration="1000" data-aos-once="true"
-            class="text-h2 text-brown font-weight-bold">最新商品</h1>
+            class="text-h2 text-brown font-weight-bold">{{ $t('latestproduct') }}</h1>
         </v-col>
         <v-col cols="6" md="4" lg="3">
           <v-select variant="outlined" v-model="item" :items="items"></v-select>

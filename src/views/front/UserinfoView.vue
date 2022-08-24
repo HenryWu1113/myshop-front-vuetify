@@ -2,7 +2,7 @@
   <div id="userinfo_view">
     <div class="MyContainer">
       <h1 class="text-h2 text-center text-brown font-weight-bold mt-10 mb-10" data-aos="fade-down"
-        data-aos-duration="1000" data-aos-offset="150">個人資料</h1>
+        data-aos-duration="1000" data-aos-offset="150">{{ $t('selfinfo') }}</h1>
       <div class="user_info_card ps-5 pe-5">
         <img src="../../assets/mango_cartoon.png" class="mango d-none d-md-block">
         <img src="../../assets/grass_cartoon.png" class="grass d-none d-lg-block">
@@ -11,19 +11,20 @@
             <img :src="users.avatar" class="info_pic">
           </v-col>
           <v-col cols="12" md="7" lg="6" class="d-flex flex-column justify-center">
-            <span class="user_info">帳號 : {{ users.account }}</span>
-            <span class="user_info">暱稱 : {{ users.nickname }}</span>
-            <span class="user_info">信箱 : {{ users.email }}</span>
+            <span class="user_info">{{ $t('account') }} : {{ users.account }}</span>
+            <span class="user_info">{{ $t('nickname') }} : {{ users.nickname }}</span>
+            <span class="user_info">{{ $t('mail') }} : {{ users.email }}</span>
           </v-col>
           <v-col cols="12" class="text-center">
-            <v-btn variant="outlined" color="deep-orange" @click="changeinfo" class="mb-5">編輯個人資料</v-btn>
+            <v-btn variant="outlined" color="deep-orange" @click="changeinfo" class="mb-5">{{ $t('editselfinfo') }}
+            </v-btn>
           </v-col>
         </v-row>
         <v-dialog v-model="dialog" persistent>
           <v-form @submit.prevent="submitForm" v-model="valid">
             <v-card>
               <v-card-title>
-                <h1 class="text-center mt-3 mb-3">個人資料</h1>
+                <h1 class="text-center mt-3 mb-3">{{ $t('selfinfo') }}</h1>
               </v-card-title>
               <v-divider></v-divider>
               <v-card-text>
@@ -55,8 +56,8 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="brown" @click="dialog = false">取消</v-btn>
-                <v-btn type="submit" color="warning">確定</v-btn>
+                <v-btn color="brown" @click="dialog = false">{{ $t('cancel') }}</v-btn>
+                <v-btn type="submit" color="warning">{{ $t('confirm') }}</v-btn>
               </v-card-actions>
             </v-card>
           </v-form>

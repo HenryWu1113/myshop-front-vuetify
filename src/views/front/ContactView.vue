@@ -17,7 +17,7 @@
           <a href="tel:0910968708">
             <div class="contact_box1">
               <v-icon class="contact_icon" icon="mdi-phone"></v-icon>
-              <h1 class="">電話</h1>
+              <h1 class="">{{ $t('phone') }}</h1>
               <span class="">0910968708</span>
             </div>
           </a>
@@ -33,7 +33,7 @@
           <a href="mailto:service@wlsfarm.com.tw">
             <div class="contact_box3">
               <v-icon class="contact_icon" icon="mdi-email-outline"></v-icon>
-              <h1 class="">信箱</h1>
+              <h1 class="">{{ $t('mail') }}</h1>
               <span class="">service@wlsfarm.com.tw</span>
             </div>
           </a>
@@ -45,9 +45,9 @@
       <v-row>
         <v-col class="text-center mt-10" cols="12">
           <h1 class="text-h2 text-brown font-weight-bold" data-aos="fade-down" data-aos-duration="1000"
-            data-aos-offset="150" data-aos-once="true">留言區</h1>
+            data-aos-offset="150" data-aos-once="true">{{ $t('message') }}</h1>
           <span class="text-brown" data-aos="fade" data-aos-duration="1000" data-aos-offset="150"
-            data-aos-once="true">如果有任何問題或是對產品有任何的反饋，請在下方留言。</span>
+            data-aos-once="true">{{ $t('messagehint') }}</span>
         </v-col>
         <v-col cols="12" class="text-center">
           <v-form v-model="valid" @submit.prevent="submitComment">
@@ -57,7 +57,7 @@
             </v-textarea>
             <div class="contact_btn_group">
               <!-- <v-btn variant="text" color="error" type="reset">重填</v-btn> -->
-              <v-btn variant="outlined" color="orange" type="submit" :disabled="!cansend">送出</v-btn>
+              <v-btn variant="outlined" color="orange" type="submit" :disabled="!cansend">{{ $t('send') }}</v-btn>
             </div>
           </v-form>
         </v-col>

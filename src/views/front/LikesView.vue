@@ -1,6 +1,6 @@
 <template>
   <div id="likes_view">
-    <h1 class="text-h2 text-center pt-15 text-brown font-weight-bold"><b>我的收藏</b></h1>
+    <h1 class="text-h2 text-center pt-15 text-brown font-weight-bold">{{ $t('myfav') }}</h1>
     <swiper v-if="likes.length > 0" :effect="'coverflow'" :grabCursor="true" :centeredSlides="true"
       :slidesPerView="'auto'" :coverflowEffect="{
         rotate: 50,
@@ -37,7 +37,7 @@
             </v-container>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="orange" @click="deleteLike(i)" prepend-icon="mdi-delete" block>移除收藏
+            <v-btn color="orange" @click="deleteLike(i)" prepend-icon="mdi-delete" block>{{ $t('deletelike') }}
             </v-btn>
           </v-card-actions>
         </v-card>

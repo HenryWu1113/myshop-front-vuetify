@@ -2,7 +2,7 @@
   <div id="front_order_view">
     <div class="MyContainer">
       <h1 class="text-h2 text-center mt-15 text-brown font-weight-bold" data-aos="fade-down" data-aos-duration="1000"
-        data-aos-offset="150">訂購紀錄</h1>
+        data-aos-offset="150">{{ $t('orderrecord') }}</h1>
       <v-row class="mt-5">
         <v-col cols="12" md="3">
           <v-select v-model="item" variant="outlined" :items="items" append-inner-icon="mdi-filter-menu-outline">
@@ -11,19 +11,19 @@
       </v-row>
       <v-row class="d-none d-lg-flex">
         <v-col class="text-h6">
-          <span>訂單編號</span>
+          <span>{{ $t('orderid') }}</span>
         </v-col>
         <v-col class="text-h6">
-          <span>訂購日期</span>
+          <span>{{ $t('orderdate') }}</span>
         </v-col>
         <v-col class="text-h6">
-          <span>訂單狀態</span>
+          <span>{{ $t('orderstate') }}</span>
         </v-col>
         <v-col class="text-h6">
-          <span>總價</span>
+          <span>{{ $t('totalprice') }}</span>
         </v-col>
         <v-col class="text-h6">
-          <span>詳細資訊</span>
+          <span>{{ $t('detail') }}</span>
         </v-col>
       </v-row>
       <v-divider class="mb-10 d-none d-lg-block"></v-divider>
@@ -31,27 +31,29 @@
         <v-row v-if="orders.length > 0" v-for="order in filtereditems" :key="order._id" class="pt-3 pb-3 mt-10"
           style="border-left:3px solid #FFEB3B">
           <v-col cols="12" lg="" class="d-flex align-center">
-            <span class="d-lg-none" @click="router.push('/order/' + order._id)" style="cursor: pointer;">訂單編號
+            <span class="d-lg-none" @click="router.push('/order/' + order._id)" style="cursor: pointer;">{{
+                $t('orderid')
+            }}
               : </span>
             <span @click="router.push('/order/' + order._id)" style="cursor: pointer;" class="order_id">{{ order._id
             }}</span>
           </v-col>
           <v-col cols="12" lg="" class="d-flex align-center">
-            <span class="d-lg-none">訂購日期 : </span>
+            <span class="d-lg-none">{{ $t('orderdate') }} : </span>
             <span>{{ new Date(order.date).toLocaleString() }}</span>
           </v-col>
           <v-col cols="12" md="4" lg="" class="d-flex align-center">
-            <span class="d-lg-none">訂單狀態 : </span>
-            <span v-if="order.state === 0">未付款</span>
-            <span v-else-if="order.state === 1">訂單成立</span>
-            <span v-else="order.state === 2">訂單取消</span>
+            <span class="d-lg-none">{{ $t('orderstate') }} : </span>
+            <span v-if="order.state === 0">{{ $t('unpaid') }}</span>
+            <span v-else-if="order.state === 1">{{ $t('orderestablished') }}</span>
+            <span v-else="order.state === 2">{{ $t('ordercancel') }}</span>
           </v-col>
           <v-col cols="12" md="4" lg="" class="d-flex align-center">
-            <span class="d-lg-none">總價 : </span>
+            <span class="d-lg-none">{{ $t('totalprice') }} : </span>
             <span>NT. {{ order.totalPrice }}</span>
           </v-col>
           <v-col cols="12" md="4" lg="">
-            <span class="d-lg-none">詳細資訊 : </span>
+            <span class="d-lg-none">{{ $t('detail') }} : </span>
             <v-btn icon variant="text" @click="openDialog(order._id)">
               <v-icon icon="mdi-plus"></v-icon>
             </v-btn>
@@ -61,21 +63,21 @@
         <v-dialog v-model="dialog">
           <v-card>
             <v-card-title>
-              <h3 class="text-center mt-4 text-brown">~~~~~ 訂單編號 :{{ form._id }} ~~~~~</h3>
+              <h3 class="text-center mt-4 text-brown">~~~~~ {{ $t('orderid') }} :{{ form._id }} ~~~~~</h3>
             </v-card-title>
             <v-card-text>
               <v-row class="d-none d-md-flex">
                 <v-col cols="12" md="5">
-                  <span class="text-brown">產品</span>
+                  <span class="text-brown">{{ $t('product') }}</span>
                 </v-col>
                 <v-col cols="12" md="2">
-                  <span class="text-brown">單價</span>
+                  <span class="text-brown">{{ $t('singleprice') }}</span>
                 </v-col>
                 <v-col cols="12" md="2">
-                  <span class="text-brown">數量</span>
+                  <span class="text-brown">{{ $t('amount') }}</span>
                 </v-col>
                 <v-col cols="12" md="3">
-                  <span class="text-brown">總價</span>
+                  <span class="text-brown">{{ $t('totalprice') }}</span>
                 </v-col>
               </v-row>
               <v-divider class="d-none d-md-block mb-1"></v-divider>
@@ -91,15 +93,15 @@
                   </span>
                 </v-col>
                 <v-col cols="4" md="2">
-                  <span class="d-md-none text-brown">單價 : </span>
+                  <span class="d-md-none text-brown">{{ $t('singleprice') }} : </span>
                   <span class="text-deep-orange">NT. {{ product.product.price }}</span>
                 </v-col>
                 <v-col cols="4" md="2">
-                  <span class="d-md-none text-brown">數量 : </span>
+                  <span class="d-md-none text-brown">{{ $t('amount') }} : </span>
                   <span class="text-brown">{{ product.quantity }}</span>
                 </v-col>
                 <v-col cols="4" md="3">
-                  <span class="d-md-none text-brown">總價 : </span>
+                  <span class="d-md-none text-brown">{{ $t('totalprice') }} : </span>
                   <span class="text-deep-orange">NT. {{ product.product.price * product.quantity }}</span>
                 </v-col>
                 <v-divider class="d-md-none"></v-divider>
@@ -107,7 +109,7 @@
               <v-divider class="d-none d-md-block"></v-divider>
             </v-card-text>
             <v-card-actions>
-              <v-btn color="brown" block @click="dialog = false">關閉</v-btn>
+              <v-btn color="brown" block @click="dialog = false">{{ $t('close') }}</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
