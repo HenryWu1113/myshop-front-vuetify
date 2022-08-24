@@ -34,7 +34,7 @@
             </v-col>
           </v-row>
           <div class="d-flex justify-center">
-            <v-btn color="success" variant="flat" type="submit" :loading="loading">
+            <v-btn color="orange" variant="outlined" type="submit" :loading="loading">
               註冊
             </v-btn>
           </div>
