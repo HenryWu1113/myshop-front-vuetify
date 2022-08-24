@@ -1,9 +1,10 @@
 <template>
   <div id="front_news_view">
     <div class="MyContainer mt-10">
-      <h1 class="text-h2 text-center text-brown font-weight-bold">{{ $t('news') }}</h1>
-      <v-row v-if="news.length > 0" v-for="n in pagination" :key="n._id" class="mt-3"
-        @click="router.push('/news/' + n._id)" style="cursor:pointer;">
+      <h1 class="text-h2 text-center text-brown font-weight-bold" data-aos="fade-down" data-aos-duration="1000"
+        data-aos-offset="150">{{ $t('news') }}</h1>
+      <v-row v-if="news.length > 0" v-for="n in pagination" :key="n._id"
+        class="mt-3 animate__animated animate__bounceIn" @click="router.push('/news/' + n._id)" style="cursor:pointer;">
         <v-col cols="12" md="" class="d-flex align-center">
           <h2 class="text-brown">
             ֍ {{ n.title }}
@@ -32,7 +33,7 @@
 </style>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import Swal from 'sweetalert2'
 import { api } from '@/plugins/axios'
 import { useRouter } from 'vue-router'
@@ -43,6 +44,12 @@ const pageSize = 5
 const currentPage = ref(1)
 
 const news = reactive([])
+
+import AOS from "aos"
+
+onMounted(() => {
+  AOS.init();
+})
 
 const pagination = computed(() => {
   return news.slice((currentPage.value - 1) * pageSize, pageSize * currentPage.value)

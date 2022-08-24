@@ -1,7 +1,8 @@
 <template>
   <div id="front_order_view">
     <div class="MyContainer">
-      <h1 class="text-h2 text-center mt-15 text-brown font-weight-bold"><b>訂購紀錄</b></h1>
+      <h1 class="text-h2 text-center mt-15 text-brown font-weight-bold" data-aos="fade-down" data-aos-duration="1000"
+        data-aos-offset="150">訂購紀錄</h1>
       <v-row class="mt-5">
         <v-col cols="12" md="3">
           <v-select v-model="item" variant="outlined" :items="items" append-inner-icon="mdi-filter-menu-outline">
@@ -119,10 +120,15 @@
 </style>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { apiAuth } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
+import AOS from "aos"
+
+onMounted(() => {
+  AOS.init();
+})
 
 const router = useRouter()
 

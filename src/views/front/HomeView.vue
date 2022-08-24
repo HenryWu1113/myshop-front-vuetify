@@ -22,7 +22,8 @@
     <div class="MyContainer">
       <v-row class="mt-10">
         <v-col cols="12" class="text-center">
-          <h1 class="text-h2 text-brown font-weight-bold">最新商品</h1>
+          <h1 data-aos="fade-down" data-aos-duration="1000" data-aos-once="true"
+            class="text-h2 text-brown font-weight-bold">最新商品</h1>
         </v-col>
         <v-col cols="6" md="4" lg="3">
           <v-select variant="outlined" v-model="item" :items="items"></v-select>
@@ -34,7 +35,8 @@
       </v-row>
       <v-row style="min-height:500px">
         <v-col v-if="products.length > 0" cols="12" md="6" lg="4" xl="3" v-for="product in filtereditems">
-          <ProductCard :product="product"></ProductCard>
+          <ProductCard :product="product" data-aos="flip-up" data-aos-duration="3000" data-aos-offset="150">
+          </ProductCard>
         </v-col>
         <v-col v-else>
           <h1 class="text-center">沒有商品</h1>
@@ -98,9 +100,11 @@ import "swiper/css/effect-fade"
 import "swiper/css/pagination"
 import "swiper/css/navigation"
 
+import AOS from "aos"
+
 // import required modules
 import { Pagination, Autoplay, EffectFade } from "swiper"
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 // import { useUserStore } from '@/stores/user'
 // import { storeToRefs } from 'pinia'
 // import { apiAuth } from '../../plugins/axios.js'
@@ -125,6 +129,10 @@ const items = reactive(['全部', '芒果', '火龍果', '香蕉'])
 //   }
 // ]
 // )
+onMounted(() => {
+  AOS.init();
+})
+
 
 const products = reactive([])
 

@@ -23,7 +23,7 @@
   '2200': {
     slidesPerView: 6
   }
-}" :navigation="true" :speed="700" :modules="modules" class="mySwiper">
+}" :navigation="true" :speed="700" :modules="modules" class="mySwiper animate__animated animate__zoomIn">
       <swiper-slide v-if="likes.length > 0" v-for="(like, i) in likes" :key="like._id">
         <v-card variant="outlined" color="brown-lighten-4">
           <v-img :src="like.product.image" @click="router.push(`/product/${like.product._id}`)" style="cursor:pointer">

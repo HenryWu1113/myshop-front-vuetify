@@ -1,7 +1,8 @@
 <template>
   <div id="userinfo_view">
     <div class="MyContainer">
-      <h1 class="text-h2 text-center text-brown font-weight-bold mt-10 mb-10">個人資料</h1>
+      <h1 class="text-h2 text-center text-brown font-weight-bold mt-10 mb-10" data-aos="fade-down"
+        data-aos-duration="1000" data-aos-offset="150">個人資料</h1>
       <div class="user_info_card ps-5 pe-5">
         <img src="../../assets/mango_cartoon.png" class="mango d-none d-md-block">
         <img src="../../assets/grass_cartoon.png" class="grass d-none d-lg-block">
@@ -71,11 +72,15 @@
 <script setup>
 import { apiAuth } from '@/plugins/axios'
 import Swal from 'sweetalert2'
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { isEmail } from 'validator'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
+import AOS from "aos"
 
+onMounted(() => {
+  AOS.init();
+})
 
 const user = useUserStore()
 const { editUser } = user

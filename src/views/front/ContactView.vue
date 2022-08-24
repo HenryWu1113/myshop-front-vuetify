@@ -5,13 +5,14 @@
     <v-parallax class="mb-15" src="https://shoplineimg.com/60e7f216ed3d3c0024770f58/610d117bbbb7ce0026b0af3b/800x.jpg?"
       cover height="600">
       <div class="d-flex flex-column fill-height justify-center align-center text-white">
-        <h1 class="text-h1 mb-4 pt-6 pb-6 ps-6 pe-6 font-weight-bold contact_bg">
+        <h1
+          class="text-h1 mb-4 pt-6 pb-6 ps-6 pe-6 font-weight-bold contact_bg w-100 text-center animate__animated animate__flip">
           {{ $t('contact') }}
         </h1>
       </div>
     </v-parallax>
     <div class="MyContainer">
-      <v-row class="mt-7">
+      <v-row class="mt-7" data-aos="fade-down" data-aos-duration="1000" data-aos-offset="150">
         <v-col cols="12" lg="4">
           <a href="tel:0910968708">
             <div class="contact_box1">
@@ -43,13 +44,16 @@
     <div class="MyContainer">
       <v-row>
         <v-col class="text-center mt-10" cols="12">
-          <h1 class="text-h2 text-brown font-weight-bold">留言區</h1>
-          <span class="text-brown">如果有任何問題或是對產品有任何的反饋，請在下方留言。</span>
+          <h1 class="text-h2 text-brown font-weight-bold" data-aos="fade-down" data-aos-duration="1000"
+            data-aos-offset="150" data-aos-once="true">留言區</h1>
+          <span class="text-brown" data-aos="fade" data-aos-duration="1000" data-aos-offset="150"
+            data-aos-once="true">如果有任何問題或是對產品有任何的反饋，請在下方留言。</span>
         </v-col>
         <v-col cols="12" class="text-center">
           <v-form v-model="valid" @submit.prevent="submitComment">
             <v-textarea v-model="form.comment" name="回饋訊息" label="回饋訊息" counter maxlength="500" placeholder="輸入訊息"
-              variant="outlined" prepend-inner-icon="mdi-comment" clearable>
+              variant="outlined" prepend-inner-icon="mdi-comment" clearable data-aos="zoom-in" data-aos-duration="1000"
+              data-aos-offset="150" data-aos-once="true">
             </v-textarea>
             <div class="contact_btn_group">
               <!-- <v-btn variant="text" color="error" type="reset">重填</v-btn> -->
@@ -76,8 +80,13 @@
 <script setup>
 import { apiAuth } from '@/plugins/axios'
 import Swal from 'sweetalert2'
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import FooterPart from '@/components/FooterPart.vue'
+import AOS from "aos"
+
+onMounted(() => {
+  AOS.init();
+})
 
 const valid = ref(false)
 const dialog = ref(false)

@@ -6,6 +6,10 @@ import { loadFonts } from './plugins/webfontloader'
 import pinia from './plugins/pinia'
 import './styles/style.scss'
 import i18n from './i18n'
+// importing AOS css style globally
+import '../node_modules/aos/dist/aos.css'
+import '../node_modules/animate.css/animate.min.css'
+import '../node_modules/magnific-popup/dist/magnific-popup.css'
 
 loadFonts()
 

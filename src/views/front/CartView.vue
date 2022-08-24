@@ -1,6 +1,7 @@
 <template>
   <div class="MyContainer">
-    <h1 class="text-h2 text-center text-brown font-weight-bold mt-10">購物車</h1>
+    <h1 class="text-h2 text-center text-brown font-weight-bold mt-10" data-aos="fade-down" data-aos-duration="1000"
+      data-aos-offset="150">購物車</h1>
     <v-row v-if="cart.length > 0" class="mt-4" v-for="(item, idx) in cart" :key="item._id"
       :class="{ 'bg-error': !item.product.sell }">
       <v-col cols="12" md="">
@@ -71,13 +72,17 @@
 </style>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import Swal from 'sweetalert2'
 import { apiAuth } from '@/plugins/axios'
 import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
 import { isMobilePhone } from 'validator'
+import AOS from "aos"
 
+onMounted(() => {
+  AOS.init();
+})
 
 const router = useRouter()
 

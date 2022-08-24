@@ -1,5 +1,5 @@
 <template>
-  <div id="product_view" class="mt-15">
+  <div id="product_view" class="mt-15 animate__animated animate__zoomInDown">
     <div class="MyContainer">
       <v-row>
         <v-col cols="12" lg="7">

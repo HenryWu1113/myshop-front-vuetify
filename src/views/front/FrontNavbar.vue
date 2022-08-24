@@ -57,7 +57,7 @@
                 </template>
                 <v-list>
                   <v-list-item v-for="(language, idx) in languages" :key="idx" :value="language" rounded="xl"
-                    active-color="primary" variant="plain" :title="language" @click="$i18n.locale = changeLang(idx)">
+                    active-color="primary" variant="plain" :title="language" @click="setLang(language)">
                   </v-list-item>
                 </v-list>
               </v-menu>
@@ -234,11 +234,6 @@
   transform: translateX(-50%);
 }
 
-// .btn_group {
-//   border: 1px solid orange;
-//   padding: 1rem;
-// }
-
 .bar-list-right-group {
   position: absolute;
   right: 0;
@@ -248,9 +243,14 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
-import { ref, reactive, computed, watch } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import router from '@/router'
-import i18n from '@/i18n'
+import i18n from '../../i18n'
+import gsap from 'gsap'
+import ScrollTrigger from "gsap/ScrollTrigger"
+import ScrollToPlugin from "gsap/ScrollToPlugin"
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 const user = useUserStore()
 const { logout } = user
@@ -272,27 +272,66 @@ const lists = reactive([
   }
 ])
 
+// watch(i18n.global.locale, () => {
+//   if (i18n.global.locale === 'tw') {
+//     lists[0].text = '個人資料'
+//     lists[1].text = '訂購紀錄'
+//   } else if (i18n.global.locale === 'en') {
+//     lists[0].text = 'user infomation'
+//     lists[1].text = 'order record'
+//   } else {
+//     lists[0].text = '個人資料(日)'
+//     lists[1].text = '訂購紀錄(日)'
+//   }
+// })
+
 const setLang = (newLang) => {
   // this.$i18n.locale = 'en'
   // localStorage.setItem('locale', 'en')
   if (newLang === '中文') {
-    i18n.locale = 'tw'
+    i18n.global.locale = 'tw'
     localStorage.setItem('locale', 'tw')
   } else if (newLang === 'English') {
-    i18n.locale = 'en'
+    i18n.global.locale = 'en'
     localStorage.setItem('locale', 'en')
   } else {
-    i18n.locale = 'jp'
+    i18n.global.locale = 'jp'
     localStorage.setItem('locale', 'jp')
   }
 }
 
+// onMounted(() => {
+//   gsap.from('.title', {
+//     yPercent: -100,
+//     duration: 0.5,
+//     scrollTrigger: {
+//       // 沒有 trigger 觸發目標，整份文件是滾動監控
+//       start: 'top 60',
+//       end: () => '+=' + document.documentElement.scrollHeight, // end 整份文件的高度
+//       onEnter(self) {
+//         // console.log(self)
+//         self.animation.play()
+//       },
+//       onUpdate(self) {
+//         console.log(self.direction)
+//         self.direction === -1 ? self.animation.play() : self.animation.reverse() // -1 往上時正向播放，否則 1 往下時反向播放
+//       },
+//       markers: true
+//     }
+//   })
+// })
 
-const changeLang = (idx) => {
-  if (idx === 0) return 'tw'
-  else if (idx === 1) return 'en'
-  else return 'jp'
-}
+// const changeLang = (idx) => {
+//   if (idx === 0) return 'tw'
+//   else if (idx === 1) return 'en'
+//   else return 'jp'
+// }
+
+// const changeLang = (idx) => {
+//   if (idx === 0) i18n.global.locale = 'tw'
+//   else if (idx === 1) i18n.global.locale = 'en'
+//   else i18n.global.locale = 'jp'
+// }
 
 const logoutinfo = reactive({
   text: '登出',

@@ -19,13 +19,16 @@
 @import './global';
 
 // 區塊結構
+@import './front_navbar';
 @import './brand';
 @import './front_news';
 @import './contact';
-@import './_front_order';
-@import './_back_order';
-@import './_front_userinfo';
-@import './_product_card';
+@import './front_order';
+@import './back_order';
+@import './front_userinfo';
+@import './product_card';
 @import './likes';
 
 // 功能
+
+@import './features/backtop';

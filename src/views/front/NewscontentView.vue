@@ -1,12 +1,18 @@
 <template>
-  <div class="MyContainer">
-    <h1 class="text-h2 text-center mt-15 font-weight-bold text-brown"><b>{{ n.title }}</b></h1>
-    <h6 class="text-h6 mt-15 text-orange">發布時間 : {{ new Date(n.date).toLocaleString() }}</h6>
-    <p class="mt-5 text-brown" style="white-space: pre-wrap;">{{ n.content }}</p>
-    <v-col cols="12" class="mt-5 text-center">
-      <v-btn color="brown" variant="outlined" prepend-icon="mdi-arrow-left" @click="router.go(-1)">
-        回上一頁</v-btn>
-    </v-col>
+  <div id="news_content_view">
+    <div class="MyContainer">
+      <h1 class="text-h2 text-center mt-15 font-weight-bold text-brown" data-aos="fade-down" data-aos-duration="1000"
+        data-aos-offset="150">{{ n.title }}</h1>
+      <h6 class="text-h6 mt-15 text-orange" data-aos="fade-down" data-aos-duration="1000" data-aos-offset="150">發布時間 :
+        {{ new Date(n.date).toLocaleString() }}</h6>
+      <p class="mt-5 text-brown" style="white-space: pre-wrap;" data-aos="fade-down" data-aos-duration="1000"
+        data-aos-offset="150">{{ n.content }}</p>
+      <v-col cols="12" class="mt-5 text-center">
+        <v-btn color="brown" variant="outlined" prepend-icon="mdi-arrow-left" @click="router.go(-1)"
+          class="animate__animated animate__tada">
+          回上一頁</v-btn>
+      </v-col>
+    </div>
   </div>
 </template>
 
@@ -14,10 +20,15 @@
 </style>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { reactive, onMounted } from 'vue'
 import Swal from 'sweetalert2'
 import { api } from '@/plugins/axios'
 import { useRouter, useRoute } from 'vue-router'
+import AOS from "aos"
+
+onMounted(() => {
+  AOS.init();
+})
 
 const router = useRouter()
 const route = useRoute()
