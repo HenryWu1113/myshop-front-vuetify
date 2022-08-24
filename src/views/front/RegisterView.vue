@@ -56,7 +56,8 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
-import { isEmail } from 'validator'
+// import { isEmail } from 'validator'
+import isEmail from 'validator/lib/isEmail'
 import { api } from '@/plugins/axios'
 import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
