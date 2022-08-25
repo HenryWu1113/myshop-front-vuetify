@@ -25,6 +25,10 @@ import Swal from 'sweetalert2'
 import { api } from '@/plugins/axios'
 import { useRouter, useRoute } from 'vue-router'
 import AOS from "aos"
+import { useLoading } from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+
+const loader = useLoading()
 
 onMounted(() => {
   AOS.init();
@@ -41,10 +45,17 @@ const n = reactive({
 
 const init = async () => {
   try {
+    loader.show({
+      color: 'orange',
+      loader: 'bars',
+      width: 100,
+      height: 100
+    })
     const { data } = await api.get('/news/' + route.params.id)
     n.title = data.result.title
     n.content = data.result.content
     n.date = data.result.date
+    loader.hide()
   } catch (error) {
     console.log(error)
     Swal.fire({

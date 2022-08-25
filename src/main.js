@@ -10,6 +10,9 @@ import i18n from './i18n'
 import '../node_modules/aos/dist/aos.css'
 import '../node_modules/animate.css/animate.min.css'
 import '../node_modules/magnific-popup/dist/magnific-popup.css'
+import '../node_modules/vue3-loading-overlay/dist/vue3-loading-overlay.css'
+
+
 
 loadFonts()
 

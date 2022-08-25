@@ -1,4 +1,6 @@
 {
+  "wuleefarm": "ウーリーファーム",
+  "titleslogan": "有機栽培 / 産地直販",
   "home": "ホームページ",
   "brand": "ファーム紹介",
   "why": "夏雪マンゴー",
@@ -31,7 +33,7 @@
   "orderstate": "注文の状況",
   "totalprice": "合計金額",
   "detail": "詳細",
-  "product": "產品",
+  "product": "商品",
   "singleprice": "単価",
   "amount": "数",
   "close": "閉じる",
@@ -39,5 +41,20 @@
   "confirm": "確認",
   "unpaid": "未払い",
   "orderestablished": "注文確定",
-  "ordercancel": "注文を取り消す"
+  "ordercancel": "注文を取り消す",
+  "back": " 戻る",
+  "addcart": "カートに入れる",
+  "thanks": "ご購入いただきありがとうございます",
+  "remind": "ご注文は正常に送信されました。商品はお支払い後 7 日以内に配送されます。",
+  "painfo": "支払情報",
+  "bankname": "銀行名",
+  "branch": "ブランチ",
+  "banknumber": "銀行番号",
+  "accountname": "アカウント",
+  "company": "会社",
+  "accountnumber": "口座番号",
+  "deadline": "支払期限",
+  "gohome": "ホームページ",
+  "noproduct": "商品なし!",
+  "nonews": "ニュースはありません"
 }

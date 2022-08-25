@@ -1,4 +1,6 @@
 {
+  "wuleefarm": "Wu Lixiang Farm",
+  "titleslogan": "Organically / Direct Selling",
   "home": "Home",
   "brand": "Introduction",
   "why": "XiaXue Mango",
@@ -39,5 +41,20 @@
   "confirm": "confirm",
   "unpaid": "Unpaid",
   "orderestablished": "Order Established",
-  "ordercancel": "Order Canceled"
+  "ordercancel": "Order Canceled",
+  "back": "Go Back",
+  "addcart": "Add Cart",
+  "thanks": "Thank you for purchasing",
+  "remind": "Your order has been successfully submitted, your order will be delivered within 7 days after payment is made",
+  "painfo": "Payment Information",
+  "bankname": "Bank",
+  "branch": "(Branch)",
+  "banknumber": "Bank Number",
+  "accountname": "Account",
+  "company": "Company",
+  "accountnumber": "Account Number",
+  "deadline": "Payment Deadline",
+  "gohome": "Home",
+  "noproduct": "No Product!",
+  "nonews": "No Latest News"
 }

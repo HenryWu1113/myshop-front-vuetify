@@ -20,6 +20,7 @@
 
 // 區塊結構
 @import './front_navbar';
+@import './home';
 @import './brand';
 @import './front_news';
 @import './contact';
@@ -28,7 +29,9 @@
 @import './front_userinfo';
 @import './product_card';
 @import './likes';
+@import './cart';
+@import './payinfo';
 
 // 功能
 
-@import './features/backtop';
+// @import './features/backtop';

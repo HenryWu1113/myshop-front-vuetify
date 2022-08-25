@@ -13,12 +13,18 @@
         <v-spacer class="d-none d-md-block"></v-spacer>
         <v-col cols="12" md="" class="d-flex align-center justify-md-end">
           <div class="column_divider mr-3 d-none d-md-block"></div>
-          <span style="width: 200px;" class="text-brown">{{ new Date(n.date).toLocaleString() }}</span>
+          <span v-if="$i18n.locale === 'tw'" style="width: 200px;" class="text-brown">{{ new
+              Date(n.date).toLocaleString('zh-TW')
+          }}</span>
+          <span v-else-if="$i18n.locale === 'en'" style="width: 200px;" class="text-brown">{{ new
+              Date(n.date).toLocaleString('en-US')
+          }}</span>
+          <span v-else style="width: 200px;" class="text-brown">{{ new Date(n.date).toLocaleString('ja-JP') }}</span>
         </v-col>
         <v-divider></v-divider>
       </v-row>
       <v-row v-else>
-        <v-col cols="12" class="text-center">沒有最新消息</v-col>
+        <v-col v-if="loading" cols="12" class="text-center">沒有最新消息</v-col>
       </v-row>
       <div class="text-center mt-10">
         <v-pagination v-model="currentPage" :length="Math.ceil(news.length / 5)"></v-pagination>
@@ -37,6 +43,11 @@ import { ref, reactive, computed, onMounted } from 'vue'
 import Swal from 'sweetalert2'
 import { api } from '@/plugins/axios'
 import { useRouter } from 'vue-router'
+import { useLoading } from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+
+const loader = useLoading()
+const loading = ref(false)
 
 const router = useRouter()
 
@@ -57,8 +68,16 @@ const pagination = computed(() => {
 
 const init = async () => {
   try {
+    loader.show({
+      color: 'orange',
+      loader: 'bars',
+      width: 100,
+      height: 100
+    })
     const { data } = await api.get('/news')
     news.push(...data.result)
+    loader.hide()
+    loading.value = true
   } catch (error) {
     // console.log(error)
     Swal.fire({

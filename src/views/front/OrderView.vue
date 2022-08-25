@@ -40,7 +40,12 @@
           </v-col>
           <v-col cols="12" lg="" class="d-flex align-center">
             <span class="d-lg-none">{{ $t('orderdate') }} : </span>
-            <span>{{ new Date(order.date).toLocaleString() }}</span>
+            <span v-if="$i18n.locale === 'tw'">{{ new Date(order.date).toLocaleString('zh-TW')
+            }}</span>
+            <span v-else-if="$i18n.locale === 'en'">{{ new Date(order.date).toLocaleString('en-US')
+            }}</span>
+            <span v-else>{{ new Date(order.date).toLocaleString('ja-JP')
+            }}</span>
           </v-col>
           <v-col cols="12" md="4" lg="" class="d-flex align-center">
             <span class="d-lg-none">{{ $t('orderstate') }} : </span>
@@ -59,7 +64,9 @@
             </v-btn>
           </v-col>
         </v-row>
-        <h1 v-else class="text-h1 text-center mt-10">沒有訂單哦</h1>
+        <v-row v-else>
+          <v-col v-if="loading" cols="12" class="text-center">沒有訂單哦</v-col>
+        </v-row>
         <v-dialog v-model="dialog">
           <v-card>
             <v-card-title>
@@ -127,6 +134,11 @@ import { apiAuth } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import AOS from "aos"
+import { useLoading } from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+
+const loader = useLoading()
+const loading = ref(false)
 
 onMounted(() => {
   AOS.init();
@@ -160,6 +172,12 @@ const openDialog = (i) => {
 
 const init = async () => {
   try {
+    loader.show({
+      color: 'orange',
+      loader: 'bars',
+      width: 100,
+      height: 100
+    })
     const { data } = await apiAuth.get('/orders')
     orders.push(...data.result.map(order => {
       order.totalPrice = order.products.reduce((a, b) => {
@@ -167,6 +185,8 @@ const init = async () => {
       }, 0)
       return order
     }))
+    loader.hide()
+    loading.value = true
   } catch (error) {
     Swal.fire({
       icon: 'error',

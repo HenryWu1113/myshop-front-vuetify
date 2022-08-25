@@ -4,6 +4,17 @@
   // background: url('../assets/放射狀背景黃色.jpg') no-repeat center/cover;
   // background: blue;
 
+  .no_like_img {
+    img {
+      width: 100%;
+      max-width: 300px;
+
+      @include md {
+        max-width: 400px;
+      }
+    }
+  }
+
   .swiper {
     width: 100%;
     padding-top: 50px;

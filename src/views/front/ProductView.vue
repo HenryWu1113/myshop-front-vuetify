@@ -35,10 +35,11 @@
                 <!-- <v-spacer></v-spacer> -->
                 <v-col cols="6" lg="4">
                   <v-btn block color="brown" variant="outlined" prepend-icon="mdi-arrow-left" @click="router.go(-1)">
-                    回上一頁</v-btn>
+                    {{ $t('back') }}</v-btn>
                 </v-col>
                 <v-col cols="6" lg="8">
-                  <v-btn block color="orange" type="submit" prepend-icon="mdi-cart" variant="outlined">加入購物車</v-btn>
+                  <v-btn block color="orange" type="submit" prepend-icon="mdi-cart" variant="outlined">{{ $t('addcart')
+                  }}</v-btn>
                 </v-col>
               </v-row>
             </v-form>
@@ -48,8 +49,9 @@
           <v-btn color="primary" variant="outlined" prepend-icon="mdi-arrow-left" @click="router.go(-1)">
             回上一頁</v-btn>
         </v-col> -->
-        <v-overlay class="align-center justify-center" :model-value='!product.sell'>
+        <v-overlay v-if="loading" class="align-center justify-center" :model-value='!product.sell'>
           <h1 class="text-white">已下架</h1>
+          <v-btn variant="outlined" color="white" block @click="router.push('/')">{{ $t('gohome') }}</v-btn>
         </v-overlay>
       </v-row>
     </div>
@@ -69,6 +71,11 @@ import { api } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
+import { useLoading } from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+
+const loader = useLoading()
+const loading = ref(false)
 
 const route = useRoute()
 const router = useRouter()
@@ -110,6 +117,12 @@ const isLike = computed(() => {
 
 const init = async () => {
   try {
+    loader.show({
+      color: 'orange',
+      loader: 'bars',
+      width: 100,
+      height: 100
+    })
     const { data } = await api.get('/products/' + route.params.id)
     product._id = data.result._id
     product.name = data.result.name
@@ -118,6 +131,8 @@ const init = async () => {
     product.sell = data.result.sell
     product.image = data.result.image
     product.description = data.result.description
+    loader.hide()
+    loading.value = true
   } catch (error) {
     Swal.fire({
       icon: 'error',

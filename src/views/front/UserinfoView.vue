@@ -4,7 +4,7 @@
       <h1 class="text-h2 text-center text-brown font-weight-bold mt-10 mb-10" data-aos="fade-down"
         data-aos-duration="1000" data-aos-offset="150">{{ $t('selfinfo') }}</h1>
       <div class="user_info_card ps-5 pe-5">
-        <img src="../../assets/mango_cartoon.png" class="mango d-none d-md-block">
+        <img src="../../assets/mango_cartoon.png" class="mango d-none d-md-block animate__animated animate__shakeX">
         <img src="../../assets/grass_cartoon.png" class="grass d-none d-lg-block">
         <v-row>
           <v-col cols="12" md="5" lg="6">
@@ -78,6 +78,10 @@ import { isEmail } from 'validator'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
 import AOS from "aos"
+import { useLoading } from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+
+const loader = useLoading()
 
 onMounted(() => {
   AOS.init();
@@ -156,6 +160,12 @@ const submitForm = async () => {
 
 const init = async () => {
   try {
+    loader.show({
+      color: 'orange',
+      loader: 'bars',
+      width: 100,
+      height: 100
+    })
     const { data } = await apiAuth.get('/users')
     form.account = data.result.account
     form.email = data.result.email
@@ -166,7 +176,8 @@ const init = async () => {
     users.nickname = data.result.nickname
     users.avatar = data.result.avatar
     // users.push(data.result)
-    console.log(users)
+    // console.log(users)
+    loader.hide()
   } catch (error) {
     console.log(error)
     Swal.fire({

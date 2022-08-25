@@ -1,70 +1,79 @@
 <template>
-  <div class="MyContainer">
-    <h1 class="text-h2 text-center text-brown font-weight-bold mt-10" data-aos="fade-down" data-aos-duration="1000"
-      data-aos-offset="150">{{ $t('cart') }}</h1>
-    <v-row v-if="cart.length > 0" class="mt-4" v-for="(item, idx) in cart" :key="item._id"
-      :class="{ 'bg-error': !item.product.sell }">
-      <v-col cols="12" md="">
-        <v-img :src="item.product.image" @click="router.push(`/product/${item.product._id}`)" style="cursor: pointer;">
-        </v-img>
-      </v-col>
-      <v-col cols="12" md="" class="d-flex align-center justify-center text-center">
-        <h2 class="text-brown" @click="router.push(`/product/${item.product._id}`)" style="cursor: pointer;">{{
-            item.product.name
-        }}</h2>
-      </v-col>
-      <v-col cols="12" md="" class="d-flex align-center justify-center text-center">
-        <span class="text-h6 text-deep-orange">NT. {{ item.product.price }}</span>
-      </v-col>
-      <v-col cols="12" md="" class="d-flex align-center justify-center text-center">
-        <v-btn icon variant="text" @click="update(idx, item.quantity - 1)" :disabled="item.quantity < 2">
-          <v-icon icon="mdi-minus" color="brown"></v-icon>
-        </v-btn>
-        <span class="ms-3 me-3 text-h6">{{ item.quantity }}</span>
-        <v-btn icon variant="text" @click="update(idx, item.quantity + 1)">
-          <v-icon icon="mdi-plus" color="brown"></v-icon>
-        </v-btn>
-      </v-col>
-      <v-col cols="12" md="" class="d-flex align-center justify-center text-center">
-        <span class="text-h6 text-deep-orange">NT. {{ item.product.price * item.quantity }}</span>
-      </v-col>
-      <v-col cols="12" md="" class="d-flex align-center justify-center text-center">
-        <v-btn icon variant="text" color="red" @click="update(idx, 0)">
-          <v-icon icon="mdi-trash-can-outline"></v-icon>
-        </v-btn>
-      </v-col>
-      <v-divider class="d-none d-md-block"></v-divider>
-    </v-row>
-    <h1 v-else class="text-h1 text-center mt-10">沒有商品哦</h1>
-    <v-row>
-      <v-spacer></v-spacer>
-      <v-col cols="12" md="3" class="text-center mt-10">
-        <span class="text-h6 text-red">{{ $t('totalprice') }} : NT.{{ totalPrice }}</span>
-      </v-col>
-    </v-row>
-    <v-form v-model="valid" @submit.prevent="submit">
-      <v-row>
-        <v-col cols="12" md="6">
-          <v-text-field v-model="form.receiver" type="text" label="收件者姓名" placeholder="請輸入收件者姓名" counter="10"
-            maxlength="10" :rules="[rules.required]" variant="outlined"></v-text-field>
+  <div id="cart_view">
+    <div class="MyContainer">
+      <h1 class="text-h2 text-center text-brown font-weight-bold mt-10" data-aos="fade-down" data-aos-duration="1000"
+        data-aos-offset="150">{{ $t('cart') }}</h1>
+      <v-row v-if="cart.length > 0" class="mt-4" v-for="(item, idx) in cart" :key="item._id"
+        :class="{ 'bg-grey-lighten-1 ': !item.product.sell }">
+        <v-col cols="12" md="">
+          <v-img :src="item.product.image" @click="router.push(`/product/${item.product._id}`)"
+            style="cursor: pointer;">
+          </v-img>
         </v-col>
-        <v-col cols="12" md="6">
-          <v-text-field v-model="form.cellphone" type="text" label="收件者電話" placeholder="請輸入收件者電話"
-            :rules="[rules.required, rules.isMobilePhone]" variant="outlined">
-          </v-text-field>
+        <v-col cols="12" md="" class="d-flex align-center justify-center text-center">
+          <h2 class="text-brown" @click="router.push(`/product/${item.product._id}`)" style="cursor: pointer;">{{
+              item.product.name
+          }}</h2>
         </v-col>
-        <v-col cols="12">
-          <v-text-field v-model="form.address" type="text" label="收件地址" placeholder="請輸入收件地址" :rules="[rules.required]"
-            variant="outlined">
-          </v-text-field>
+        <v-col cols="12" md="" class="d-flex align-center justify-center text-center">
+          <span class="text-h6 text-deep-orange">NT. {{ item.product.price }}</span>
         </v-col>
-        <v-col cols="12" md="2" class="ma-auto">
-          <v-btn color="warning" block variant="outlined" type="submit" :disabled="!canCheckout">
-            {{ $t('confirmandsend') }}
+        <v-col cols="12" md="" class="d-flex align-center justify-center text-center">
+          <v-btn icon variant="text" @click="update(idx, item.quantity - 1)" :disabled="item.quantity < 2">
+            <v-icon icon="mdi-minus" color="brown"></v-icon>
+          </v-btn>
+          <span class="ms-3 me-3 text-h6">{{ item.quantity }}</span>
+          <v-btn icon variant="text" @click="update(idx, item.quantity + 1)">
+            <v-icon icon="mdi-plus" color="brown"></v-icon>
           </v-btn>
         </v-col>
+        <v-col cols="12" md="" class="d-flex align-center justify-center text-center">
+          <span class="text-h6 text-deep-orange">NT. {{ item.product.price * item.quantity }}</span>
+        </v-col>
+        <v-col cols="12" md="" class="d-flex align-center justify-center text-center">
+          <v-btn icon variant="text" color="red" @click="update(idx, 0)">
+            <v-icon icon="mdi-trash-can-outline"></v-icon>
+          </v-btn>
+        </v-col>
+        <v-divider class="d-none d-md-block"></v-divider>
       </v-row>
-    </v-form>
+      <v-row v-else class="mt-15">
+        <v-col v-if="loading" cols="12" class="text-center no_product_img">
+          <img v-if="$i18n.locale === 'tw'" src="../../assets/nocarttw.png">
+          <img v-else-if="$i18n.locale === 'en'" src="../../assets/nocarten.png">
+          <img v-else src="../../assets/nocartjp.png">
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-spacer></v-spacer>
+        <v-col cols="12" md="3" class="text-center mt-10">
+          <span class="text-h6 text-red">{{ $t('totalprice') }} : NT.{{ totalPrice }}</span>
+        </v-col>
+      </v-row>
+      <v-form v-model="valid" @submit.prevent="submit">
+        <v-row>
+          <v-col cols="12" md="6">
+            <v-text-field v-model="form.receiver" type="text" label="收件者姓名" placeholder="請輸入收件者姓名" counter="10"
+              maxlength="10" :rules="[rules.required]" variant="outlined"></v-text-field>
+          </v-col>
+          <v-col cols="12" md="6">
+            <v-text-field v-model="form.cellphone" type="text" label="收件者電話" placeholder="請輸入收件者電話"
+              :rules="[rules.required, rules.isMobilePhone]" variant="outlined">
+            </v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field v-model="form.address" type="text" label="收件地址" placeholder="請輸入收件地址"
+              :rules="[rules.required]" variant="outlined">
+            </v-text-field>
+          </v-col>
+          <v-col cols="12" md="2" class="ma-auto">
+            <v-btn color="warning" block variant="outlined" type="submit" :disabled="!canCheckout">
+              {{ $t('confirmandsend') }}
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-form>
+    </div>
   </div>
 </template>
 
@@ -79,6 +88,11 @@ import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
 import { isMobilePhone } from 'validator'
 import AOS from "aos"
+import { useLoading } from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+
+const loader = useLoading()
+const loading = ref(false)
 
 onMounted(() => {
   AOS.init();
@@ -147,8 +161,16 @@ const submit = async () => {
 
 const init = async () => {
   try {
+    loader.show({
+      color: 'orange',
+      loader: 'bars',
+      width: 100,
+      height: 100
+    })
     const { data } = await apiAuth.get('/users/cart')
     cart.push(...data.result)
+    loader.hide()
+    loading.value = true
   } catch (error) {
     Swal.fire({
       icon: 'error',

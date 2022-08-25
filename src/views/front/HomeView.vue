@@ -3,7 +3,7 @@
     <swiper :slidesPerView="1" :spaceBetween="30" :loop="true" :effect="'fade'" :pagination="{
       clickable: true,
     }" :autoplay="{
-  delay: 2500,
+  delay: 5000,
   disableOnInteraction: false,
 }" :modules="modules" class="mySwiper">
       <!-- <swiper-slide v-for="(image, i) in images" :key="i">
@@ -39,7 +39,7 @@
           </ProductCard>
         </v-col>
         <v-col v-else>
-          <h1 class="text-center">沒有商品</h1>
+          <h1 v-if="loading" class="text-center">{{ $t('noproduct') }}</h1>
         </v-col>
       </v-row>
     </div>
@@ -50,42 +50,10 @@
 </template>
 
 <style scoped lang="scss">
-.swiper {
-  width: 100%;
-  aspect-ratio: 16 / 6;
-  // height: 300px;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-
-  /* Center slide text vertically */
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 </style>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import Swal from 'sweetalert2'
 import { api } from '@/plugins/axios'
 import ProductCard from '@/components/ProductCard.vue'
@@ -104,15 +72,20 @@ import AOS from "aos"
 
 // import required modules
 import { Pagination, Autoplay, EffectFade } from "swiper"
-import { computed, onMounted } from 'vue'
 // import { useUserStore } from '@/stores/user'
 // import { storeToRefs } from 'pinia'
 // import { apiAuth } from '../../plugins/axios.js'
 // const user = useUserStore()
 // const { isLogin } = storeToRefs(user)
+import { useLoading } from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+
 
 const modules = reactive([Pagination, Autoplay, EffectFade])
 
+const loader = useLoading()
+
+const loading = ref(false)
 const item = ref('全部')
 const search = ref('')
 
@@ -134,6 +107,7 @@ onMounted(() => {
 })
 
 
+
 const products = reactive([])
 
 const filtereditems = computed(() => {
@@ -148,8 +122,16 @@ const filtereditems = computed(() => {
 
 const init = async () => {
   try {
+    loader.show({
+      color: 'orange',
+      loader: 'bars',
+      width: 100,
+      height: 100
+    })
     const { data } = await api.get('/products')
     products.push(...data.result)
+    loader.hide()
+    loading.value = true
   } catch (error) {
     Swal.fire({
       icon: 'error',
@@ -176,3 +158,18 @@ const init = async () => {
 init()
 // login()
 </script>
+<!-- <script>
+import SwiperAnimation from '@cycjimmy/swiper-animation'
+// use swiper 4+
+const swiperAnimation = new SwiperAnimation();
+const mySwiper4 = new Swiper('.swiper-container', {
+  on: {
+    init: function () {
+      swiperAnimation.init(this).animate();
+    },
+    slideChange: function () {
+      swiperAnimation.init(this).animate();
+    }
+  }
+})
+</script> -->

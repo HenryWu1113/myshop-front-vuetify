@@ -18,7 +18,8 @@
             <div class="contact_box1">
               <v-icon class="contact_icon" icon="mdi-phone"></v-icon>
               <h1 class="">{{ $t('phone') }}</h1>
-              <span class="">0910968708</span>
+              <span class="">0911222333</span>
+              <!-- <span class="">0910968708</span> -->
             </div>
           </a>
         </v-col>
@@ -26,7 +27,8 @@
           <div class="contact_box2" @click="dialog = true">
             <v-icon class="contact_icon" icon="mdi-chat-outline"></v-icon>
             <h1 class="">Line</h1>
-            <span class="">id : wlsfarm</span>
+            <span class="">id : goodtoeat123</span>
+            <!-- <span class="">id : wlsfarm</span> -->
           </div>
         </v-col>
         <v-col cols="12" lg="4">
@@ -34,7 +36,8 @@
             <div class="contact_box3">
               <v-icon class="contact_icon" icon="mdi-email-outline"></v-icon>
               <h1 class="">{{ $t('mail') }}</h1>
-              <span class="">service@wlsfarm.com.tw</span>
+              <span class="">aaaa@gmail.com</span>
+              <!-- <span class="">service@wlsfarm.com.tw</span> -->
             </div>
           </a>
         </v-col>

@@ -10,6 +10,7 @@
     "preview": "vite preview --port 4173"
   },
   "dependencies": {
+    "@cycjimmy/swiper-animation": "^6.0.2",
     "@mdi/font": "5.9.55",
     "@vue/cli-shared-utils": "^5.0.8",
     "animate.css": "^4.1.1",
@@ -26,6 +27,7 @@
     "vue": "^3.2.37",
     "vue-i18n": "^9.2.0",
     "vue-router": "^4.1.2",
+    "vue3-loading-overlay": "^0.0.0",
     "vuetify": "^3.0.0-beta.0",
     "webfontloader": "^1.0.0"
   },

@@ -1,0 +1,11 @@
+#cart_view {
+  .no_product_img {
+    img {
+      width: 100%;
+
+      @include md {
+        width: 400px;
+      }
+    }
+  }
+}

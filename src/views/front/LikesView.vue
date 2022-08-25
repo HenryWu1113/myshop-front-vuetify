@@ -1,6 +1,7 @@
 <template>
   <div id="likes_view">
-    <h1 class="text-h2 text-center pt-15 text-brown font-weight-bold">{{ $t('myfav') }}</h1>
+    <h1 class="text-h2 text-center pt-15 text-brown font-weight-bold" data-aos="fade-down" data-aos-duration="1000"
+      data-aos-offset="150">{{ $t('myfav') }}</h1>
     <swiper v-if="likes.length > 0" :effect="'coverflow'" :grabCursor="true" :centeredSlides="true"
       :slidesPerView="'auto'" :coverflowEffect="{
         rotate: 50,
@@ -43,7 +44,14 @@
         </v-card>
       </swiper-slide>
     </swiper>
-    <h1 v-else class="text-h1 text-center mt-10">沒有收藏哦!!!</h1>
+    <v-row v-else>
+      <v-col v-if="loading" cols="12" class="text-center mt-15 no_like_img">
+        <img v-if="$i18n.locale === 'tw'" src="../../assets/miniontw.png" class=" animate__animated animate__jello">
+        <img v-else-if="$i18n.locale === 'en'" src="../../assets/minionen.png"
+          class=" animate__animated animate__bounce">
+        <img v-else src="../../assets/minionjp.png" class=" animate__animated animate__swing">
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -52,12 +60,21 @@
 
 <script setup>
 import { Swiper, SwiperSlide } from "swiper/vue"
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { apiAuth } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
+import AOS from "aos"
+import { useLoading } from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 
+const loader = useLoading()
+const loading = ref(false)
+
+onMounted(() => {
+  AOS.init();
+})
 const router = useRouter()
 const user = useUserStore()
 
@@ -82,9 +99,16 @@ const deleteLike = (i) => {
 
 const init = async () => {
   try {
+    loader.show({
+      color: 'orange',
+      loader: 'bars',
+      width: 100,
+      height: 100
+    })
     const { data } = await apiAuth.get('/users/likes')
     likes.push(...data.result)
-    console.log(likes)
+    loader.hide()
+    loading.value = true
   } catch (error) {
     Swal.fire({
       icon: 'error',
