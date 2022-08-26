@@ -1,11 +1,45 @@
+html {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   /* 以下為了去除滑動欄 */
   -ms-overflow-style: none;
   scrollbar-width: none;
+  width: 100%;
+  height: 100%;
 }
 
 body::-webkit-scrollbar {
   display: none;
+}
+
+.mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 10000;
+
+  .mask_box {
+    width: 150px;
+    height: 150px;
+    background: url('../assets/Spin-1s-200px.gif') no-repeat center/cover;
+    position: sticky;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+
+    @include md {
+      width: 200px;
+      height: 200px;
+    }
+  }
+
 }
 
 .MyContainer {

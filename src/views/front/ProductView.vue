@@ -56,6 +56,7 @@
       </v-row>
     </div>
   </div>
+  <LoadingImage v-if="waiting"></LoadingImage>
 </template>
 
 <style scoped lang="scss">
@@ -71,11 +72,13 @@ import { api } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
-import { useLoading } from 'vue3-loading-overlay';
-import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+import LoadingImage from '../../components/LoadingImage.vue'
+// import { useLoading } from 'vue3-loading-overlay';
+// import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 
-const loader = useLoading()
+// const loader = useLoading()
 const loading = ref(false)
+const waiting = ref(false)
 
 const route = useRoute()
 const router = useRouter()
@@ -117,12 +120,13 @@ const isLike = computed(() => {
 
 const init = async () => {
   try {
-    loader.show({
-      color: 'orange',
-      loader: 'bars',
-      width: 100,
-      height: 100
-    })
+    // loader.show({
+    //   color: 'orange',
+    //   loader: 'bars',
+    //   width: 100,
+    //   height: 100
+    // })
+    waiting.value = true
     const { data } = await api.get('/products/' + route.params.id)
     product._id = data.result._id
     product.name = data.result.name
@@ -131,7 +135,8 @@ const init = async () => {
     product.sell = data.result.sell
     product.image = data.result.image
     product.description = data.result.description
-    loader.hide()
+    // loader.hide()
+    waiting.value = false
     loading.value = true
   } catch (error) {
     Swal.fire({

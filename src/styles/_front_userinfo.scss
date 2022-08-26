@@ -2,20 +2,27 @@
 
   .user_info_card {
     // border: 1px dashed #F57F17;
-    // background: #F57F17;
-    background: linear-gradient(315deg, rgba(255, 255, 0, 0.11), rgba(255, 166, 0, 0.726));
+    // background: #fff;
+    // background: linear-gradient(315deg, rgba(255, 255, 0, 0.11), rgba(255, 166, 0, 0.726));
     border-radius: 10px;
     position: relative;
     text-shadow: 0 0 5px white;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-
+    max-width: 1000px;
+    margin: auto;
 
     .info_pic {
-      width: 100%;
+      display: block;
+      margin: auto;
+      width: 60%;
       aspect-ratio: 1/1;
-      border: 3px solid white;
+      border: 5px solid orange;
       object-fit: cover;
       border-radius: 50%;
+
+      @include md {
+        width: 80%;
+      }
     }
 
     .user_info {
@@ -29,49 +36,46 @@
 
     @include md {
       border-radius: 20px;
-      padding-top: 5rem;
-
-      .mango {
-        width: 260px;
-        position: absolute;
-        right: -5%;
-        top: 0;
-
-        &:hover {
-          transform: translateX(-10px);
-        }
-      }
+      padding-top: 2.5rem;
+      padding-right: 2rem;
+      // .mango {
+      //   width: 260px;
+      //   position: absolute;
+      //   right: -5%;
+      //   top: 0;
+      // }
 
       .user_info {
         text-align: left;
-        font-size: 32px;
+        font-size: 28px;
       }
     }
 
     @include lg {
-      padding-top: 6rem;
+      padding-top: 5rem;
       margin-bottom: 5rem;
 
       .user_info {
         line-height: 80px;
+        font-size: 32px;
       }
 
-      .mango {
-        width: 400px;
-        position: absolute;
-        right: -10%;
-        top: 0;
-      }
+      // .mango {
+      //   width: 400px;
+      //   position: absolute;
+      //   right: -10%;
+      //   top: 0;
+      // }
 
-      .grass {
-        width: 100%;
-        opacity: 30%;
-        position: absolute;
-        right: 0%;
-        bottom: 0;
-        border-end-start-radius: 20px;
-        border-end-end-radius: 20px;
-      }
+      // .grass {
+      //   width: 100%;
+      //   opacity: 30%;
+      //   position: absolute;
+      //   right: 0%;
+      //   bottom: 0;
+      //   border-end-start-radius: 20px;
+      //   border-end-end-radius: 20px;
+      // }
     }
 
 

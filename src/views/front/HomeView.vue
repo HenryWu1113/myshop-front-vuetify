@@ -10,13 +10,13 @@
       <img :src="image.src">
     </swiper-slide> -->
       <swiper-slide>
-        <img src="../../assets/banner01.jpg">
+        <img src="../../assets/fresh_mango_banner.jpg">
       </swiper-slide>
       <swiper-slide>
-        <img src="../../assets/banner02.jpg">
+        <img src="../../assets/banner01newnew.jpg">
       </swiper-slide>
       <swiper-slide>
-        <img src="../../assets/banner03.jpg">
+        <img src="../../assets/banner02new.jpg">
       </swiper-slide>
     </swiper>
     <div class="MyContainer">
@@ -45,8 +45,7 @@
     </div>
   </div>
   <FooterPart></FooterPart>
-
-  <!-- </v-container> -->
+  <LoadingImage v-if="waiting"></LoadingImage>
 </template>
 
 <style scoped lang="scss">
@@ -58,6 +57,7 @@ import Swal from 'sweetalert2'
 import { api } from '@/plugins/axios'
 import ProductCard from '@/components/ProductCard.vue'
 import FooterPart from '@/components/FooterPart.vue'
+import LoadingImage from '../../components/LoadingImage.vue'
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue"
 
@@ -77,14 +77,14 @@ import { Pagination, Autoplay, EffectFade } from "swiper"
 // import { apiAuth } from '../../plugins/axios.js'
 // const user = useUserStore()
 // const { isLogin } = storeToRefs(user)
-import { useLoading } from 'vue3-loading-overlay';
-import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+// import { useLoading } from 'vue3-loading-overlay';
+// import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 
 
 const modules = reactive([Pagination, Autoplay, EffectFade])
 
-const loader = useLoading()
-
+// const loader = useLoading()
+const waiting = ref(false)
 const loading = ref(false)
 const item = ref('全部')
 const search = ref('')
@@ -122,16 +122,18 @@ const filtereditems = computed(() => {
 
 const init = async () => {
   try {
-    loader.show({
-      color: 'orange',
-      loader: 'bars',
-      width: 100,
-      height: 100
-    })
+    // loader.show({
+    //   color: 'orange',
+    //   loader: 'bars',
+    //   width: 100,
+    //   height: 100
+    // })
+    waiting.value = true
     const { data } = await api.get('/products')
     products.push(...data.result)
-    loader.hide()
+    // loader.hide()
     loading.value = true
+    waiting.value = false
   } catch (error) {
     console.log(error)
     Swal.fire({

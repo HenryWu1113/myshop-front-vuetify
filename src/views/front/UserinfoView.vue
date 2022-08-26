@@ -3,20 +3,23 @@
     <div class="MyContainer">
       <h1 class="text-h2 text-center text-brown font-weight-bold mt-10 mb-10" data-aos="fade-down"
         data-aos-duration="1000" data-aos-offset="150">{{ $t('selfinfo') }}</h1>
-      <div class="user_info_card ps-5 pe-5">
-        <img src="../../assets/mango_cartoon.png" class="mango d-none d-md-block animate__animated animate__shakeX">
-        <img src="../../assets/grass_cartoon.png" class="grass d-none d-lg-block">
+      <div class="user_info_card">
+        <!-- <img src="../../assets/mango_cartoon.png" class="mango d-none d-md-block animate__animated animate__shakeX">
+        <img src="../../assets/grass_cartoon.png" class="grass d-none d-lg-block"> -->
         <v-row>
-          <v-col cols="12" md="5" lg="6">
+          <v-col cols="12" md="4" class="text-cneter">
             <img :src="users.avatar" class="info_pic">
           </v-col>
-          <v-col cols="12" md="7" lg="6" class="d-flex flex-column justify-center">
-            <span class="user_info">{{ $t('account') }} : {{ users.account }}</span>
-            <span class="user_info">{{ $t('nickname') }} : {{ users.nickname }}</span>
-            <span class="user_info">{{ $t('mail') }} : {{ users.email }}</span>
+          <v-col cols="12" md="8" class="d-flex flex-column justify-center">
+            <span class="user_info">✧{{ $t('account') }} : {{ users.account }}</span>
+            <v-divider></v-divider>
+            <span class="user_info">✧{{ $t('nickname') }} : {{ users.nickname }}</span>
+            <v-divider></v-divider>
+            <span class="user_info">✧{{ $t('mail') }} : {{ users.email }}</span>
+            <v-divider></v-divider>
           </v-col>
           <v-col cols="12" class="text-center">
-            <v-btn variant="outlined" color="deep-orange" @click="changeinfo" class="mb-5">{{ $t('editselfinfo') }}
+            <v-btn variant="outlined" color="orange" @click="changeinfo" class="mb-5">{{ $t('editselfinfo') }}
             </v-btn>
           </v-col>
         </v-row>
@@ -65,6 +68,7 @@
       </div>
     </div>
   </div>
+  <LoadingImage v-if="waiting"></LoadingImage>
 </template>
 
 <style scoped lang="scss">
@@ -78,10 +82,11 @@ import { isEmail } from 'validator'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
 import AOS from "aos"
-import { useLoading } from 'vue3-loading-overlay';
-import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+import LoadingImage from '../../components/LoadingImage.vue'
+// import { useLoading } from 'vue3-loading-overlay';
+// import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 
-const loader = useLoading()
+// const loader = useLoading()
 
 onMounted(() => {
   AOS.init();
@@ -91,6 +96,7 @@ const user = useUserStore()
 const { editUser } = user
 const { nickname, email, account, avatar } = storeToRefs(user)
 
+const waiting = ref(false)
 const dialog = ref(false)
 const valid = ref(false)
 
@@ -160,12 +166,13 @@ const submitForm = async () => {
 
 const init = async () => {
   try {
-    loader.show({
-      color: 'orange',
-      loader: 'bars',
-      width: 100,
-      height: 100
-    })
+    // loader.show({
+    //   color: 'orange',
+    //   loader: 'bars',
+    //   width: 100,
+    //   height: 100
+    // })
+    waiting.value = true
     const { data } = await apiAuth.get('/users')
     form.account = data.result.account
     form.email = data.result.email
@@ -177,7 +184,8 @@ const init = async () => {
     users.avatar = data.result.avatar
     // users.push(data.result)
     // console.log(users)
-    loader.hide()
+    waiting.value = false
+    // loader.hide()
   } catch (error) {
     console.log(error)
     Swal.fire({

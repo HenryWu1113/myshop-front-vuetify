@@ -6,7 +6,7 @@
       cover height="600">
       <div class="d-flex flex-column fill-height justify-center align-center text-white">
         <h1
-          class="text-h1 mb-4 pt-6 pb-6 ps-6 pe-6 font-weight-bold contact_bg w-100 text-center animate__animated animate__flip">
+          class="text-h1 mb-4 pt-6 pb-6 ps-6 pe-6 font-weight-bold contact_bg w-100 text-center animate__animated animate__backInLeft">
           {{ $t('contact') }}
         </h1>
       </div>
@@ -55,8 +55,7 @@
         <v-col cols="12" class="text-center">
           <v-form v-model="valid" @submit.prevent="submitComment">
             <v-textarea v-model="form.comment" name="回饋訊息" label="回饋訊息" counter maxlength="500" placeholder="輸入訊息"
-              variant="outlined" prepend-inner-icon="mdi-comment" clearable data-aos="zoom-in" data-aos-duration="1000"
-              data-aos-offset="150" data-aos-once="true">
+              variant="outlined" prepend-inner-icon="mdi-comment" clearable>
             </v-textarea>
             <div class="contact_btn_group">
               <!-- <v-btn variant="text" color="error" type="reset">重填</v-btn> -->

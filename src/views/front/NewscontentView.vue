@@ -3,32 +3,48 @@
     <div class="MyContainer">
       <h1 class="text-h2 text-center mt-15 font-weight-bold text-brown" data-aos="fade-down" data-aos-duration="1000"
         data-aos-offset="150">{{ n.title }}</h1>
-      <h6 class="text-h6 mt-15 text-orange" data-aos="fade-down" data-aos-duration="1000" data-aos-offset="150">發布時間 :
-        {{ new Date(n.date).toLocaleString() }}</h6>
-      <p class="mt-5 text-brown" style="white-space: pre-wrap;" data-aos="fade-down" data-aos-duration="1000"
-        data-aos-offset="150">{{ n.content }}</p>
+      <h6 v-if="$i18n.locale === 'tw'" class="text-h6 mt-15 text-orange" data-aos="fade-down" data-aos-duration="1000"
+        data-aos-offset="150">{{
+            $t('release')
+        }} :
+        {{ new Date(n.date).toLocaleString('zh-TW') }}</h6>
+      <h6 v-else-if="$i18n.locale === 'en'" class="text-h6 mt-15 text-orange" data-aos="fade-down"
+        data-aos-duration="1000" data-aos-offset="150">{{
+            $t('release')
+        }} :
+        {{ new Date(n.date).toLocaleString('en-US') }}</h6>
+      <h6 v-else class="text-h6 mt-15 text-orange" data-aos="fade-down" data-aos-duration="1000" data-aos-offset="150">
+        {{
+            $t('release')
+        }} :
+        {{ new Date(n.date).toLocaleString('ja-JP') }}</h6>
+      <p class="mt-5 text-brown" style="white-space: pre-wrap; font-size: 18px;;" data-aos="fade-down"
+        data-aos-duration="1000" data-aos-offset="150">{{ n.content }}</p>
       <v-col cols="12" class="mt-5 text-center">
         <v-btn color="brown" variant="outlined" prepend-icon="mdi-arrow-left" @click="router.go(-1)"
-          class="animate__animated animate__tada">
+          class="animate__animated animate__fadeInUp">
           回上一頁</v-btn>
       </v-col>
     </div>
   </div>
+  <LoadingImage v-if="waiting"></LoadingImage>
 </template>
 
 <style scoped lang="scss">
 </style>
 
 <script setup>
-import { reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import Swal from 'sweetalert2'
 import { api } from '@/plugins/axios'
 import { useRouter, useRoute } from 'vue-router'
 import AOS from "aos"
-import { useLoading } from 'vue3-loading-overlay';
-import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+import LoadingImage from '../../components/LoadingImage.vue'
+// import { useLoading } from 'vue3-loading-overlay';
+// import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 
-const loader = useLoading()
+// const loader = useLoading()
+const waiting = ref(false)
 
 onMounted(() => {
   AOS.init();
@@ -45,19 +61,21 @@ const n = reactive({
 
 const init = async () => {
   try {
-    loader.show({
-      color: 'orange',
-      loader: 'bars',
-      width: 100,
-      height: 100
-    })
+    // loader.show({
+    //   color: 'orange',
+    //   loader: 'bars',
+    //   width: 100,
+    //   height: 100
+    // })
+    waiting.value = true
     const { data } = await api.get('/news/' + route.params.id)
     n.title = data.result.title
     n.content = data.result.content
     n.date = data.result.date
-    loader.hide()
+    waiting.value = false
+    // loader.hide()
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     Swal.fire({
       icon: 'error',
       title: '失敗',

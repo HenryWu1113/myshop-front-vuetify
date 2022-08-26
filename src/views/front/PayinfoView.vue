@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
-
+  <LoadingImage v-if="waiting"></LoadingImage>
 </template>
 
 <style scoped lang="scss">
@@ -43,12 +43,14 @@
 <script setup>
 import Swal from 'sweetalert2'
 import { apiAuth } from '@/plugins/axios'
-import { reactive } from 'vue'
+import { ref, reactive } from 'vue'
 import { useRoute } from 'vue-router'
-import { useLoading } from 'vue3-loading-overlay';
-import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+import LoadingImage from '../../components/LoadingImage.vue'
+// import { useLoading } from 'vue3-loading-overlay';
+// import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 
-const loader = useLoading()
+// const loader = useLoading()
+const waiting = ref(false)
 const route = useRoute()
 
 const orderinfo = reactive({
@@ -58,16 +60,18 @@ const orderinfo = reactive({
 
 const init = async () => {
   try {
-    loader.show({
-      color: 'orange',
-      loader: 'bars',
-      width: 100,
-      height: 100
-    })
+    // loader.show({
+    //   color: 'orange',
+    //   loader: 'bars',
+    //   width: 100,
+    //   height: 100
+    // })
+    waiting.value = true
     const { data } = await apiAuth.get('/orders/' + route.params.id)
     orderinfo._id = data.result._id
     orderinfo.deadline = data.result.deadline
-    loader.hide()
+    waiting.value = false
+    // loader.hide()
   } catch (error) {
     Swal.fire({
       icon: 'error',

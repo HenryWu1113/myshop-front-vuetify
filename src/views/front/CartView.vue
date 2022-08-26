@@ -39,9 +39,11 @@
       </v-row>
       <v-row v-else class="mt-15">
         <v-col v-if="loading" cols="12" class="text-center no_product_img">
-          <img v-if="$i18n.locale === 'tw'" src="../../assets/nocarttw.png">
-          <img v-else-if="$i18n.locale === 'en'" src="../../assets/nocarten.png">
-          <img v-else src="../../assets/nocartjp.png">
+          <img v-if="$i18n.locale === 'tw'" src="../../assets/pngwingtw.png"
+            class="animate__animated animate__rubberBand">
+          <img v-else-if="$i18n.locale === 'en'" src="../../assets/pngwingen.png"
+            class="animate__animated animate__tada">
+          <img v-else src="../../assets/pngwingjp.png" class="animate__animated animate__heartBeat">
         </v-col>
       </v-row>
       <v-row>
@@ -75,6 +77,7 @@
       </v-form>
     </div>
   </div>
+  <LoadingImage v-if="waiting"></LoadingImage>
 </template>
 
 <style scoped lang="scss">
@@ -88,11 +91,13 @@ import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
 import { isMobilePhone } from 'validator'
 import AOS from "aos"
-import { useLoading } from 'vue3-loading-overlay';
-import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+import LoadingImage from '../../components/LoadingImage.vue'
+// import { useLoading } from 'vue3-loading-overlay';
+// import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 
-const loader = useLoading()
+// const loader = useLoading()
 const loading = ref(false)
+const waiting = ref(false)
 
 onMounted(() => {
   AOS.init();
@@ -161,15 +166,17 @@ const submit = async () => {
 
 const init = async () => {
   try {
-    loader.show({
-      color: 'orange',
-      loader: 'bars',
-      width: 100,
-      height: 100
-    })
+    // loader.show({
+    //   color: 'orange',
+    //   loader: 'bars',
+    //   width: 100,
+    //   height: 100
+    // })
+    waiting.value = true
     const { data } = await apiAuth.get('/users/cart')
     cart.push(...data.result)
-    loader.hide()
+    // loader.hide()
+    waiting.value = false
     loading.value = true
   } catch (error) {
     Swal.fire({

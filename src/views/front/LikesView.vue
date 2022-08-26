@@ -46,13 +46,14 @@
     </swiper>
     <v-row v-else>
       <v-col v-if="loading" cols="12" class="text-center mt-15 no_like_img">
-        <img v-if="$i18n.locale === 'tw'" src="../../assets/miniontw.png" class=" animate__animated animate__jello">
-        <img v-else-if="$i18n.locale === 'en'" src="../../assets/minionen.png"
+        <img v-if="$i18n.locale === 'tw'" src="../../assets/minionmintw.png" class=" animate__animated animate__jello">
+        <img v-else-if="$i18n.locale === 'en'" src="../../assets/minionminen.png"
           class=" animate__animated animate__bounce">
-        <img v-else src="../../assets/minionjp.png" class=" animate__animated animate__swing">
+        <img v-else src="../../assets/minionminjp.png" class=" animate__animated animate__swing">
       </v-col>
     </v-row>
   </div>
+  <LoadingImage v-if="waiting"></LoadingImage>
 </template>
 
 <style scoped lang="scss">
@@ -66,11 +67,13 @@ import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import AOS from "aos"
-import { useLoading } from 'vue3-loading-overlay';
-import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+import LoadingImage from '../../components/LoadingImage.vue'
+// import { useLoading } from 'vue3-loading-overlay';
+// import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 
-const loader = useLoading()
+// const loader = useLoading()
 const loading = ref(false)
+const waiting = ref(false)
 
 onMounted(() => {
   AOS.init();
@@ -99,18 +102,20 @@ const deleteLike = (i) => {
 
 const init = async () => {
   try {
-    loader.show({
-      color: 'orange',
-      loader: 'bars',
-      width: 100,
-      height: 100
-    })
+    // loader.show({
+    //   color: 'orange',
+    //   loader: 'bars',
+    //   width: 100,
+    //   height: 100
+    // })
+    waiting.value = true
     const { data } = await apiAuth.get('/users/likes')
     likes.push(...data.result)
-    loader.hide()
+    // loader.hide()
     loading.value = true
+    waiting.value = false
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     Swal.fire({
       icon: 'error',
       title: '失敗',

@@ -3,8 +3,8 @@
     <div class="MyContainer mt-10">
       <h1 class="text-h2 text-center text-brown font-weight-bold" data-aos="fade-down" data-aos-duration="1000"
         data-aos-offset="150">{{ $t('news') }}</h1>
-      <v-row v-if="news.length > 0" v-for="n in pagination" :key="n._id"
-        class="mt-3 animate__animated animate__bounceIn" @click="router.push('/news/' + n._id)" style="cursor:pointer;">
+      <v-row v-if="news.length > 0" v-for="n in pagination" :key="n._id" class="mt-3 animate__animated animate__fadeIn"
+        @click="router.push('/news/' + n._id)" style="cursor:pointer;">
         <v-col cols="12" md="" class="d-flex align-center">
           <h2 class="text-brown">
             ֍ {{ n.title }}
@@ -32,6 +32,7 @@
     </div>
   </div>
 
+  <LoadingImage v-if="waiting"></LoadingImage>
 
 </template>
 
@@ -43,11 +44,13 @@ import { ref, reactive, computed, onMounted } from 'vue'
 import Swal from 'sweetalert2'
 import { api } from '@/plugins/axios'
 import { useRouter } from 'vue-router'
-import { useLoading } from 'vue3-loading-overlay';
-import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+// import { useLoading } from 'vue3-loading-overlay';
+// import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+import LoadingImage from '../../components/LoadingImage.vue'
 
-const loader = useLoading()
+// const loader = useLoading()
 const loading = ref(false)
+const waiting = ref(false)
 
 const router = useRouter()
 
@@ -68,15 +71,17 @@ const pagination = computed(() => {
 
 const init = async () => {
   try {
-    loader.show({
-      color: 'orange',
-      loader: 'bars',
-      width: 100,
-      height: 100
-    })
+    // loader.show({
+    //   color: 'orange',
+    //   loader: 'bars',
+    //   width: 100,
+    //   height: 100
+    // })
+    waiting.value = true
     const { data } = await api.get('/news')
     news.push(...data.result)
-    loader.hide()
+    // loader.hide()
+    waiting.value = false
     loading.value = true
   } catch (error) {
     console.log(error)
