@@ -2,13 +2,7 @@
   <div id="brand_view">
     <div class="brand_top_img">
       <div class="circle">
-        <span>吳</span>
-        <span>李</span>
-        <span>香</span>
-        <span>農</span>
-        <span>場</span>
-        <span>介</span>
-        <span>紹</span>
+        <span class="animate__animated animate__bounceInLeft">吳李香夏雪芒果</span>
       </div>
     </div>
     <div class="MyContainer">

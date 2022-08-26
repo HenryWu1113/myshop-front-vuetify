@@ -274,18 +274,19 @@ const lists = reactive([
   }
 ])
 
-// watch(i18n.global.locale, () => {
-//   if (i18n.global.locale === 'tw') {
-//     lists[0].text = '個人資料'
-//     lists[1].text = '訂購紀錄'
-//   } else if (i18n.global.locale === 'en') {
-//     lists[0].text = 'user infomation'
-//     lists[1].text = 'order record'
-//   } else {
-//     lists[0].text = '個人資料(日)'
-//     lists[1].text = '訂購紀錄(日)'
-//   }
-// })
+watch(i18n.global.locale, (n, o) => {
+  console.log(n)
+  // if (n === 'tw') {
+  //   lists[0].text = '個人資料'
+  //   lists[1].text = '訂購紀錄'
+  // } else if (n === 'en') {
+  //   lists[0].text = 'user infomation'
+  //   lists[1].text = 'order record'
+  // } else {
+  //   lists[0].text = '個人資料(日)'
+  //   lists[1].text = '訂購紀錄(日)'
+  // }
+})
 
 const setLang = (newLang) => {
   // this.$i18n.locale = 'en'

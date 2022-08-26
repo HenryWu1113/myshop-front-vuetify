@@ -6,7 +6,7 @@
       cover height="600">
       <div class="d-flex flex-column fill-height justify-center align-center text-white">
         <h1
-          class="text-h1 mb-4 pt-6 pb-6 ps-6 pe-6 font-weight-bold contact_bg w-100 text-center animate__animated animate__backInLeft">
+          class="mb-4 pt-6 pb-6 ps-6 pe-6 font-weight-bold contact_bg w-100 text-center animate__animated animate__backInLeft">
           {{ $t('contact') }}
         </h1>
       </div>
@@ -47,7 +47,7 @@
     <div class="MyContainer">
       <v-row>
         <v-col class="text-center mt-10" cols="12">
-          <h1 class="text-h2 text-brown font-weight-bold" data-aos="fade-down" data-aos-duration="1000"
+          <h1 class="contact_message text-brown font-weight-bold" data-aos="fade-down" data-aos-duration="1000"
             data-aos-offset="150" data-aos-once="true">{{ $t('message') }}</h1>
           <span class="text-brown" data-aos="fade" data-aos-duration="1000" data-aos-offset="150"
             data-aos-once="true">{{ $t('messagehint') }}</span>

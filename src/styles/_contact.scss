@@ -1,9 +1,30 @@
 #contact_view {
 
   .contact_bg {
+    font-size: 3rem;
     backdrop-filter: blur(3px) hue-rotate(340deg);
     border-radius: 5px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+
+    @include md {
+      font-size: 4rem;
+    }
+
+    @include lg {
+      font-size: 5rem;
+    }
+  }
+
+  .contact_message {
+    font-size: 2.5rem;
+
+    @include md {
+      font-size: 3.25rem;
+    }
+
+    @include lg {
+      font-size: 3.75rem;
+    }
   }
 
   .contact_box1 {
