@@ -1,1 +1,0 @@
-import{a,c as t,d as o,F as r,b as e,g as s}from"./index.c5412de4.js";const c=e("div",{id:"why_view"},[e("h2",null,"why \u590F\u96EA")],-1),i={__name:"WhyView",setup(n){return(_,l)=>(a(),t(r,null,[c,o(s)],64))}};export{i as default};
