@@ -1,0 +1,182 @@
+#why_view {
+  .top_banner {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: url('../assets/banner02.jpg') no-repeat center center/cover;
+  }
+
+  .top_title_place {
+    width: 100%;
+    padding: 5rem 0;
+    // background: rgb(207, 180, 141);
+    text-align: center;
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    .title_mango_img {
+      width: 100%;
+      max-width: 700px;
+      margin: auto;
+      margin-top: 5rem;
+    }
+
+    @include md {
+      h1 {
+        font-size: 4rem;
+      }
+
+      h2 {
+        font-size: 3rem;
+      }
+
+      p {
+        font-size: 20px;
+      }
+
+      .title_mango_img {
+        margin-top: 7rem;
+      }
+    }
+
+    @include lg {
+      h1 {
+        font-size: 4.5rem;
+      }
+
+      h2 {
+        font-size: 3.5rem;
+      }
+
+      p {
+        font-size: 24px;
+      }
+
+      .title_mango_img {
+        margin-top: 10rem;
+      }
+    }
+  }
+
+  .comparison {
+    // background: rgb(250, 250, 250);
+    background: radial-gradient(#FFF59D, #fff);
+    color: #795548;
+    text-align: center;
+    margin-top: 5rem;
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    @include md {
+      margin-top: 7rem;
+
+      h1 {
+        font-size: 3.5rem;
+      }
+
+      h2 {
+        font-size: 2.5rem;
+      }
+
+      p {
+        font-size: 20px;
+      }
+    }
+
+    @include lg {
+      margin-top: 10rem;
+
+      h1 {
+        font-size: 4rem;
+      }
+
+      h2 {
+        font-size: 3rem;
+      }
+
+      p {
+        font-size: 20px;
+      }
+    }
+
+    .mango_box {
+      width: 100%;
+
+      h3 {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+      }
+
+      p {
+        margin-top: 1rem;
+        font-size: 18px;
+      }
+
+      img {
+        width: 80%;
+        margin: auto;
+        aspect-ratio: 1/1;
+        object-fit: contain;
+      }
+
+      @include lg {
+        h3 {
+          font-size: 2rem;
+          margin-top: 2rem;
+        }
+
+        p {
+          font-size: 20px;
+          margin-top: 2.5rem;
+        }
+      }
+    }
+
+  }
+
+  .mango_different {
+    text-align: center;
+    color: #795548;
+    margin-top: 5rem;
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    img {
+      border-radius: 30px;
+      width: 100%;
+    }
+
+    @include md {
+      margin-top: 7rem;
+
+      h1 {
+        font-size: 3.5rem;
+      }
+    }
+
+    @include lg {
+      margin-top: 10rem;
+
+      h1 {
+        font-size: 4rem;
+      }
+    }
+  }
+}

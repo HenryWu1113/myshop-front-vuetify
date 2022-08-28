@@ -1,14 +1,14 @@
 <template>
   <v-container>
-    <h1 class="text-h2 text-center mt-15"><b>會員管理</b></h1>
+    <h1 class="text-h2 text-center mt-15 text-brown font-weight-bold"><b>會員管理</b></h1>
     <v-row class="mt-10">
       <v-col cols="12">
-        <v-table>
+        <v-table class="text-brown">
           <thead>
-            <th class="text-h6 text-left">帳號</th>
-            <th class="text-h6 text-left">暱稱</th>
-            <th class="text-h6 text-left">電子信箱</th>
-            <th class="text-h6 text-left">權限</th>
+            <th class="text-h6 text-left font-weight-bold">帳號</th>
+            <th class="text-h6 text-left font-weight-bold">暱稱</th>
+            <th class="text-h6 text-left font-weight-bold">電子信箱</th>
+            <th class="text-h6 text-left font-weight-bold">權限</th>
             <!-- <th class="text-h6 text-left">管理</th> -->
           </thead>
           <tbody>
@@ -35,7 +35,7 @@
               </td> -->
             </tr>
             <tr v-else>
-              <td class="text-center" colspan="5">沒有會員</td>
+              <td v-if="loading" class="text-center" colspan="5">沒有會員</td>
             </tr>
           </tbody>
         </v-table>
@@ -57,15 +57,19 @@
       </v-card>
     </v-dialog> -->
   </v-container>
+  <LoadingImage v-if="waiting"></LoadingImage>
 </template>
 
 <script setup>
 import { ref, reactive } from 'vue'
 import Swal from 'sweetalert2'
 import { apiAuth } from '@/plugins/axios.js';
+import LoadingImage from '../../components/LoadingImage.vue'
 
 const dialog = ref(false)
 const idx = ref(0)
+const waiting = ref(false)
+const loading = ref(false)
 
 const users = reactive([])
 
@@ -77,9 +81,12 @@ const openDialog = (i) => {
 
 const init = async () => {
   try {
+    waiting.value = true
     const { data } = await apiAuth.get('/users/all')
     users.push(...data.result)
-    console.log(users)
+    // console.log(users)
+    loading.value = true
+    waiting.value = false
   } catch (error) {
     Swal.fire({
       icon: 'error',

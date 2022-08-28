@@ -1,15 +1,15 @@
 <template>
   <v-container>
-    <h1 class="text-h2 text-center mt-15"><b>最新消息管理</b></h1>
-    <v-btn class="mt-5 mb-15" color="success" @click="openDialog('', -1)">新增最新消息</v-btn>
+    <h1 class="text-h2 text-brown text-center mt-15 font-weight-bold">最新消息管理</h1>
+    <v-btn class="mt-5 mb-15" color="orange" variant="outlined" @click="openDialog('', -1)">新增最新消息</v-btn>
     <v-row v-if="news.length > 0" v-for="(n, idx) in news" :key="n._id" class="mt-3">
       <v-col cols="" class="d-flex align-center">
-        <h2 @click="router.push('/news/' + n._id)" style="cursor:pointer;">
+        <h2 class="text-brown" @click="router.push('/news/' + n._id)" style="cursor:pointer;">
           ֍ {{ n.title }}
         </h2>
       </v-col>
       <v-spacer></v-spacer>
-      <v-col cols="" class="d-flex align-center justify-end">
+      <v-col cols="" class="d-flex align-center justify-end text-brown">
         <v-icon v-if="n.shownews" icon="mdi-eye-outline"></v-icon>
         <v-icon v-else icon="mdi-eye-off-outline"></v-icon>
         <v-btn icon variant="text" class="mr-3" @click="openDialog(n._id, idx)">
@@ -21,7 +21,9 @@
       <v-divider></v-divider>
     </v-row>
     <v-row v-else>
-      <v-col cols="12" class="text-center">沒有最新消息</v-col>
+      <v-col v-if="loading" cols="12" class="text-center">
+        <h1>沒有最新消息</h1>
+      </v-col>
     </v-row>
   </v-container>
   <v-dialog v-model="dialog" persistent>
@@ -50,7 +52,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" variant="outlined" @click="dialog = false" :disabled='submitting'>關閉</v-btn>
+          <v-btn color="brown" variant="outlined" @click="dialog = false" :disabled='submitting'>關閉</v-btn>
           <v-btn color="warning" variant="outlined" type="submit" :loading="submitting">
             確認
           </v-btn>
@@ -58,6 +60,7 @@
       </v-card>
     </v-form>
   </v-dialog>
+  <LoadingImage v-if="waiting"></LoadingImage>
 </template>
 
 <style scoped lang="scss">
@@ -73,12 +76,15 @@ import { ref, reactive, computed } from 'vue'
 import Swal from 'sweetalert2'
 import { apiAuth } from '@/plugins/axios'
 import { useRouter } from 'vue-router'
+import LoadingImage from '../../components/LoadingImage.vue'
 
 const router = useRouter()
 
 const dialog = ref(false)
 const valid = ref(false)
 const submitting = ref(false)
+const waiting = ref(false)
+const loading = ref(false)
 
 const news = reactive([])
 const form = reactive({
@@ -111,7 +117,7 @@ const openDialog = (_id, idx) => {
 }
 
 const submitForm = async () => {
-  if (!valid) return
+  if (!valid.value) return
   submitting.value = true
   const fm = {
     title: form.title,
@@ -149,8 +155,11 @@ const submitForm = async () => {
 
 const init = async () => {
   try {
+    waiting.value = true
     const { data } = await apiAuth.get('/news/all')
     news.push(...data.result)
+    loading.value = true
+    waiting.value = false
   } catch (error) {
     // console.log(error)
     Swal.fire({

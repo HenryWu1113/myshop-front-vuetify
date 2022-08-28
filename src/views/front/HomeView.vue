@@ -10,10 +10,10 @@
       <img :src="image.src">
     </swiper-slide> -->
       <swiper-slide>
-        <img src="../../assets/fresh_mango_banner.jpg">
+        <img src="../../assets/banner01newnew.jpg">
       </swiper-slide>
       <swiper-slide>
-        <img src="../../assets/banner01newnew.jpg">
+        <img src="../../assets/fresh_mango_banner.jpg">
       </swiper-slide>
       <swiper-slide>
         <img src="../../assets/banner02new.jpg">
@@ -135,7 +135,7 @@ const init = async () => {
     loading.value = true
     waiting.value = false
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     Swal.fire({
       icon: 'error',
       title: '失敗',

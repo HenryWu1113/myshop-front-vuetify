@@ -1,17 +1,17 @@
 <template>
   <div class="container pt-10">
-    <h1 class="text-center">Products</h1>
-    <v-btn class="mt-5" color="success" @click="openDialog('', -1)">新增商品</v-btn>
+    <h1 class="text-h2 text-brown text-center mt-15 font-weight-bold">商品管理</h1>
+    <v-btn class="mt-5" variant="outlined" color="orange" @click="openDialog('', -1)">新增商品</v-btn>
     <v-row class="mt-10">
       <v-col cols="12">
-        <v-table>
+        <v-table class="text-brown">
           <thead>
             <tr>
-              <th class="text-h6">圖片</th>
-              <th class="text-h6">名稱</th>
-              <th class="text-h6">分類</th>
-              <th class="text-h6">上架</th>
-              <th class="text-h6">管理</th>
+              <th class="text-h6 font-weight-bold">圖片</th>
+              <th class="text-h6 font-weight-bold">名稱</th>
+              <th class="text-h6 font-weight-bold">分類</th>
+              <th class="text-h6 font-weight-bold">上架</th>
+              <th class="text-h6 font-weight-bold">管理</th>
             </tr>
           </thead>
           <tbody>
@@ -35,7 +35,11 @@
               </td>
             </tr>
             <tr v-else>
-              <td class="text-center" colspan="5">沒有商品</td>
+              <td v-if="loading" class="text-center" colspan="5">
+                <h1>
+                  沒有商品
+                </h1>
+              </td>
             </tr>
           </tbody>
         </v-table>
@@ -81,12 +85,13 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="warning" @click="form.dialog = false" :disabled="form.submitting" variant="outlined">取消</v-btn>
-          <v-btn type="submit" color="primary" :loading="form.submitting" variant="outlined">確定</v-btn>
+          <v-btn color="brown" @click="form.dialog = false" :disabled="form.submitting" variant="outlined">取消</v-btn>
+          <v-btn type="submit" color="orange" :loading="form.submitting" variant="outlined">確定</v-btn>
         </v-card-actions>
       </v-card>
     </v-form>
   </v-dialog>
+  <LoadingImage v-if="waiting"></LoadingImage>
 </template>
 
 <style scoped lang="scss">
@@ -97,9 +102,13 @@
 </style>
 
 <script setup>
-import { reactive } from 'vue'
+import { ref, reactive } from 'vue'
 import Swal from 'sweetalert2'
 import { apiAuth } from '@/plugins/axios.js';
+import LoadingImage from '../../components/LoadingImage.vue'
+
+const waiting = ref(false)
+const loading = ref(false)
 
 const products = reactive([])
 const categories = reactive(['芒果', '香蕉', '火龍果'])
@@ -197,9 +206,12 @@ const submitForm = async () => {
 
 const init = async () => {
   try {
+    waiting.value = true
     const { data } = await apiAuth.get('/products/all')
     products.push(...data.result)
-    console.log(products)
+    loading.value = true
+    waiting.value = false
+    // console.log(products)
   } catch (error) {
     Swal.fire({
       icon: 'error',

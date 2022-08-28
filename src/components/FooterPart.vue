@@ -5,7 +5,8 @@
         <v-col cols="12">
           <h1 class="text-center text-h3 text-white font-weight-bold">꧁吳李香農場꧂</h1>
           <div class="text-center mt-5 mb-5">
-            <v-btn icon variant="text" href="https://www.facebook.com/wlsfarm/">
+            <!-- <v-btn icon variant="text" href="https://www.facebook.com/wlsfarm/"> -->
+            <v-btn icon variant="text">
               <v-icon icon="mdi-facebook" class="text-white ms-5 me-5"></v-icon>
             </v-btn>
             <v-btn icon variant="text">

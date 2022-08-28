@@ -17,7 +17,7 @@
           <v-card-text class="text-center">
             <div class="self-info" v-if="isLogin">
               <img class="MyAvatar_menu mb-2" :src="avatar">
-              <h3 class="text-center text-h3 text-brown">{{ nickname }}</h3>
+              <h3 class="text-center text-h3 text-white bg-black">{{ nickname }}</h3>
             </div>
             <v-btn block size="x-large" color="warning" class="btn" to="/" @click="dialog = false">{{ $t('home') }}
             </v-btn>
@@ -208,9 +208,11 @@
 .self-info {
   margin: auto;
   width: 300px;
-  border-radius: 15px;
-  background: #FFFDE7;
-  box-shadow: 0 10px 15px#FFF9C4;
+  border-radius: 30px;
+  border: 1px solid lightgrey;
+  background: linear-gradient(white 80%, lightgrey 20%) repeat-y left top/100% 20px;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
   // border: 2px solid #f1cc87;
 }
 
@@ -226,7 +228,7 @@
   width: 250px;
   height: 250px;
   border-radius: 50%;
-  border: 3px dashed orange;
+  border: 3px solid lightgrey;
   object-fit: cover;
 }
 

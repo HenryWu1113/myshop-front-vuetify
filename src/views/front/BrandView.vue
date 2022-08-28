@@ -2,7 +2,7 @@
   <div id="brand_view">
     <div class="brand_top_img">
       <div class="circle">
-        <span class="animate__animated animate__bounceInLeft">吳李香夏雪芒果</span>
+        <span class="animate__animated animate__bounceInLeft">{{ $t('wuleemango') }}</span>
       </div>
     </div>
     <div class="MyContainer">

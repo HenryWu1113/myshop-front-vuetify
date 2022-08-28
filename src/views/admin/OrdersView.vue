@@ -1,7 +1,7 @@
 <template>
   <div id="back_order_view">
     <v-container>
-      <h1 class="text-h2 text-center mt-15 font-weight-bold"><b>訂單管理</b></h1>
+      <h1 class="text-h2 text-center mt-15 font-weight-bold">訂單管理</h1>
       <v-row class="mt-5">
         <v-col cols="12" md="3" sm="4">
           <v-select v-model="item" variant="outlined" :items="items" append-inner-icon="mdi-pistol"></v-select>
@@ -33,7 +33,8 @@
           style="border-left:3px solid #FFEB3B">
           <v-col cols="12" lg="" class="d-flex align-center">
             <span class="d-lg-none" @click="router.push('/order/' + order._id)" style="cursor: pointer;">訂單編號 : </span>
-            <span @click="router.push('/order/' + order._id)" style="cursor: pointer;">{{ order._id }}</span>
+            <span @click="router.push('/order/' + order._id)" style="cursor: pointer;" class="order_id">{{ order._id
+            }}</span>
           </v-col>
           <v-col cols="12" lg="" class="d-flex align-center">
             <span class="d-lg-none">訂購日期 : </span>
@@ -62,7 +63,11 @@
             </v-btn>
           </v-col>
         </v-row>
-        <h1 v-else class="text-h1 text-center mt-10">沒有訂單哦</h1>
+        <v-row v-else>
+          <v-col v-if="loading" cols="12" class="text-center mt-10">
+            <h1>沒有訂單哦</h1>
+          </v-col>
+        </v-row>
         <v-dialog v-model="dialog">
           <v-card>
             <v-card-title>
@@ -150,15 +155,21 @@
 
     </v-container>
   </div>
+  <LoadingImage v-if="waiting"></LoadingImage>
 </template>
 
 <style scoped lang="scss">
 .order_panel {
   background-color: #FFFDE7;
   border-radius: 20px;
-  box-shadow: 5px 5px 10px #FFF9C4;
-  padding: 10px 30px 50px 30px;
 
+  .order_id {
+    transition: 0.4s;
+
+    &:hover {
+      color: red;
+    }
+  }
 }
 </style>
 
@@ -168,9 +179,12 @@ import { apiAuth } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import { isMobilePhone } from 'validator'
+import LoadingImage from '../../components/LoadingImage.vue'
 
 const router = useRouter()
 
+const waiting = ref(false)
+const loading = ref(false)
 const dialog = ref(false)
 const dialog2 = ref(false)
 const item = ref('全部')
@@ -268,14 +282,17 @@ const submitForm = async () => {
 
 const init = async () => {
   try {
+    waiting.value = true
     const { data } = await apiAuth.get('/orders/all')
-    console.log(data.result)
+    // console.log(data.result)
     orders.push(...data.result.map(order => {
       order.totalPrice = order.products.reduce((a, b) => {
         return a + b.product.price * b.quantity
       }, 0)
       return order
     }))
+    loading.value = true
+    waiting.value = false
   } catch (error) {
     Swal.fire({
       icon: 'error',
