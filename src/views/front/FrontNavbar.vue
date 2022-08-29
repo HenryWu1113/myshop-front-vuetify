@@ -38,21 +38,21 @@
 
 
               <v-btn v-if="isAdmin && isLogin" icon to="/admin" class="mr-3" @click="dialog = false">
-                <v-icon icon="mdi-fingerprint" class="icon"></v-icon>
+                <v-icon color="orange" icon="mdi-fingerprint" class="icon"></v-icon>
               </v-btn>
               <v-btn icon to="/likes" class="mr-3" @click="dialog = false">
-                <v-icon icon="mdi-heart-outline" class="icon"></v-icon>
+                <v-icon color="orange" icon="mdi-heart-outline" class="icon"></v-icon>
               </v-btn>
               <v-btn icon to="/cart" class="mr-3" @click="dialog = false">
                 <v-badge class="badge" color="amber-darken-4" v-if='cart > 0'>
-                  <v-icon icon="mdi-cart-check" class="icon"></v-icon>
+                  <v-icon color="orange" icon="mdi-cart-check" class="icon"></v-icon>
                 </v-badge>
-                <v-icon v-if='cart === 0' icon="mdi-cart-check" class="icon"></v-icon>
+                <v-icon color="orange" v-if='cart === 0' icon="mdi-cart-check" class="icon"></v-icon>
               </v-btn>
               <v-menu transition="scale-transition" location="bottom" open-on-hover>
                 <template v-slot:activator="{ props }">
                   <v-btn icon v-bind="props" class="mr-2">
-                    <v-icon icon="mdi-earth" class="icon"></v-icon>
+                    <v-icon color="orange" icon="mdi-earth" class="icon"></v-icon>
                   </v-btn>
                 </template>
                 <v-list>
@@ -62,12 +62,12 @@
                 </v-list>
               </v-menu>
               <v-btn v-if="!isLogin" icon to="/login" @click="dialog = false">
-                <v-icon icon="mdi-login-variant" class="icon"></v-icon>
+                <v-icon color="orange" icon="mdi-login-variant" class="icon"></v-icon>
               </v-btn>
               <v-menu transition="scale-transition" location="bottom" v-if="isLogin">
                 <template v-slot:activator="{ props }">
                   <v-btn icon v-bind="props">
-                    <v-icon icon="mdi-account-outline" class="icon"></v-icon>
+                    <v-icon color="orange" icon="mdi-account-outline" class="icon"></v-icon>
                   </v-btn>
                 </template>
                 <v-list class="userlist">

@@ -179,7 +179,8 @@ import { ref, reactive, computed } from 'vue'
 import { apiAuth } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
-import { isMobilePhone } from 'validator'
+// import { isMobilePhone } from 'validator'
+import isMobilePhone from 'validator/lib/isMobilePhone'
 import LoadingImage from '../../components/LoadingImage.vue'
 
 const router = useRouter()
