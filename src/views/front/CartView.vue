@@ -158,20 +158,14 @@ const submit = async () => {
     cellphone: form.cellphone,
     address: form.address
   })
-  form.receiver = ''
-  form.cellphone = ''
-  form.address = ''
   // loading.value = false
 }
 
 const init = async () => {
   try {
-    // loader.show({
-    //   color: 'orange',
-    //   loader: 'bars',
-    //   width: 100,
-    //   height: 100
-    // })
+    form.receiver = ''
+    form.cellphone = ''
+    form.address = ''
     waiting.value = true
     const { data } = await apiAuth.get('/users/cart')
     cart.push(...data.result)

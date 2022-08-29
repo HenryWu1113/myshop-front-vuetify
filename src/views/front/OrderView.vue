@@ -65,7 +65,7 @@
           </v-col>
         </v-row>
         <v-row v-else>
-          <v-col v-if="loading" cols="12" class="text-center">沒有訂單哦</v-col>
+          <v-col v-if="loading" cols="12" class="text-center text-h3 mt-10 font-weight-bold">{{ $t('noorder') }}</v-col>
         </v-row>
         <v-dialog v-model="dialog">
           <v-card>
@@ -135,6 +135,7 @@ import { apiAuth } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import AOS from "aos"
+import i18n from '@/i18n'
 import LoadingImage from '../../components/LoadingImage.vue'
 // import { useLoading } from 'vue3-loading-overlay';
 // import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
@@ -150,7 +151,7 @@ onMounted(() => {
 const router = useRouter()
 
 const dialog = ref(false)
-const item = ref('全部')
+const item = ref('')
 
 const orders = reactive([])
 const form = reactive({
@@ -160,9 +161,9 @@ const form = reactive({
 const items = reactive(['全部', '未付款', '訂單成立', '訂單取消'])
 
 const filtereditems = computed(() => {
-  if (item.value === '全部') return orders
-  else if (item.value === '未付款') return orders.filter(item => item.state === 0)
-  else if (item.value === '訂單成立') return orders.filter(item => item.state === 1)
+  if (item.value === '全部' || item.value === 'All') return orders
+  else if (item.value === '未付款' || item.value === 'Unpaid' || item.value === '未払い') return orders.filter(item => item.state === 0)
+  else if (item.value === '訂單成立' || item.value === 'Order Established' || item.value === '注文確定') return orders.filter(item => item.state === 1)
   else return orders.filter(item => item.state === 2)
 })
 
@@ -173,14 +174,75 @@ const openDialog = (i) => {
   dialog.value = true
 }
 
+// 暴力破解 
+setInterval(() => {
+  if (i18n.global.locale === 'tw') {
+    if (item.value === 'All') {
+      item.value = '全部'
+    } else if (item.value === 'Unpaid' || item.value === '未払い') {
+      item.value = '未付款'
+    } else if (item.value === 'Order Established' || item.value === '注文確定') {
+      item.value = '訂單成立'
+    } else if (item.value === 'Order Canceled' || item.value === '注文を取り消す') {
+      item.value = '訂單取消'
+    }
+    items[0] = '全部'
+    items[1] = '未付款'
+    items[2] = '訂單成立'
+    items[3] = '訂單取消'
+  } else if (i18n.global.locale === 'en') {
+    if (item.value === '全部') {
+      item.value = 'All'
+    } else if (item.value === '未付款' || item.value === '未払い') {
+      item.value = 'Unpaid'
+    } else if (item.value === '訂單成立' || item.value === '注文確定') {
+      item.value = 'Order Established'
+    } else if (item.value === '訂單取消' || item.value === '注文を取り消す') {
+      item.value = 'Order Canceled'
+    }
+    items[0] = 'All'
+    items[1] = 'Unpaid'
+    items[2] = 'Order Established'
+    items[3] = 'Order Canceled'
+  } else {
+    if (item.value === 'All') {
+      item.value = '全部'
+    } else if (item.value === '未付款' || item.value === 'Unpaid') {
+      item.value = '未払い'
+    } else if (item.value === '訂單成立' || item.value === 'Order Established') {
+      item.value = '注文確定'
+    } else if (item.value === '訂單取消' || item.value === 'Order Canceled') {
+      item.value = '注文を取り消す'
+    }
+    items[0] = '全部'
+    items[1] = '未払い'
+    items[2] = '注文確定'
+    items[3] = '注文を取り消す'
+  }
+}, 100)
+
 const init = async () => {
   try {
-    // loader.show({
-    //   color: 'orange',
-    //   loader: 'bars',
-    //   width: 100,
-    //   height: 100
-    // })
+    if (i18n.global.locale === 'tw') {
+      item.value = '全部'
+      items[0] = '全部'
+      items[1] = '未付款'
+      items[2] = '訂單成立'
+      items[3] = '訂單取消'
+    }
+    else if (i18n.global.locale === 'en') {
+      item.value = 'All'
+      items[0] = 'All'
+      items[1] = 'Unpaid'
+      items[2] = 'Order Established'
+      items[3] = 'Order Canceled'
+    } else {
+      item.value = '全部'
+      items[0] = '全部'
+      items[1] = '未払い'
+      items[2] = '注文確定'
+      items[3] = '注文を取り消す'
+    }
     waiting.value = true
     const { data } = await apiAuth.get('/orders')
     orders.push(...data.result.map(order => {
@@ -193,6 +255,7 @@ const init = async () => {
     waiting.value = false
     loading.value = true
   } catch (error) {
+    console.log(error)
     Swal.fire({
       icon: 'error',
       title: '失敗',

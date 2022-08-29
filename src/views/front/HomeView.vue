@@ -35,7 +35,8 @@
       </v-row>
       <v-row style="min-height:500px">
         <v-col v-if="products.length > 0" cols="12" md="6" lg="4" xl="3" v-for="product in filtereditems">
-          <ProductCard :product="product" data-aos="flip-up" data-aos-duration="3000" data-aos-offset="150">
+          <ProductCard :product="product" data-aos="flip-up" data-aos-duration="3000" data-aos-offset="150"
+            data-aos-once="true">
           </ProductCard>
         </v-col>
         <v-col v-else>
@@ -52,7 +53,7 @@
 </style>
 
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, watch } from 'vue'
 import Swal from 'sweetalert2'
 import { api } from '@/plugins/axios'
 import ProductCard from '@/components/ProductCard.vue'
@@ -60,7 +61,8 @@ import FooterPart from '@/components/FooterPart.vue'
 import LoadingImage from '../../components/LoadingImage.vue'
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue"
-
+import i18n from '@/i18n'
+// import { useI18n } from "vue-i18n"
 // Import Swiper styles
 import "swiper/css"
 
@@ -86,10 +88,10 @@ const modules = reactive([Pagination, Autoplay, EffectFade])
 // const loader = useLoading()
 const waiting = ref(false)
 const loading = ref(false)
-const item = ref('全部')
+const item = ref('')
 const search = ref('')
-
-const items = reactive(['全部', '芒果', '火龍果', '香蕉'])
+// const { locale } = useI18n()
+const items = reactive(['', '', '', ''])
 // const images = reactive([
 //   {
 //     src: '../../assets/banner01.jpg',
@@ -106,28 +108,110 @@ onMounted(() => {
   AOS.init();
 })
 
+// watch(i18n.global.locale, (n, o) => {
+//   console.log(i18n.global.locale)
+//   // if (n === 'tw') {
+//   //   item.value = '全部'
+//   //   items[0] = '全部'
+//   //   items[1] = '芒果'
+//   //   items[2] = '火龍果'
+//   //   items[3] = '香蕉'
+//   // } else if (n === 'en') {
+//   //   item.value = 'All'
+//   //   items[0] = 'All'
+//   //   items[1] = 'Mango'
+//   //   items[2] = 'Pitaya'
+//   //   items[3] = 'Banana'
+//   // } else {
+//   //   item.value = '全部'
+//   //   items[0] = '全部'
+//   //   items[1] = 'マンゴー'
+//   //   items[2] = 'ピタヤ'
+//   //   items[3] = 'バナナ'
+//   // }
+// })
 
+// 暴力破解 
+setInterval(() => {
+  if (i18n.global.locale === 'tw') {
+    if (item.value === 'All') {
+      item.value = '全部'
+    } else if (item.value === 'Mango' || item.value === 'マンゴー') {
+      item.value = '芒果'
+    } else if (item.value === 'Pitaya' || item.value === 'ピタヤ') {
+      item.value = '火龍果'
+    } else if (item.value === 'Banana' || item.value === 'バナナ') {
+      item.value = '香蕉'
+    }
+    items[0] = '全部'
+    items[1] = '芒果'
+    items[2] = '火龍果'
+    items[3] = '香蕉'
+  } else if (i18n.global.locale === 'en') {
+    if (item.value === '全部') {
+      item.value = 'All'
+    } else if (item.value === '芒果' || item.value === 'マンゴー') {
+      item.value = 'Mango'
+    } else if (item.value === '火龍果' || item.value === 'ピタヤ') {
+      item.value = 'Pitaya'
+    } else if (item.value === '香蕉' || item.value === 'バナナ') {
+      item.value = 'Banana'
+    }
+    items[0] = 'All'
+    items[1] = 'Mango'
+    items[2] = 'Pitaya'
+    items[3] = 'Banana'
+  } else {
+    if (item.value === 'All') {
+      item.value = '全部'
+    } else if (item.value === 'Mango' || item.value === '芒果') {
+      item.value = 'マンゴー'
+    } else if (item.value === 'Pitaya' || item.value === '火龍果') {
+      item.value = 'ピタヤ'
+    } else if (item.value === '香蕉' || item.value === 'Banana') {
+      item.value = 'バナナ'
+    }
+    items[0] = '全部'
+    items[1] = 'マンゴー'
+    items[2] = 'ピタヤ'
+    items[3] = 'バナナ'
+  }
+}, 100)
 
 const products = reactive([])
 
 const filtereditems = computed(() => {
   return products.filter(i => {
     const inc = i.name.toLowerCase().includes(search.value.toLowerCase())
-    if (item.value === '全部') return inc
-    else if (item.value === '芒果') return inc && i.category === '芒果'
-    else if (item.value === '火龍果') return inc && i.category === '火龍果'
+    if (item.value === '全部' || item.value === 'All') return inc
+    else if (item.value === '芒果' || item.value === 'Mango' || item.value === 'マンゴー') return inc && i.category === '芒果'
+    else if (item.value === '火龍果' || item.value === 'Pitaya' || item.value === 'ピタヤ') return inc && i.category === '火龍果'
     else return inc && i.category === '香蕉'
   })
 })
 
 const init = async () => {
   try {
-    // loader.show({
-    //   color: 'orange',
-    //   loader: 'bars',
-    //   width: 100,
-    //   height: 100
-    // })
+    if (i18n.global.locale === 'tw') {
+      item.value = '全部'
+      items[0] = '全部'
+      items[1] = '芒果'
+      items[2] = '火龍果'
+      items[3] = '香蕉'
+    }
+    else if (i18n.global.locale === 'en') {
+      item.value = 'All'
+      items[0] = 'All'
+      items[1] = 'Mango'
+      items[2] = 'Pitaya'
+      items[3] = 'Banana'
+    } else {
+      item.value = '全部'
+      items[0] = '全部'
+      items[1] = 'マンゴー'
+      items[2] = 'ピタヤ'
+      items[3] = 'バナナ'
+    }
     waiting.value = true
     const { data } = await api.get('/products')
     products.push(...data.result)
@@ -135,7 +219,7 @@ const init = async () => {
     loading.value = true
     waiting.value = false
   } catch (error) {
-    // console.log(error)
+    console.log(error)
     Swal.fire({
       icon: 'error',
       title: '失敗',

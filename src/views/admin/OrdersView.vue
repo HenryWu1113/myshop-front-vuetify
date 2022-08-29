@@ -129,6 +129,7 @@
                 <h3 class="text-center mt-4 text-brown">~~~~~ 訂單編號 :{{ form._id }} ~~~~~</h3>
               </v-card-title>
               <v-card-text>
+                <h2 class="text-center text-brown mb-4">帳號 : {{ form.account }}</h2>
                 <h2 class="text-center text-brown mb-4">會員 : {{ form.nickname }}</h2>
                 <v-text-field v-model="form.receiver" type="text" label="收件者姓名" placeholder="請輸入收件者姓名" counter="10"
                   maxlength="10" :rules="[rules.required]" variant="outlined"></v-text-field>
@@ -192,6 +193,7 @@ const item = ref('全部')
 const orders = reactive([])
 const form = reactive({
   _id: '',
+  account: '',
   nickname: '',
   cellphone: '',
   address: '',
@@ -235,6 +237,7 @@ const openDialog = (i) => {
 const changeOrder = (i) => {
   const idx = orders.findIndex(item => item._id === i)
   form._id = orders[idx]._id
+  form.account = orders[idx].user.account
   form.nickname = orders[idx].user.nickname
   form.cellphone = orders[idx].cellphone
   form.receiver = orders[idx].receiver
@@ -293,6 +296,7 @@ const init = async () => {
     }))
     loading.value = true
     waiting.value = false
+    console.log(orders)
   } catch (error) {
     Swal.fire({
       icon: 'error',

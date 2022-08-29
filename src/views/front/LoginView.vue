@@ -1,9 +1,9 @@
 <template>
   <v-form v-model="valid" @submit.prevent="login">
-    <v-card class="ma-auto" max-width="800">
+    <v-card class="ma-auto mt-15" max-width="800">
       <v-card-title class="text-center mt-5">
         <img class="register-logo" src="../../assets/Logo.png">
-        <p class="text-h4">登入</p>
+        <p class="text-h4 text-brown font-weight-bold">{{ $t('login') }}</p>
       </v-card-title>
       <v-card-text>
         <v-container>
@@ -24,14 +24,14 @@
           </v-row>
           <div class="d-flex justify-center">
             <v-btn color="orange" variant="outlined" type="submit">
-              登入
+              {{ $t('login') }}
             </v-btn>
           </div>
         </v-container>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-3" to="/register">註冊</v-btn>
+        <v-btn color="blue darken-3" to="/register">{{ $t('register') }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-form>
@@ -39,7 +39,8 @@
 
 <style scoped>
 .register-logo {
-  width: 150px;
+  width: 100%;
+  max-width: 150px;
 }
 </style>
 

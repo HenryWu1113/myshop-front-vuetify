@@ -247,7 +247,7 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
-import { ref, reactive, watch } from 'vue'
+import { ref, reactive, watch, onMounted } from 'vue'
 import router from '@/router'
 import i18n from '../../i18n'
 import gsap from 'gsap'
@@ -265,29 +265,20 @@ const dialog = ref(false)
 const languages = reactive(['中文', 'English', '日本語'])
 const lists = reactive([
   {
-    text: '個人資料',
+    text: '',
     icon: 'mdi-newspaper-variant-outline',
     to: '/userinfo'
   },
   {
-    text: '訂購紀錄',
+    text: '',
     icon: 'mdi-format-list-bulleted',
     to: '/order'
   }
 ])
 
-watch(i18n.global.locale, (n, o) => {
-  console.log(n)
-  // if (n === 'tw') {
-  //   lists[0].text = '個人資料'
-  //   lists[1].text = '訂購紀錄'
-  // } else if (n === 'en') {
-  //   lists[0].text = 'user infomation'
-  //   lists[1].text = 'order record'
-  // } else {
-  //   lists[0].text = '個人資料(日)'
-  //   lists[1].text = '訂購紀錄(日)'
-  // }
+const logoutinfo = reactive({
+  text: '',
+  icon: 'mdi-logout-variant'
 })
 
 const setLang = (newLang) => {
@@ -295,20 +286,29 @@ const setLang = (newLang) => {
   // localStorage.setItem('locale', 'en')
   if (newLang === '中文') {
     i18n.global.locale = 'tw'
+    lists[0].text = '個人資料'
+    lists[1].text = '訂購紀錄'
+    logoutinfo.text = '登出'
     localStorage.setItem('locale', 'tw')
   } else if (newLang === 'English') {
     i18n.global.locale = 'en'
+    lists[0].text = 'Personal Information'
+    lists[1].text = 'Order Record'
+    logoutinfo.text = 'Log out'
     localStorage.setItem('locale', 'en')
   } else {
     i18n.global.locale = 'jp'
+    lists[0].text = '会員情報'
+    lists[1].text = '注文追跡'
+    logoutinfo.text = 'サインアウト'
     localStorage.setItem('locale', 'jp')
   }
 }
 
 // onMounted(() => {
-//   gsap.from('.title', {
+//   gsap.from('.v-toolbar', {
 //     yPercent: -100,
-//     duration: 0.5,
+//     duration: 0.1,
 //     scrollTrigger: {
 //       // 沒有 trigger 觸發目標，整份文件是滾動監控
 //       start: 'top 60',
@@ -318,10 +318,10 @@ const setLang = (newLang) => {
 //         self.animation.play()
 //       },
 //       onUpdate(self) {
-//         console.log(self.direction)
+//         // console.log(self.direction)
 //         self.direction === -1 ? self.animation.play() : self.animation.reverse() // -1 往上時正向播放，否則 1 往下時反向播放
 //       },
-//       markers: true
+//       // markers: true
 //     }
 //   })
 // })
@@ -338,10 +338,21 @@ const setLang = (newLang) => {
 //   else i18n.global.locale = 'jp'
 // }
 
-const logoutinfo = reactive({
-  text: '登出',
-  icon: 'mdi-logout-variant'
-})
+const init = () => {
+  if (i18n.global.locale === 'tw') {
+    lists[0].text = '個人資料'
+    lists[1].text = '訂購紀錄'
+    logoutinfo.text = '登出'
+  } else if (i18n.global.locale === 'en') {
+    lists[0].text = 'Personal Information'
+    lists[1].text = 'Order Record'
+    logoutinfo.text = 'Log out'
+  } else {
+    lists[0].text = '会員情報'
+    lists[1].text = '注文追跡'
+    logoutinfo.text = 'サインアウト'
+  }
+}
 
-
+init()
 </script>

@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
-  <LoadingImage v-if="waiting"></LoadingImage>
+  <!-- <LoadingImage v-if="waiting"></LoadingImage> -->
 </template>
 
 <style scoped lang="scss">
@@ -45,12 +45,12 @@ import Swal from 'sweetalert2'
 import { apiAuth } from '@/plugins/axios'
 import { ref, reactive } from 'vue'
 import { useRoute } from 'vue-router'
-import LoadingImage from '../../components/LoadingImage.vue'
+// import LoadingImage from '../../components/LoadingImage.vue'
 // import { useLoading } from 'vue3-loading-overlay';
 // import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 
 // const loader = useLoading()
-const waiting = ref(false)
+// const waiting = ref(false)
 const route = useRoute()
 
 const orderinfo = reactive({
@@ -66,11 +66,11 @@ const init = async () => {
     //   width: 100,
     //   height: 100
     // })
-    waiting.value = true
+    // waiting.value = true
     const { data } = await apiAuth.get('/orders/' + route.params.id)
     orderinfo._id = data.result._id
     orderinfo.deadline = data.result.deadline
-    waiting.value = false
+    // waiting.value = false
     // loader.hide()
   } catch (error) {
     Swal.fire({

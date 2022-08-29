@@ -59,7 +59,9 @@
             </v-textarea>
             <div class="contact_btn_group">
               <!-- <v-btn variant="text" color="error" type="reset">重填</v-btn> -->
-              <v-btn variant="outlined" color="orange" type="submit" :disabled="!cansend">{{ $t('send') }}</v-btn>
+              <v-btn variant="outlined" color="orange" type="submit" :loading="loading" :disabled="!cansend">{{
+                  $t('send')
+              }}</v-btn>
             </div>
           </v-form>
         </v-col>
@@ -68,7 +70,7 @@
     <v-dialog v-model="dialog">
       <v-card>
         <v-card-text>
-          <img src="../../assets/Logo.png" style="width:300px;">
+          <img src="../../assets/QR.png" style="width: 100%;max-width:300px;">
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -85,13 +87,19 @@ import Swal from 'sweetalert2'
 import { ref, reactive, computed, onMounted } from 'vue'
 import FooterPart from '@/components/FooterPart.vue'
 import AOS from "aos"
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/stores/user'
 
 onMounted(() => {
   AOS.init();
 })
 
+const user = useUserStore()
+const { isLogin } = storeToRefs(user)
+
 const valid = ref(false)
 const dialog = ref(false)
+const loading = ref(false)
 
 const form = reactive({
   comment: ''
@@ -104,12 +112,14 @@ const cansend = computed(() => {
 const submitComment = async () => {
   if (!valid.value) return
   try {
+    loading.value = true
     await apiAuth.post('/feedbacks', form)
     Swal.fire({
       icon: 'success',
       title: '成功',
       text: '訊息已傳送'
     })
+    loading.value = false
     form.comment = ''
   } catch (error) {
     Swal.fire({
@@ -117,6 +127,7 @@ const submitComment = async () => {
       title: '失敗',
       text: '送出訊息失敗'
     })
+    loading.value = false
   }
 }
 </script>
