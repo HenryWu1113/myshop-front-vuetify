@@ -296,7 +296,7 @@ const init = async () => {
     }))
     loading.value = true
     waiting.value = false
-    console.log(orders)
+    // console.log(orders)
   } catch (error) {
     Swal.fire({
       icon: 'error',
