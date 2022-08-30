@@ -3,7 +3,7 @@ import { api } from '@/plugins/axios'
 import Swal from 'sweetalert2'
 import router from '@/router'
 import { apiAuth } from '../plugins/axios'
-
+import i18n from '@/i18n'
 
 export const useUserStore = defineStore({
   id: 'user',
@@ -39,11 +39,26 @@ export const useUserStore = defineStore({
         this.cart = data.result.cart
         this.likes = data.result.likes
         this.role = data.result.role
-        Swal.fire({
-          icon: 'success',
-          title: '成功',
-          text: '登入成功'
-        })
+        if (i18n.global.locale === 'tw') {
+          Swal.fire({
+            icon: 'success',
+            title: '成功',
+            text: '登入成功'
+          })
+        } else if (i18n.global.locale === 'en') {
+          Swal.fire({
+            icon: 'success',
+            title: 'SUCCESS',
+            text: 'Login succeesfully'
+          })
+        } else {
+          Swal.fire({
+            icon: 'success',
+            title: '成功',
+            text: 'ログイン成功'
+          })
+        }
+
         router.push('/')
       } catch (error) {
         Swal.fire({
@@ -57,11 +72,26 @@ export const useUserStore = defineStore({
       try {
         await apiAuth.delete('/users/logout')
         router.push('/')
-        Swal.fire({
-          icon: 'success',
-          title: '成功',
-          text: '登出成功'
-        })
+        if (i18n.global.locale === 'tw') {
+          Swal.fire({
+            icon: 'success',
+            title: '成功',
+            text: '登出成功'
+          })
+        } else if (i18n.global.locale === 'en') {
+          Swal.fire({
+            icon: 'success',
+            title: 'SUCCESS',
+            text: 'Sign out suceesfully'
+          })
+        } else {
+          Swal.fire({
+            icon: 'success',
+            title: '成功',
+            text: 'サインアウト成功'
+          })
+        }
+
       } catch (_) {
       }
       this.token = ''
