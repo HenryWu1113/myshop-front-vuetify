@@ -62,6 +62,7 @@ import isEmail from 'validator/lib/isEmail'
 import { api } from '@/plugins/axios'
 import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
+import i18n from '@/i18n'
 
 const router = useRouter()
 
@@ -102,11 +103,26 @@ const register = async () => {
   loading.value = true
   try {
     await api.post('/users', form)
-    await Swal.fire({
-      icon: 'success',
-      title: '成功',
-      text: '註冊成功'
-    })
+
+    if (i18n.global.locale === 'tw') {
+      await Swal.fire({
+        icon: 'success',
+        title: '成功',
+        text: '註冊成功'
+      })
+    } else if (i18n.global.locale === 'en') {
+      await Swal.fire({
+        icon: 'success',
+        title: 'SUCCESS',
+        text: 'Registration success'
+      })
+    } else {
+      await Swal.fire({
+        icon: 'success',
+        title: '成功',
+        text: '登録完了'
+      })
+    }
     router.push('/')
   } catch (error) {
     Swal.fire({

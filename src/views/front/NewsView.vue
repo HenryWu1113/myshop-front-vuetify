@@ -24,7 +24,7 @@
         <v-divider></v-divider>
       </v-row>
       <v-row v-else>
-        <v-col v-if="loading" cols="12" class="text-center">沒有最新消息</v-col>
+        <v-col v-if="loading" cols="12" class="text-center">{{ $t('nonews') }}</v-col>
       </v-row>
       <div class="text-center mt-10">
         <v-pagination v-model="currentPage" :length="Math.ceil(news.length / 5)"></v-pagination>
@@ -47,6 +47,7 @@ import { useRouter } from 'vue-router'
 // import { useLoading } from 'vue3-loading-overlay';
 // import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 import LoadingImage from '../../components/LoadingImage.vue'
+import AOS from "aos"
 
 // const loader = useLoading()
 const loading = ref(false)
@@ -59,7 +60,6 @@ const currentPage = ref(1)
 
 const news = reactive([])
 
-import AOS from "aos"
 
 onMounted(() => {
   AOS.init();

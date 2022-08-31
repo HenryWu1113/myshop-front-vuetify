@@ -23,7 +23,7 @@
       <v-col cols="12" class="mt-5 text-center">
         <v-btn color="brown" variant="outlined" prepend-icon="mdi-arrow-left" @click="router.go(-1)"
           class="animate__animated animate__fadeInUp">
-          回上一頁</v-btn>
+          {{ $t('back') }}</v-btn>
       </v-col>
     </div>
   </div>
@@ -40,6 +40,7 @@ import { api } from '@/plugins/axios'
 import { useRouter, useRoute } from 'vue-router'
 import AOS from "aos"
 import LoadingImage from '../../components/LoadingImage.vue'
+import i18n from '@/i18n'
 // import { useLoading } from 'vue3-loading-overlay';
 // import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 
@@ -76,11 +77,26 @@ const init = async () => {
     // loader.hide()
   } catch (error) {
     // console.log(error)
-    Swal.fire({
-      icon: 'error',
-      title: '失敗',
-      text: '取得最新消息失敗'
-    })
+
+    if (i18n.global.locale === 'tw') {
+      Swal.fire({
+        icon: 'error',
+        title: '失敗',
+        text: '取得最新消息失敗'
+      })
+    } else if (i18n.global.locale === 'en') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed',
+        text: 'Failed to get latest news'
+      })
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '失敗',
+        text: '最新ニュースの取得に失敗しました'
+      })
+    }
     router.go(-1)
   }
 }

@@ -92,6 +92,7 @@ import { useRouter } from 'vue-router'
 import { isMobilePhone } from 'validator'
 import AOS from "aos"
 import LoadingImage from '../../components/LoadingImage.vue'
+import i18n from '@/i18n'
 // import { useLoading } from 'vue3-loading-overlay';
 // import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 
@@ -173,11 +174,25 @@ const init = async () => {
     waiting.value = false
     loading.value = true
   } catch (error) {
-    Swal.fire({
-      icon: 'error',
-      title: '失敗',
-      text: '伺服器錯誤'
-    })
+    if (i18n.global.locale === 'tw') {
+      Swal.fire({
+        icon: 'error',
+        title: '失敗',
+        text: '伺服器錯誤'
+      })
+    } else if (i18n.global.locale === 'en') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed',
+        text: 'Server Error'
+      })
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '失敗',
+        text: 'サーバーエラー'
+      })
+    }
   }
 }
 init()

@@ -1,7 +1,7 @@
 <template>
   <div id="likes_view">
     <h1 class="text-h2 text-center pt-15 text-brown font-weight-bold" data-aos="fade-down" data-aos-duration="1000"
-      data-aos-offset="150">{{  $t('myfav')  }}</h1>
+      data-aos-offset="150">{{ $t('myfav') }}</h1>
     <swiper v-if="likes.length > 0" :effect="'coverflow'" :grabCursor="true" :centeredSlides="true"
       :slidesPerView="'auto'" :coverflowEffect="{
         rotate: 50,
@@ -31,15 +31,15 @@
             style="cursor:pointer">
           </v-img>
           <v-card-title>
-            <h2 class="ms-3 text-brown">{{  like.product.name  }}</h2>
+            <h2 class="ms-3 text-brown">{{ like.product.name }}</h2>
           </v-card-title>
           <v-card-text>
             <v-container>
-              <h2 class="text-deep-orange">NT. {{  like.product.price  }}</h2>
+              <h2 class="text-deep-orange">NT. {{ like.product.price }}</h2>
             </v-container>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="orange" @click="deleteLike(i)" prepend-icon="mdi-delete" block>{{  $t('deletelike')  }}
+            <v-btn color="orange" @click="deleteLike(i)" prepend-icon="mdi-delete" block>{{ $t('deletelike') }}
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -69,6 +69,7 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import AOS from "aos"
 import LoadingImage from '../../components/LoadingImage.vue'
+import i18n from "@/i18n"
 // import { useLoading } from 'vue3-loading-overlay';
 // import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 // Import Swiper styles
@@ -117,11 +118,26 @@ const init = async () => {
     waiting.value = false
   } catch (error) {
     // console.log(error)
-    Swal.fire({
-      icon: 'error',
-      title: '失敗',
-      text: '無法取得我的收藏'
-    })
+
+    if (i18n.global.locale === 'tw') {
+      Swal.fire({
+        icon: 'error',
+        title: '失敗',
+        text: '無法取得我的收藏'
+      })
+    } else if (i18n.global.locale === 'en') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed',
+        text: 'Can\'t get my favorites'
+      })
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '失敗',
+        text: 'お気に入りを取得できません'
+      })
+    }
   }
 
 }

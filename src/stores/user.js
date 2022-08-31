@@ -105,35 +105,94 @@ export const useUserStore = defineStore({
     },
     async addCart(data) {
       if (this.token.length === 0) {
-        Swal.fire({
-          icon: 'error',
-          title: '失敗',
-          text: '請先登入'
-        })
+
+        if (i18n.global.locale === 'tw') {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: '請先登入'
+          })
+        } else if (i18n.global.locale === 'en') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Failed',
+            text: 'Please Login'
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: 'ログインしてください'
+          })
+        }
         router.push('/login')
         return
       }
       if (data.quantity <= 0) {
-        Swal.fire({
-          icon: 'error',
-          title: '失敗',
-          text: '數量必須大於 0'
-        })
+
+        if (i18n.global.locale === 'tw') {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: '數量必須大於 0'
+          })
+        } else if (i18n.global.locale === 'en') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Failed',
+            text: 'Quantity can\'t be zero'
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: '数量を 0 にすることはできません'
+          })
+        }
       }
       try {
         const { data: resData } = await apiAuth.post('/users/cart', data)
         this.cart = resData.result
-        Swal.fire({
-          icon: 'success',
-          title: '成功',
-          text: '加入購物車成功'
-        })
+        if (i18n.global.locale === 'tw') {
+          Swal.fire({
+            icon: 'success',
+            title: '成功',
+            text: '加入購物車成功'
+          })
+        } else if (i18n.global.locale === 'en') {
+          Swal.fire({
+            icon: 'success',
+            title: 'SUCCESS',
+            text: 'Add to Cart successful'
+          })
+        } else {
+          Swal.fire({
+            icon: 'success',
+            title: '成功',
+            text: 'カートに追加しました'
+          })
+        }
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: '失敗',
-          text: '加入購物車失敗'
-        })
+
+        if (i18n.global.locale === 'tw') {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: '加入購物車失敗'
+          })
+        } else if (i18n.global.locale === 'en') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Failed',
+            text: ' Add to cart failed'
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: 'カートに追加できませんでした'
+          })
+        }
       }
     },
     async updateCart(data) {
@@ -142,22 +201,51 @@ export const useUserStore = defineStore({
         this.cart = resData.result
         return true
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: '失敗',
-          text: '更新購物車失敗'
-        })
+
+        if (i18n.global.locale === 'tw') {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: '更新購物車失敗'
+          })
+        } else if (i18n.global.locale === 'en') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Failed',
+            text: 'Failed to update cart'
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: 'カートを更新できませんでした'
+          })
+        }
         return false
       }
 
     },
     async addLike(product) {
       if (this.token.length === 0) {
-        Swal.fire({
-          icon: 'error',
-          title: '失敗',
-          text: '請先登入'
-        })
+        if (i18n.global.locale === 'tw') {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: '請先登入'
+          })
+        } else if (i18n.global.locale === 'en') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Failed',
+            text: 'Please Login'
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: 'ログインしてください'
+          })
+        }
         router.push('/login')
         return
       }
@@ -165,20 +253,49 @@ export const useUserStore = defineStore({
         const { data } = await apiAuth.post('/users/likes', product)
         this.likes = data.result
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: '失敗',
-          text: '加入收藏失敗'
-        })
+
+        if (i18n.global.locale === 'tw') {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: '加入收藏失敗'
+          })
+        } else if (i18n.global.locale === 'en') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Failed to add to favorites',
+            text: '加入收藏失敗'
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: 'お気に入りに追加できませんでした'
+          })
+        }
       }
     },
     async deleteLike(product) {
       if (this.token.length === 0) {
-        Swal.fire({
-          icon: 'error',
-          title: '失敗',
-          text: '請先登入'
-        })
+        if (i18n.global.locale === 'tw') {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: '請先登入'
+          })
+        } else if (i18n.global.locale === 'en') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Failed',
+            text: 'Please Login'
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: 'ログインしてください'
+          })
+        }
         router.push('/login')
         return
       }
@@ -186,30 +303,75 @@ export const useUserStore = defineStore({
         const { data } = await apiAuth.patch('/users/likes', product)
         this.likes = data.result
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: '失敗',
-          text: '取消收藏失敗'
-        })
+
+        if (i18n.global.locale === 'tw') {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: '取消收藏失敗'
+          })
+        } else if (i18n.global.locale === 'en') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Failed',
+            text: 'Unfavourite failed'
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: 'お気に入りから削除できませんでした'
+          })
+        }
       }
     },
     async checkout(data) {
       try {
         const { data: resData } = await apiAuth.post('/orders', data)
         this.cart = 0
-        Swal.fire({
-          icon: 'success',
-          title: '成功',
-          text: '送出訂單成功'
-        })
+
+        if (i18n.global.locale === 'tw') {
+          Swal.fire({
+            icon: 'success',
+            title: '成功',
+            text: '送出訂單成功'
+          })
+        } else if (i18n.global.locale === 'en') {
+          Swal.fire({
+            icon: 'success',
+            title: 'SUCCESS',
+            text: 'Order sent successfully'
+          })
+        } else {
+          Swal.fire({
+            icon: 'success',
+            title: '成功',
+            text: '注文が正常に送信されました'
+          })
+        }
         router.push('/order/' + resData.result)
       } catch (error) {
         console.log(error)
-        Swal.fire({
-          icon: 'error',
-          title: '失敗',
-          text: '送出訂單失敗'
-        })
+
+        if (i18n.global.locale === 'tw') {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: '送出訂單失敗'
+          })
+        } else if (i18n.global.locale === 'en') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Failed',
+            text: 'Failed to send order'
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: '失敗',
+            text: '注文を送信できませんでした'
+          })
+        }
       }
     },
     async editUser(data) {
@@ -219,11 +381,26 @@ export const useUserStore = defineStore({
         this.email = resData.result.email
         this.nickname = resData.result.nickname
         this.avatar = resData.result.avatar
-        Swal.fire({
-          icon: 'success',
-          title: '成功',
-          text: '編輯個人資料成功'
-        })
+
+        if (i18n.global.locale === 'tw') {
+          Swal.fire({
+            icon: 'success',
+            title: '成功',
+            text: '編輯個人資料成功'
+          })
+        } else if (i18n.global.locale === 'en') {
+          Swal.fire({
+            icon: 'success',
+            title: 'SUCCESS',
+            text: 'Edit Successfully'
+          })
+        } else {
+          Swal.fire({
+            icon: 'success',
+            title: '成功',
+            text: '編集成功'
+          })
+        }
         return true
         // { email: this.email, nickname: this.nickname, avatar: this.avatar }
       } catch (error) {

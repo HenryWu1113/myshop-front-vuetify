@@ -220,11 +220,26 @@ const init = async () => {
     waiting.value = false
   } catch (error) {
     console.log(error)
-    Swal.fire({
-      icon: 'error',
-      title: '失敗',
-      text: '伺服器錯誤'
-    })
+
+    if (i18n.global.locale === 'tw') {
+      Swal.fire({
+        icon: 'error',
+        title: '失敗',
+        text: '伺服器錯誤'
+      })
+    } else if (i18n.global.locale === 'en') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed',
+        text: 'Server Error'
+      })
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '失敗',
+        text: 'サーバーエラー'
+      })
+    }
   }
 }
 

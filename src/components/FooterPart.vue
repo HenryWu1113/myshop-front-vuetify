@@ -3,7 +3,7 @@
     <div class="MyContainer">
       <v-row>
         <v-col cols="12">
-          <h1 class="text-center text-h3 text-white font-weight-bold">꧁吳李香農場꧂</h1>
+          <h1 class="text-center text-h3 text-white font-weight-bold">▶ {{ $t('wuleefarm') }} ◀</h1>
           <div class="text-center mt-5 mb-5">
             <!-- <v-btn icon variant="text" href="https://www.facebook.com/wlsfarm/"> -->
             <v-btn icon variant="text">
@@ -21,7 +21,7 @@
           </div>
           <v-divider color="white" thickness="3"></v-divider>
           <span class="d-block text-center text-white font-weight-bold mt-5">Copyright © 2022
-            吳李香農場(圖像影音有部分取自網路，網站為學習用途，無商業使用)</span>
+            {{ $t('wuleefarm') }} ({{ $t('footerwords') }})</span>
         </v-col>
         <!-- <v-col cols="12" md="6">
           <h1 class="text-center text-h4 text-brown font-weight-bold">標題一</h1>

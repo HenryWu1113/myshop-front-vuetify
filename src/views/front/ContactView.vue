@@ -89,6 +89,7 @@ import FooterPart from '@/components/FooterPart.vue'
 import AOS from "aos"
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
+import i18n from '@/i18n'
 
 onMounted(() => {
   AOS.init();
@@ -114,19 +115,49 @@ const submitComment = async () => {
   try {
     loading.value = true
     await apiAuth.post('/feedbacks', form)
-    Swal.fire({
-      icon: 'success',
-      title: '成功',
-      text: '訊息已傳送'
-    })
+
+    if (i18n.global.locale === 'tw') {
+      Swal.fire({
+        icon: 'success',
+        title: '成功',
+        text: '訊息已傳送'
+      })
+    } else if (i18n.global.locale === 'en') {
+      Swal.fire({
+        icon: 'success',
+        title: 'SUCCESS',
+        text: 'message sent successfully'
+      })
+    } else {
+      Swal.fire({
+        icon: 'success',
+        title: '成功',
+        text: 'メッセージを送信しました'
+      })
+    }
     loading.value = false
     form.comment = ''
   } catch (error) {
-    Swal.fire({
-      icon: 'error',
-      title: '失敗',
-      text: '送出訊息失敗'
-    })
+
+    if (i18n.global.locale === 'tw') {
+      Swal.fire({
+        icon: 'error',
+        title: '失敗',
+        text: '送出訊息失敗'
+      })
+    } else if (i18n.global.locale === 'en') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed',
+        text: 'Failed to send message'
+      })
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '失敗',
+        text: 'メッセージを送信できませんでした'
+      })
+    }
     loading.value = false
   }
 }

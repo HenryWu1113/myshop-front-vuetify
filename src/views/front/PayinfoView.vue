@@ -45,6 +45,7 @@ import Swal from 'sweetalert2'
 import { apiAuth } from '@/plugins/axios'
 import { ref, reactive } from 'vue'
 import { useRoute } from 'vue-router'
+import i18n from '@/i18n'
 // import LoadingImage from '../../components/LoadingImage.vue'
 // import { useLoading } from 'vue3-loading-overlay';
 // import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
@@ -73,11 +74,26 @@ const init = async () => {
     // waiting.value = false
     // loader.hide()
   } catch (error) {
-    Swal.fire({
-      icon: 'error',
-      title: '失敗',
-      text: '取得訂購單失敗'
-    })
+
+    if (i18n.global.locale === 'tw') {
+      Swal.fire({
+        icon: 'error',
+        title: '失敗',
+        text: '取得訂購單失敗'
+      })
+    } else if (i18n.global.locale === 'en') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed',
+        text: 'Failed to get purchase order'
+      })
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '失敗',
+        text: '注文書の取得に失敗しました'
+      })
+    }
     router.go(-1)
   }
 }

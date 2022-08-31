@@ -256,11 +256,26 @@ const init = async () => {
     loading.value = true
   } catch (error) {
     console.log(error)
-    Swal.fire({
-      icon: 'error',
-      title: '失敗',
-      text: '無法取得訂單'
-    })
+
+    if (i18n.global.locale === 'tw') {
+      Swal.fire({
+        icon: 'error',
+        title: '失敗',
+        text: '無法取得訂單'
+      })
+    } else if (i18n.global.locale === 'en') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed',
+        text: 'Unable to get order'
+      })
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '失敗',
+        text: '注文を取得できません'
+      })
+    }
   }
 }
 
