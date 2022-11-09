@@ -406,7 +406,7 @@ export const useUserStore = defineStore({
       } catch (error) {
         Swal.fire({
           icon: 'error',
-          title: '失敗',
+          title: '失敗了',
           text: error.isAxiosError ? error.response.data.message : error.message
         })
       }
