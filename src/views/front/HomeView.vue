@@ -23,7 +23,7 @@
       <v-row class="mt-10">
         <v-col cols="12" class="text-center">
           <h1 data-aos="fade-down" data-aos-duration="1000" data-aos-once="true"
-            class="text-h2 text-brown font-weight-bold">{{ $t('latestproduct') }}</h1>
+            class="text-h2 text-brown font-weight-bold">~{{ $t('latestproduct') }}~</h1>
         </v-col>
         <v-col cols="6" md="4" lg="3">
           <v-select variant="outlined" v-model="item" :items="items"></v-select>
@@ -34,11 +34,13 @@
         </v-col>
       </v-row>
       <v-row style="min-height:500px">
-        <v-col v-if="products.length > 0" cols="12" md="6" lg="4" xl="3" v-for="product in filtereditems">
-          <ProductCard :product="product" data-aos="flip-up" data-aos-duration="3000" data-aos-offset="150"
-            data-aos-once="true">
-          </ProductCard>
-        </v-col>
+        <template v-if="products.length > 0">
+          <v-col cols="12" md="6" lg="4" xl="3" v-for="product in filtereditems" :key="product.id">
+            <ProductCard :product="product" data-aos="flip-up" data-aos-duration="3000" data-aos-offset="150"
+              data-aos-once="true">
+            </ProductCard>
+          </v-col>
+        </template>
         <v-col v-else>
           <h1 v-if="loading" class="text-center">{{ $t('noproduct') }}</h1>
         </v-col>
@@ -50,6 +52,7 @@
 </template>
 
 <style scoped lang="scss">
+
 </style>
 
 <script setup>
